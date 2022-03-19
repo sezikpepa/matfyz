@@ -11,17 +11,16 @@ namespace MyApp
             string result = "";
             while (true)
             {
-                int precharacter = Console.Read();
-                char character = Convert.ToChar(precharacter);
+                char character = Convert.ToChar(Console.Read());
                 if (48 <= character && 57 >= character)
                 {
                     result += character;
                 }
-                else if ((character == 32 || character == 13 || character < 32) && result != "")
+                else if (character <= 32 && result != "")
                 {
                     return result;
                 }
-                else if (precharacter == 43 || precharacter == 45 || precharacter == 42 || precharacter == 47)
+                else if (character == 43 || character == 45 || character == 42 || character == 47)
                 {
                     return character.ToString();
                 }
