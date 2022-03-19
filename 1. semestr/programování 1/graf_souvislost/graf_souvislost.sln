@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "graf_souvislost", "graf_souvislost\graf_souvislost.pyproj", "{BC3990DF-4A41-443C-B0D8-F8C78AC180AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC3990DF-4A41-443C-B0D8-F8C78AC180AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC3990DF-4A41-443C-B0D8-F8C78AC180AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {825B5E82-5228-4A38-8466-7EE194786AAA}
+	EndGlobalSection
+EndGlobal

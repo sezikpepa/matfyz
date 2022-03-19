@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "algoritmizace_zkouska", "algoritmizace_zkouska\algoritmizace_zkouska.pyproj", "{9346B2BC-5890-4534-B457-A37E3A1823D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9346B2BC-5890-4534-B457-A37E3A1823D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9346B2BC-5890-4534-B457-A37E3A1823D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FB13036-B515-4083-84CA-5F113BDE7D8D}
+	EndGlobalSection
+EndGlobal

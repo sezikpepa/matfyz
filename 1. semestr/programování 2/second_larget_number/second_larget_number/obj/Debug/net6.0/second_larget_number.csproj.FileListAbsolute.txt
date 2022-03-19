@@ -1,0 +1,15 @@
+C:\škola\programování 2\second_larget_number\second_larget_number\bin\Debug\net6.0\second_larget_number.exe
+C:\škola\programování 2\second_larget_number\second_larget_number\bin\Debug\net6.0\second_larget_number.deps.json
+C:\škola\programování 2\second_larget_number\second_larget_number\bin\Debug\net6.0\second_larget_number.runtimeconfig.json
+C:\škola\programování 2\second_larget_number\second_larget_number\bin\Debug\net6.0\second_larget_number.dll
+C:\škola\programování 2\second_larget_number\second_larget_number\bin\Debug\net6.0\second_larget_number.pdb
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.csproj.AssemblyReference.cache
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.GeneratedMSBuildEditorConfig.editorconfig
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.AssemblyInfoInputs.cache
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.AssemblyInfo.cs
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.csproj.CoreCompileInputs.cache
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.dll
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\refint\second_larget_number.dll
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.pdb
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\second_larget_number.genruntimeconfig.cache
+C:\škola\programování 2\second_larget_number\second_larget_number\obj\Debug\net6.0\ref\second_larget_number.dll

@@ -1,0 +1,15 @@
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.csproj.AssemblyReference.cache
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.GeneratedMSBuildEditorConfig.editorconfig
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.AssemblyInfoInputs.cache
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.AssemblyInfo.cs
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.csproj.CoreCompileInputs.cache
+C:\škola\programování 2\Perfect_number\Perfect_number\bin\Debug\net6.0\Perfect_number.exe
+C:\škola\programování 2\Perfect_number\Perfect_number\bin\Debug\net6.0\Perfect_number.deps.json
+C:\škola\programování 2\Perfect_number\Perfect_number\bin\Debug\net6.0\Perfect_number.runtimeconfig.json
+C:\škola\programování 2\Perfect_number\Perfect_number\bin\Debug\net6.0\Perfect_number.dll
+C:\škola\programování 2\Perfect_number\Perfect_number\bin\Debug\net6.0\Perfect_number.pdb
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.dll
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\refint\Perfect_number.dll
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.pdb
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\Perfect_number.genruntimeconfig.cache
+C:\škola\programování 2\Perfect_number\Perfect_number\obj\Debug\net6.0\ref\Perfect_number.dll

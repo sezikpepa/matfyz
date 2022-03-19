@@ -1,0 +1,15 @@
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\bin\Debug\net6.0\maximumvyskyt.exe
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\bin\Debug\net6.0\maximumvyskyt.deps.json
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\bin\Debug\net6.0\maximumvyskyt.runtimeconfig.json
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\bin\Debug\net6.0\maximumvyskyt.dll
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\bin\Debug\net6.0\maximumvyskyt.pdb
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.csproj.AssemblyReference.cache
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.GeneratedMSBuildEditorConfig.editorconfig
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.AssemblyInfoInputs.cache
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.AssemblyInfo.cs
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.csproj.CoreCompileInputs.cache
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.dll
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\refint\maximumvyskyt.dll
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.pdb
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\maximumvyskyt.genruntimeconfig.cache
+C:\škola\programování 2\maximumvyskyt\maximumvyskyt\obj\Debug\net6.0\ref\maximumvyskyt.dll

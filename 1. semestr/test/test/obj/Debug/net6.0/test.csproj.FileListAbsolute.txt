@@ -1,0 +1,5 @@
+C:\škola\test\test\obj\Debug\net6.0\test.csproj.AssemblyReference.cache
+C:\škola\test\test\obj\Debug\net6.0\test.GeneratedMSBuildEditorConfig.editorconfig
+C:\škola\test\test\obj\Debug\net6.0\test.AssemblyInfoInputs.cache
+C:\škola\test\test\obj\Debug\net6.0\test.AssemblyInfo.cs
+C:\škola\test\test\obj\Debug\net6.0\test.csproj.CoreCompileInputs.cache

@@ -1,0 +1,49 @@
+*{
+	background-color:rgb(155, 158, 144);
+	align-items: center;
+}
+
+table, th, td {
+	border: 1px solid black;
+	text-align: center;
+  }
+td{
+	background-color: rgba(255, 166, 0, 0.404);
+}
+
+h1, h2, p{
+	font-family: Arial;
+	margin: 50px;
+	font-size: 50px;
+	position: relative;
+	text-align: center;
+}
+section{
+	line-height: 1.2
+}
+
+#hlavninadpis{
+	font-size: 80px;
+	padding: 10px;
+}
+
+.cislahodin{
+	font-size: 50px;
+	background-color: red;
+}
+
+.nazvydnu{
+	font-size: 30px;
+	background-color: rgba(255, 255, 0, 0.384);
+}
+li ~ ul{
+	font-size: 20px;
+	font-family: arial;
+}
+ul{
+	font-size: 30px;
+	font-family: arial;
+}
+a:hover{
+	background-color: red;
+}

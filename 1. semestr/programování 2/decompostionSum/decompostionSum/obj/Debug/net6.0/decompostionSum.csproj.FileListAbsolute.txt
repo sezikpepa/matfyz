@@ -1,0 +1,15 @@
+C:\škola\programování 2\decompostionSum\decompostionSum\bin\Debug\net6.0\decompostionSum.exe
+C:\škola\programování 2\decompostionSum\decompostionSum\bin\Debug\net6.0\decompostionSum.deps.json
+C:\škola\programování 2\decompostionSum\decompostionSum\bin\Debug\net6.0\decompostionSum.runtimeconfig.json
+C:\škola\programování 2\decompostionSum\decompostionSum\bin\Debug\net6.0\decompostionSum.dll
+C:\škola\programování 2\decompostionSum\decompostionSum\bin\Debug\net6.0\decompostionSum.pdb
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.csproj.AssemblyReference.cache
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.GeneratedMSBuildEditorConfig.editorconfig
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.AssemblyInfoInputs.cache
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.AssemblyInfo.cs
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.csproj.CoreCompileInputs.cache
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.dll
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\refint\decompostionSum.dll
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.pdb
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\decompostionSum.genruntimeconfig.cache
+C:\škola\programování 2\decompostionSum\decompostionSum\obj\Debug\net6.0\ref\decompostionSum.dll

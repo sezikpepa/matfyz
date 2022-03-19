@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "repeatNumbers", "repeatNumbers\repeatNumbers.pyproj", "{C2119E8B-09A2-48BE-84BA-78B0690C7301}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2119E8B-09A2-48BE-84BA-78B0690C7301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2119E8B-09A2-48BE-84BA-78B0690C7301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {354A5EEA-3DD3-40BD-92DD-5C58BE764F19}
+	EndGlobalSection
+EndGlobal

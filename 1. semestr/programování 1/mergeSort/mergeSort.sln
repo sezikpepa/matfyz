@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "mergeSort", "mergeSort\mergeSort.pyproj", "{60FD64DC-5746-4B68-B30A-454E2263DFE9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60FD64DC-5746-4B68-B30A-454E2263DFE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60FD64DC-5746-4B68-B30A-454E2263DFE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8EFE1B7-23CA-4885-9EA4-D4E8154A4E22}
+	EndGlobalSection
+EndGlobal

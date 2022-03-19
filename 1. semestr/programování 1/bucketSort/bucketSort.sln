@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "bucketSort", "bucketSort\bucketSort.pyproj", "{42F5F2A3-5906-4764-92C1-7D5BF951D6CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42F5F2A3-5906-4764-92C1-7D5BF951D6CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42F5F2A3-5906-4764-92C1-7D5BF951D6CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2D71AE4-C791-45A2-B160-4C0651E5D22D}
+	EndGlobalSection
+EndGlobal

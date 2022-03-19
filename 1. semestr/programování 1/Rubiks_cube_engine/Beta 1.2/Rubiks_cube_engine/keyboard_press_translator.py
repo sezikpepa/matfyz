@@ -1,0 +1,20 @@
+import pygame
+
+keyboard_press_translator: dict = {pygame.K_x: "x",
+                                    pygame.K_c: "x’",
+                                    pygame.K_y: "y",
+                                    pygame.K_a: "y’",
+                                    pygame.K_z: "z",
+                                    pygame.K_t: "z’",
+                                    pygame.K_f: "f",
+                                    pygame.K_g: "f’",
+                                    pygame.K_d: "d",
+                                    pygame.K_s: "d’",
+                                    pygame.K_r: "r",
+                                    pygame.K_e: "r’",
+                                    pygame.K_l: "l",
+                                    pygame.K_k: "l’",
+                                    pygame.K_u: "u",
+                                    pygame.K_i: "u’",
+                                    pygame.K_b: "b",
+                                    pygame.K_n: "b’"}

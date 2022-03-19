@@ -1,0 +1,15 @@
+C:\škola\programování 2\division_two_numbers\division_two_numbers\bin\Debug\net6.0\division_two_numbers.exe
+C:\škola\programování 2\division_two_numbers\division_two_numbers\bin\Debug\net6.0\division_two_numbers.deps.json
+C:\škola\programování 2\division_two_numbers\division_two_numbers\bin\Debug\net6.0\division_two_numbers.runtimeconfig.json
+C:\škola\programování 2\division_two_numbers\division_two_numbers\bin\Debug\net6.0\division_two_numbers.dll
+C:\škola\programování 2\division_two_numbers\division_two_numbers\bin\Debug\net6.0\division_two_numbers.pdb
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.csproj.AssemblyReference.cache
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.GeneratedMSBuildEditorConfig.editorconfig
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.AssemblyInfoInputs.cache
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.AssemblyInfo.cs
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.csproj.CoreCompileInputs.cache
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.dll
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\refint\division_two_numbers.dll
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.pdb
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\division_two_numbers.genruntimeconfig.cache
+C:\škola\programování 2\division_two_numbers\division_two_numbers\obj\Debug\net6.0\ref\division_two_numbers.dll
