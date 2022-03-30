@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\bin\Debug\net6.0\chessKing.exe
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\bin\Debug\net6.0\chessKing.deps.json
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\bin\Debug\net6.0\chessKing.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\bin\Debug\net6.0\chessKing.dll
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\bin\Debug\net6.0\chessKing.pdb
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.dll
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\refint\chessKing.dll
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.pdb
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\chessKing.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\chessKing\chessKing\obj\Debug\net6.0\ref\chessKing.dll
