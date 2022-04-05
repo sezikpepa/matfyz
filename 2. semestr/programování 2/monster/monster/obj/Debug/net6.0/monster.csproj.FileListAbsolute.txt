@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\monster\monster\bin\Debug\net6.0\monster.exe
+C:\matfyz\2. semestr\programování 2\monster\monster\bin\Debug\net6.0\monster.deps.json
+C:\matfyz\2. semestr\programování 2\monster\monster\bin\Debug\net6.0\monster.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\monster\monster\bin\Debug\net6.0\monster.dll
+C:\matfyz\2. semestr\programování 2\monster\monster\bin\Debug\net6.0\monster.pdb
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.dll
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\refint\monster.dll
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.pdb
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\monster.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\monster\monster\obj\Debug\net6.0\ref\monster.dll
