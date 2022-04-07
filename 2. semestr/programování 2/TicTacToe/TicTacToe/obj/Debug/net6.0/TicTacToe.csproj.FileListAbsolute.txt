@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\bin\Debug\net6.0\TicTacToe.exe
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\bin\Debug\net6.0\TicTacToe.deps.json
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\bin\Debug\net6.0\TicTacToe.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\bin\Debug\net6.0\TicTacToe.dll
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\bin\Debug\net6.0\TicTacToe.pdb
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.dll
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\refint\TicTacToe.dll
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.pdb
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\TicTacToe.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\TicTacToe\TicTacToe\obj\Debug\net6.0\ref\TicTacToe.dll
