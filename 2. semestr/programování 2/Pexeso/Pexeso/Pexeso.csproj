@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C751250E-3921-42C1-B193-91EE531D4ADE}</ProjectGuid>
+    <ProjectGuid>{0FDC0E7C-41FE-4D27-8EE1-68C30BEDD366}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Pexeso</RootNamespace>
     <AssemblyName>Pexeso</AssemblyName>

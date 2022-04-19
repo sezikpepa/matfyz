@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pexeso", "Pexeso\Pexeso.csproj", "{C751250E-3921-42C1-B193-91EE531D4ADE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pexeso", "Pexeso\Pexeso.csproj", "{0FDC0E7C-41FE-4D27-8EE1-68C30BEDD366}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C751250E-3921-42C1-B193-91EE531D4ADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C751250E-3921-42C1-B193-91EE531D4ADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C751250E-3921-42C1-B193-91EE531D4ADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C751250E-3921-42C1-B193-91EE531D4ADE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FDC0E7C-41FE-4D27-8EE1-68C30BEDD366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FDC0E7C-41FE-4D27-8EE1-68C30BEDD366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FDC0E7C-41FE-4D27-8EE1-68C30BEDD366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FDC0E7C-41FE-4D27-8EE1-68C30BEDD366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {60930E34-D143-4AF7-BAC2-380B4B51FA3B}
+		SolutionGuid = {C4F222FA-657C-461C-AE40-947EC5E76FC6}
 	EndGlobalSection
 EndGlobal

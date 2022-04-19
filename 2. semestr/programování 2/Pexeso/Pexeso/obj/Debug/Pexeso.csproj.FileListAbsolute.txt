@@ -3,9 +3,9 @@ C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\bin\Debug\Pexeso.exe
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\bin\Debug\Pexeso.pdb
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.csproj.AssemblyReference.cache
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.csproj.SuggestedBindingRedirects.cache
-C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.Form1.resources
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.Properties.Resources.resources
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.csproj.GenerateResource.cache
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.csproj.CoreCompileInputs.cache
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.exe
 C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.pdb
+C:\matfyz\2. semestr\programování 2\Pexeso\Pexeso\obj\Debug\Pexeso.Pexeso.resources
