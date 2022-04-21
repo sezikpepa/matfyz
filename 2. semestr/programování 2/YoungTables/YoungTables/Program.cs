@@ -57,12 +57,13 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 {
                     return;
                 }
+                this.table[columnIndex, rowIndex] = this.columnSum(rowIndex, columnIndex - (rowIndex + 1));
             }
 
             private int columnSum(int maxRowIndex, int columnIndex)
             {
                 int sum = 0;
-                for(int i = 0; i < maxRowIndex; i++)
+                for(int i = 0; i <= maxRowIndex; i++)
                 {
                     sum += this.table[columnIndex, i];
                 }
@@ -70,15 +71,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
             
-
             public int indexValue(int index)
             {
-                int sum = 0;
-                for(int i = 0; i < this.size; i++)
-                {
-                    sum += this.table[i, index - 1];
-                }
-                return sum;
+                return this.columnSum(this.size - 1, index - 1);
             }
 
             public void printTable()
@@ -87,7 +82,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 {
                     for(int j = 0; j < this.size; j++)
                     {
-                        Console.Write(this.table[i, j]);
+                        Console.Write(this.table[j, i]);
                     }
                     Console.WriteLine();
                 }
@@ -100,24 +95,27 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
         static void Main(string[] args)
         {
-            /*
             int index = Int32.Parse(Console.ReadLine());
-            YoungTable youngTable = new YoungTable(index);
-            Console.WriteLine(youngTable.indexValue(index));
-            */
-            
-            for( int index = 1; index < 13; index++)
+            if (index == 0)
+            {
+                Console.WriteLine("1");
+            }
+            else if (index < 0)
+            {
+                Console.WriteLine("0");
+            }
+            else
             {
                 YoungTable youngTable = new YoungTable(index);
-
-                Console.WriteLine(index);
                 Console.WriteLine(youngTable.indexValue(index));
-                youngTable.printTable();
-                Console.WriteLine();
             }
             
+            
+            
 
+            
 
+          
         }
     }
 }
