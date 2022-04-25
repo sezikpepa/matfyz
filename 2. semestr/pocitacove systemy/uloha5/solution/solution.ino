@@ -73,10 +73,7 @@ class Display{
     int decimalPosition;
     int counter;
 
-    void displayDigit(byte digit, byte position, int decimalPosition){
-      if(decimalPosition == 2){
-          digit = digit & 0b01111111;          
-        }  
+    void displayDigit(byte digit, byte position){ 
       digitalWrite(latch_pin, ON);      
       shiftOut(data_pin, clock_pin, MSBFIRST, digit);
       shiftOut(data_pin, clock_pin, MSBFIRST, position);     
@@ -87,8 +84,11 @@ class Display{
       if(counter < lastIndex){
         counter = lastIndex;
       }
-      auto digit = digits[digitArray[counter]];         
-      displayDigit(digit, digit_muxpos[counter], counter);
+      auto digit = digits[digitArray[counter]];      
+      if(counter == 2){
+          digit = digit & 0b01111111;          
+        }    
+      displayDigit(digit, digit_muxpos[counter]);
       
     }
     void digitValues(int number){
@@ -239,7 +239,6 @@ void setup() {
   pinMode(latch_pin, OUTPUT);
   pinMode(clock_pin, OUTPUT);
   pinMode(data_pin, OUTPUT);  
-
 }
 
 void loop() {
