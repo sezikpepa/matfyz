@@ -6,13 +6,13 @@ namespace MyApp // Note: actual namespace depends on the project name.
     {
         class YoungTable
         {
-            public int size;
-            public int[,] table;
+            public long size;
+            public long[,] table;
 
             public YoungTable(int size)
             {
                 this.size = size;
-                this.table = new int[size, size];
+                this.table = new long[size, size];
 
                 this.tableSetup();
                 this.calculateTable();
@@ -20,9 +20,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             private void tableSetup()
             {
-                for(int i = 0; i < this.size; i++)
+                for(long i = 0; i < this.size; i++)
                 {
-                    for( int j = 0; j < this.size; j++)
+                    for( long j = 0; j < this.size; j++)
                     {
                         this.table[i, j] = 0;
                     }
@@ -32,21 +32,21 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             private void calculateTable()
             {
-                for(int columnIndex = 0; columnIndex < this.size; columnIndex++)
+                for(long columnIndex = 0; columnIndex < this.size; columnIndex++)
                 {
                     this.calculateColumn(columnIndex);
                 }
             }
 
-            private void calculateColumn(int columnIndex)
+            private void calculateColumn(long columnIndex)
             {
-                for(int rowIndex = 0; rowIndex < this.size; rowIndex++)
+                for(long rowIndex = 0; rowIndex < this.size; rowIndex++)
                 {
                     this.calculateBox(rowIndex, columnIndex);
                 }
             }
 
-            private void calculateBox(int rowIndex, int columnIndex)
+            private void calculateBox(long rowIndex, long columnIndex)
             {
                 if(rowIndex == columnIndex)
                 {
@@ -60,10 +60,10 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.table[columnIndex, rowIndex] = this.columnSum(rowIndex, columnIndex - (rowIndex + 1));
             }
 
-            private int columnSum(int maxRowIndex, int columnIndex)
+            private long columnSum(long maxRowIndex, long columnIndex)
             {
-                int sum = 0;
-                for(int i = 0; i <= maxRowIndex; i++)
+                long sum = 0;
+                for(long i = 0; i <= maxRowIndex; i++)
                 {
                     sum += this.table[columnIndex, i];
                 }
@@ -71,16 +71,16 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
             
-            public int indexValue(int index)
+            public long indexValue(long index)
             {
                 return this.columnSum(this.size - 1, index - 1);
             }
 
-            public void printTable()
+            public void prlongTable()
             {
-                for(int i = 0; i < this.size; i++)
+                for(long i = 0; i < this.size; i++)
                 {
-                    for(int j = 0; j < this.size; j++)
+                    for(long j = 0; j < this.size; j++)
                     {
                         Console.Write(this.table[j, i]);
                     }
