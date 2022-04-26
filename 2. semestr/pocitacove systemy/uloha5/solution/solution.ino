@@ -1,17 +1,5 @@
 #include "funshield.h"
 
-constexpr int ledPins[] { led1_pin, led2_pin, led3_pin, led4_pin };
-constexpr int ledPinsCount = sizeof(ledPins) / sizeof(ledPins[0]);
-
-constexpr int activationDelay = 1000;
-constexpr int periodicDelay = 300;
-constexpr int activationPeriodicDelay = activationDelay + periodicDelay;
-
-int number = 0;
-int position = 0;
-
-
-
 class Button{
   public:
     Button(int pin){
@@ -22,30 +10,15 @@ class Button{
       state_ = false;
     }
 
-    bool repeatActivationFirstCheck(unsigned long elapsedTime){
-      return elapsedTime >= activationDelay;
-    }
-
     virtual void actionAfterClick(){
     }
 
-    unsigned long timeElapsed(unsigned long currentTime){
-      return currentTime - lastPressed_;
-    }
-
-    void loop(unsigned long time) {
+    void loop() {
       auto currentState = digitalRead(pin_);
       if(currentState == ON)
       {     
         if (state_ == false){
           actionAfterClick();
-          lastPressed_ = time;
-        }
-        
-        unsigned long elapsedTime = timeElapsed(time);
-        if (repeatActivationFirstCheck(elapsedTime)){
-          actionAfterClick();
-          lastPressed_ += periodicDelay;
         }
                  
         state_ = true; 
@@ -57,7 +30,6 @@ class Button{
   protected:
     int pin_;
     int state_;
-    int lastPressed_;
 };
 
 class Display{
@@ -119,9 +91,7 @@ class Display{
 };
 
 enum class StopwatchStates { STOPPED, RUNNING, LAPPED};
-
 enum class UserInputs {START, RESET, STOP};
-
 
 class Stopwatch{  
   public:
@@ -243,9 +213,9 @@ void setup() {
 
 void loop() {
   int time = millis();
-  startStopButton.loop(time);
-  lapButton.loop(time);
-  resetButton.loop(time);
+  startStopButton.loop();
+  lapButton.loop();
+  resetButton.loop();
 
   stopwatch.evaluateTime(time);
   stopwatch.displayTime();  
