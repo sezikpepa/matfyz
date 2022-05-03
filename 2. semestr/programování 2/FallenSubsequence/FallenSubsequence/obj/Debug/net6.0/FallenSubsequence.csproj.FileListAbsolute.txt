@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\bin\Debug\net6.0\FallenSubsequence.exe
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\bin\Debug\net6.0\FallenSubsequence.deps.json
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\bin\Debug\net6.0\FallenSubsequence.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\bin\Debug\net6.0\FallenSubsequence.dll
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\bin\Debug\net6.0\FallenSubsequence.pdb
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.dll
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\refint\FallenSubsequence.dll
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.pdb
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\FallenSubsequence.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\FallenSubsequence\FallenSubsequence\obj\Debug\net6.0\ref\FallenSubsequence.dll
