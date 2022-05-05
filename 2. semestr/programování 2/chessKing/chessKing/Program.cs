@@ -6,9 +6,9 @@ namespace MyApp
     internal class Program
     {
 
-        static void findPath(char[,] chessboard, (int x, int y, int length) start, int width, int height)
+        static void FindPath(char[,] chessboard, (int x, int y, int length) start, int width, int height)
         {
-            Queue<(int x, int y, int length)> positions = new Queue<(int x, int y, int length)>();
+            Queue<(int x, int y, int length)> positions = new();
             positions.Enqueue(start);
             chessboard[start.x, start.y] = 'X';
             while (positions.Count > 0)
@@ -37,10 +37,7 @@ namespace MyApp
 
 
         }
-
-
-
-        static void Main(string[] args)
+        static void Main()
         {
             string[] lines = System.IO.File.ReadAllLines("./sachovnice.txt");
 
@@ -67,10 +64,8 @@ namespace MyApp
                     chessboard[j, i - 2] = current[j];
                 }
             }
-            //------------------------------------------------------------------------------------------------
-            //------------------------------------------------------------------------------------------------
-            //------------------------------------------------------------------------------------------------
-            findPath(chessboard, start, width, height);
+
+            FindPath(chessboard, start, width, height);
         }
     }
 }
