@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\bin\Debug\net6.0\indexCalculator.exe
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\bin\Debug\net6.0\indexCalculator.deps.json
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\bin\Debug\net6.0\indexCalculator.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\bin\Debug\net6.0\indexCalculator.dll
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\bin\Debug\net6.0\indexCalculator.pdb
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.dll
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\refint\indexCalculator.dll
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.pdb
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\indexCalculator.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\indexCalculator\indexCalculator\obj\Debug\net6.0\ref\indexCalculator.dll
