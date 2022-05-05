@@ -16,21 +16,23 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.operands = new Stack<String>();
             }
 
-            public void input(String input)
+            public void Input(String input)
             {
                 if (input == "+" || input == "-" || input == "*" || input == "/")
                 {
                     this.operands.Push(input);
                     return;
                 }
-
+                if(input == "=")               
+                    return;
+                
                 int number = Int32.Parse(input);
                 this.numbers.Push(number);
-                this.expressionSimplify();
+                this.ExpressionSimplify();
 
             }
 
-            private void expressionSimplify()
+            private void ExpressionSimplify()
             {
                 if (this.numbers.Count >= 2 && this.operands.Count >= 1)
                 {
@@ -41,13 +43,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                         String operand = operands.Pop();
 
-                        if (operand == "*")
-                        {
-                            this.numbers.Push(firstNumber * secondNumber);
-                            return;
-                        }
-                        this.numbers.Push(firstNumber / secondNumber);
-
+                        this.numbers.Push(this.CalculateTwoNumbers(firstNumber, secondNumber, operand));
                     }
 
                     else if (this.numbers.Count >= 3)
@@ -61,73 +57,60 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                         this.operands.Push(operandForReturn);
 
-                        if (operand == "+")
-                        {
-                            this.numbers.Push(firstNumber + secondNumber);
-                            this.numbers.Push(numberForReturn);
-                            return;
-                        }
-                        this.numbers.Push(firstNumber - secondNumber);
+                        this.numbers.Push(this.CalculateTwoNumbers(firstNumber, secondNumber, operand));
                         this.numbers.Push(numberForReturn);
                     }
                 }
 
             }
 
-            public void printResult()
+            private int CalculateTwoNumbers(int firstNumber, int secondNumber, string operand)
+            {
+                switch (operand)
+                {
+                    case "+":
+                        return firstNumber + secondNumber;
+                    case "-":
+                        return firstNumber - secondNumber;
+                    case "*":
+                        return firstNumber * secondNumber;
+                    case "/":
+                        return firstNumber / secondNumber;
+                    default:
+                        break;
+                }
+                return 0;
+            }
+
+            public void PrintResult()
             {
                 if (this.operands.Count == 0)
                 {
                     Console.WriteLine(numbers.Pop());
                     return;
                 }
-
-
                 int secondNumber = this.numbers.Pop();
                 int firstNumber = this.numbers.Pop();
 
                 String operand = this.operands.Pop();
 
-                switch (operand)
-                {
-                    case "+":
-                        Console.WriteLine(firstNumber + secondNumber);
-                        break;
-                    case "-":
-                        Console.WriteLine(firstNumber - secondNumber);
-                        break;
-                    case "*":
-                        Console.WriteLine(firstNumber * secondNumber);
-                        break;
-                    case "/":
-                        Console.WriteLine(firstNumber / secondNumber);
-                        break;
-                }
-                return;
+                Console.WriteLine(this.CalculateTwoNumbers(firstNumber, secondNumber, operand));
             }
         }
 
 
-        static void Main(string[] args)
+        static void Main()
         {
-            String line;
+            String line = "";
 
-            InfixCalculator calculator = new InfixCalculator();
+            InfixCalculator calculator = new();
 
-            while (true)
+            while(line != "=")
             {
                 line = Console.ReadLine();
-
-                if (line == "=")
-                {
-                    calculator.printResult();
-                    break;
-                }
-
-                calculator.input(line);
-
-                
+                calculator.Input(line);               
             }
+            calculator.PrintResult();
         }
     }
 }
