@@ -105,7 +105,7 @@ Display display;
 
 void loop() {
   input.updateInLoop();
-  message = input.getMessage()
+  //message = input.getMessage()
   auto time = millis();
 
   display.display();
