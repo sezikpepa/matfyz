@@ -18,18 +18,49 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             public void Input(String input)
             {
-                if (input == "+" || input == "-" || input == "*" || input == "/")
+                if (input == "+" || input == "-" || input == "*" || input == "/" || input == "(")
                 {
                     this.operands.Push(input);
                     return;
                 }
                 if(input == "=")               
                     return;
+                if(input == ")")
+                {
+                    this.CloseBracketSimplify();
+                    return;
+                }
                 
                 int number = Int32.Parse(input);
                 this.numbers.Push(number);
                 this.ExpressionSimplify();
 
+            }
+
+            private void CloseBracketSimplify()
+            {
+                if(this.operands.Peek() == "(")
+                {
+                    this.operands.Pop();
+                    return;
+                }
+                int secondNumber = this.numbers.Pop();
+                int firstNumber = this.numbers.Pop();
+
+                string operand = this.operands.Pop();
+
+                if(operand == "+")
+                {
+                    this.numbers.Push(firstNumber + secondNumber);
+                    string operand2 = this.operands.Pop();
+                    return;
+                }
+                else
+                {
+                    this.numbers.Push(firstNumber - secondNumber);
+                    string operand2 = this.operands.Pop();
+                    return;
+                }
             }
 
             private void ExpressionSimplify()
@@ -46,14 +77,23 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         this.numbers.Push(this.CalculateTwoNumbers(firstNumber, secondNumber, operand));
                     }
 
-                    else if (this.numbers.Count >= 3)
+                    else if (this.numbers.Count >= 3 && this.operands.Peek() == "+" || this.operands.Peek() == "-")
                     {
+                        String operandForReturn = this.operands.Pop();
+                        String operand = this.operands.Pop();
+
+                        if(operand == "(" || operandForReturn == "(")
+                        {
+                            this.operands.Push(operand);
+                            this.operands.Push(operandForReturn);
+                            return;
+                        }
+
+
                         int numberForReturn = this.numbers.Pop();
                         int secondNumber = this.numbers.Pop();
                         int firstNumber = this.numbers.Pop();
 
-                        String operandForReturn = this.operands.Pop();
-                        String operand = this.operands.Pop();
 
                         this.operands.Push(operandForReturn);
 
