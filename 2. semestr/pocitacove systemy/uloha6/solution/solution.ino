@@ -35,6 +35,7 @@ constexpr byte EMPTY_GLYPH = 0b11111111;
 constexpr int positionsCount = 4;
 constexpr unsigned int scrollingInterval = 300;
 
+
 /** 
  * Show chararcter on given position. If character is not letter, empty glyph is displayed instead.
  * @param ch character to be displayed
@@ -44,7 +45,8 @@ void displayChar(char ch, byte pos)
 {
   byte glyph = EMPTY_GLYPH;
   if (isAlpha(ch)) {
-    glyph = LETTER_GLYPH[ ch - (isUpperCase(ch) ? 'A' : 'a') ];
+    if(ch - (isUpperCase(ch) ? 'A' : 'a') >= 0 )
+      glyph = LETTER_GLYPH[ ch - (isUpperCase(ch) ? 'A' : 'a') ];
   }
   
   digitalWrite(latch_pin, LOW);
@@ -54,8 +56,20 @@ void displayChar(char ch, byte pos)
 }
 
 SerialInputHandler input;
-char *messagePointer;
-char message[0];
+
+size_t stringSize(const char *word){
+  size_t size = 0;
+  while(word[size]){
+    size++;
+  }
+  return size;
+}
+
+const char *messagePointer = "";
+size_t currentMessageLength;
+int charCounter;
+
+
 void setup() {
   pinMode(latch_pin, OUTPUT);
   pinMode(clock_pin, OUTPUT);
@@ -63,53 +77,69 @@ void setup() {
 
   input.initialize();
 
-  String text = input.getMessage();
-  int textLength = text.length();
-
-  char message[textLength];
-  for(int i = 0; i < textLength; ++i){
-    message[i] = text[i];
-  }
-
-  messagePointer = &message[0];
-
+  messagePointer = input.getMessage();
+  currentMessageLength = stringSize(messagePointer);
+  charCounter = 0;
 }
+
 
 class Display{
   public:
     int lastChangeTime;
+    int displayPosition;
+    int forceSpace;
     
     Display(){
       lastChangeTime = millis();
+      displayPosition = 0;
+      forceSpace = 4;
     }
 
-    void actualization(int time){
-      if(time - lastChangeTime >= 300){
-        moveText();
+    void getNewMessage(){
+        const char *newMessage = input.getMessage();
+        messagePointer = newMessage;
+        currentMessageLength = stringSize(messagePointer);
+        charCounter = 0;
+        forceSpace = 4;
       }
-    }
-
+    
+    void actualization(int time){
+      if(time - lastChangeTime >= int(scrollingInterval)){
+        charCounter++;
+        moveText();
+        lastChangeTime = time;   
+        forceSpace--;
+      }
+      
+      if(charCounter >= int(currentMessageLength + 4)){
+        getNewMessage();
+      }
+        
+    } 
     void moveText(){
-      *messagePointer += 1;
-    }
-
-    void display(){
-      displayChar(*(messagePointer), 1);
+      if(forceSpace <= 0)
+        messagePointer += 1;
     }
     
+    void display(){
+      displayPosition++;
+      displayPosition = displayPosition % 4;
+
+      if(charCounter + displayPosition >= int(currentMessageLength) + 4) //bytes outside of the message
+        return;
+        
+      displayChar(*(messagePointer + displayPosition), displayPosition + (forceSpace > 0 ? forceSpace : 0));          
+    }   
 };
+
 
 Display display;
 
 
-
 void loop() {
   input.updateInLoop();
-  //message = input.getMessage()
   auto time = millis();
-
+  display.actualization(time);
   display.display();
   
-  
-
 }
