@@ -77,7 +77,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         this.numbers.Push(this.CalculateTwoNumbers(firstNumber, secondNumber, operand));
                     }
 
-                    else if (this.numbers.Count >= 3 && this.operands.Peek() == "+" || this.operands.Peek() == "-")
+                    else if (this.numbers.Count >= 3 && this.operands.Peek() == "+" || this.operands.Peek() == "-") //possible mistake
                     {
                         String operandForReturn = this.operands.Pop();
                         String operand = this.operands.Pop();

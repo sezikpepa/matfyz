@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\bin\Debug\net6.0\zapoctak22.exe
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\bin\Debug\net6.0\zapoctak22.deps.json
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\bin\Debug\net6.0\zapoctak22.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\bin\Debug\net6.0\zapoctak22.dll
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\bin\Debug\net6.0\zapoctak22.pdb
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.dll
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\refint\zapoctak22.dll
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.pdb
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\zapoctak22.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\zapoctak22\zapoctak22\obj\Debug\net6.0\ref\zapoctak22.dll
