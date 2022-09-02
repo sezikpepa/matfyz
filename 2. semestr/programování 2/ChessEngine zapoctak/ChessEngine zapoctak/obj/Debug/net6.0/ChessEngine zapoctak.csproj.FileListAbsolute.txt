@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\bin\Debug\net6.0\ChessEngine zapoctak.exe
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\bin\Debug\net6.0\ChessEngine zapoctak.deps.json
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\bin\Debug\net6.0\ChessEngine zapoctak.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\bin\Debug\net6.0\ChessEngine zapoctak.dll
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\bin\Debug\net6.0\ChessEngine zapoctak.pdb
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.dll
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\refint\ChessEngine zapoctak.dll
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.pdb
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ChessEngine zapoctak.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\ChessEngine zapoctak\ChessEngine zapoctak\obj\Debug\net6.0\ref\ChessEngine zapoctak.dll
