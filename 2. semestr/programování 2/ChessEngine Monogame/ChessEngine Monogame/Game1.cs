@@ -50,7 +50,14 @@ namespace ChessEngine_Monogame
         {
             GraphicsDevice.Clear(Color.Black);
 
+            Texture2D rect = new Texture2D(_graphics.GraphicsDevice, 80, 30);
 
+            Color[] data = new Color[80 * 30];
+            for (int i = 0; i < data.Length; i++) data[i] = Color.Chocolate;
+            rect.SetData(data);
+
+            Vector2 coor = new Vector2(10, 20);
+            _spriteBatch.Draw(rect, coor, Color.White);
 
 
             // TODO: Add your drawing code here
