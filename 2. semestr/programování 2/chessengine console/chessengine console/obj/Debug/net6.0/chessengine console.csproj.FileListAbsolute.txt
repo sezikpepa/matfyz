@@ -13,3 +13,5 @@ C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\ob
 C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.pdb
 C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.genruntimeconfig.cache
 C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\ref\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\pgn.net.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.csproj.CopyComplete

@@ -1,8 +1,21 @@
 {
   "version": 2,
-  "dgSpecHash": "Z+RHWNwkcHe1wBrnfBNfAgsIr6flwApcu/+W+VyF5GQ/2vTV6b4LbONDwHs2I6qKeXTrXPAtAPrOcxtBvl9TQg==",
+  "dgSpecHash": "dDBaLpxqsWccCfCr+KKWAncOJIXZkKRoyip/e4dMEtTh0D5oxvB4UJNDFgOFIi5FY2d5IbYFp/lk+KBFEqNm/w==",
   "success": true,
   "projectFilePath": "C:\\matfyz\\2. semestr\\programování 2\\chessengine console\\chessengine console\\chessengine console.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "expectedPackageFiles": [
+    "C:\\Users\\sezik\\.nuget\\packages\\pgn.net\\1.2.1\\pgn.net.1.2.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Balíček pgn.net 1.2.1 se místo cílové verze rozhraní .NET Framework projektu net6.0 obnovil pomocí .NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8. Balíček nemusí být plně kompatibilní s vaším projektem.",
+      "libraryId": "pgn.net",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }
