@@ -12,6 +12,15 @@ namespace MyApp // Note: actual namespace depends on the project name.
             return false;
         }
 
+        static public bool isOppositeColorsBW(string color1, string color2)
+        {
+            if (color1 == "black" && color2 == "white")
+                return true;
+            if (color1 == "white" && color2 == "black")
+                return true;
+            return false;
+        }
+
         public class Position
         {
             public int x;
@@ -73,7 +82,6 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
-                this.board[4, 4] = new Knight("white", new Position(4, 4));
             }
 
             public void consoleDraw()
@@ -96,6 +104,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             public char consoleRepresentation;
             public Position position;
             public string type;
+            public bool withoutMove;
 
             public Piece(string color, Position position)
             {
@@ -103,6 +112,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.consoleRepresentation = ' ';
                 this.validMoves = new bool[8, 8];
                 this.position = position;
+                this.withoutMove = true;
                 this.type = "";
             }
 
@@ -261,7 +271,75 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             public override void generateValidMoves(ChessBoard board)
             {
+                this.resetValidMoves();
 
+                this.checkMoveForward(board);
+                this.checkDiscardPieceMove(board);
+                this.checkMoveForwardByTwo(board);
+                
+            }
+
+            private void checkMoveForwardByTwo(ChessBoard board)
+            {
+                if (this.withoutMove == false)
+                    return;
+                int increment;
+                if (this.color == "black")
+                    increment = 1;
+                else
+                    increment = -1;
+
+                if (board.board[this.position.x + increment, this.position.y].color == "blank")
+                {
+                    if (board.board[this.position.x + (increment * 2), this.position.y].color == "blank")
+                    {
+                        this.validMoves[this.position.x + (increment * 2), this.position.y] = true;
+                    }
+                }              
+            }
+
+
+            private void checkMoveForward(ChessBoard board)
+            {
+                int increment;
+                if (this.color == "black")
+                    increment = 1;
+                else
+                    increment = -1;
+
+                if (board.board[this.position.x + increment, this.position.y].color == "blank")
+                    this.validMoves[this.position.x + increment, this.position.y] = true;
+            }
+
+            private void checkDiscardPieceMove(ChessBoard board)
+            {
+                int increment;
+                if (this.color == "black")
+                    increment = 1;
+                else
+                    increment = -1;
+
+                try
+                {
+                    if (isOppositeColorsBW(board.board[this.position.x + increment, this.position.y + 1].color, this.color))
+                        this.validMoves[this.position.x + increment, this.position.y + 1] = true;
+                }
+                catch
+                {
+
+                }
+
+                try
+                {
+                    if (isOppositeColorsBW(board.board[this.position.x + increment, this.position.y - 1].color, this.color))
+                        this.validMoves[this.position.x + increment, this.position.y - 1] = true;
+                }
+                catch
+                {
+
+                }
+
+               
             }
         }
 
@@ -424,8 +502,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 string line = Console.ReadLine();
                 Move nextMove = new Move(line);
                 */
-                chessBoard.board[4, 4].generateValidMoves(chessBoard);
-                chessBoard.board[4, 4].drawValidMoves();
+                chessBoard.board[6,0].generateValidMoves(chessBoard);
+                chessBoard.board[6,0].drawValidMoves();
                 Console.ReadLine();
             }
             
