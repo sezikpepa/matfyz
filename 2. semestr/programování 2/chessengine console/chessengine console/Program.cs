@@ -1,4 +1,16 @@
-﻿using System;
+﻿/*
+ * TODO
+ * pawn e.p.
+ * king castle
+ * king in check
+ * king next to the king
+ */
+
+
+
+
+
+using System;
 
 namespace MyApp // Note: actual namespace depends on the project name.
 {
@@ -36,11 +48,14 @@ namespace MyApp // Note: actual namespace depends on the project name.
         public class ChessBoard
         {
             public Piece[,] board;
-
+            public bool[,] squaresUnderAttackWhite;
+            public bool[,] squaresUnderAttackBlack;
 
             public ChessBoard()
             {
                 this.board = new Piece[8, 8];
+                this.squaresUnderAttackWhite = new bool[8, 8];
+                this.squaresUnderAttackBlack = new bool[8, 8];
                 this.setStartPosition();
             }
 
@@ -82,6 +97,50 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
+            }
+
+            public void resetSquaresUnderAttack()
+            {
+                this.resetSquaresUnderAttackBlack();
+                this.resetSquaresUnderAttackWhite();
+            }
+
+            public void resetSquaresUnderAttackWhite()
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        this.squaresUnderAttackWhite[i, j] = false;
+                    }
+                }
+            }
+
+            public void resetSquaresUnderAttackBlack()
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        this.squaresUnderAttackBlack[i, j] = false;
+                    }
+                }
+            }
+
+            public void setSquaresUnderAttackWhite()
+            {
+
+            }
+
+            public void setSquaresUnderAttackBlack()
+            {
+
+            }
+
+            public void setSquaresUnderAttack()
+            {
+                this.setSquaresUnderAttackBlack();
+                this.setSquaresUnderAttackWhite();
             }
 
             public void consoleDraw()
