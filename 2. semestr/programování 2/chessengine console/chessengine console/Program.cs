@@ -8,9 +8,6 @@
  */
 
 
-
-
-
 using System;
 using System.Text;
 
@@ -53,9 +50,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
             public Piece[,] board;
             public bool[,] squaresUnderAttackWhite;
             public bool[,] squaresUnderAttackBlack;
+            public string playerOnMove;
 
             public ChessBoard()
             {
+                this.playerOnMove = "white";
                 this.board = new Piece[8, 8];
                 this.squaresUnderAttackWhite = new bool[8, 8];
                 this.squaresUnderAttackBlack = new bool[8, 8];
@@ -102,15 +101,41 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             }
 
-            public void moveInput(Move move)
+            public void changePlayerOnMove()
             {
-                this.makeMove(move);
+                if(this.playerOnMove == "white")
+                {
+                    this.playerOnMove = "black";
+                }
+                else
+                {
+                    this.playerOnMove = "white";
+                }
             }
 
-            private void makeMove(Move move)
+            private bool checkMoveFromRightPlayer(int rowIndex, int columnIndex)
             {
-                this.board[move.getRowIndexEndPosition(), move.getColumnIndexEndPosition()] = this.board[move.getRowIndexStartPosition(), move.getColumnIndexStartPosition()];
-                this.clearSquare(move.getRowIndexStartPosition(), move.getColumnIndexStartPosition());
+                return this.board[rowIndex, columnIndex].color == this.playerOnMove;
+            }
+
+            public void moveInput(Move move)
+            {
+                int rowStart = move.getRowIndexStartPosition();
+                int rowEnd = move.getRowIndexEndPosition();
+                int columnStart = move.getColumnIndexStartPosition();
+                int columnEnd = move.getColumnIndexEndPosition();
+
+                if (!this.checkMoveFromRightPlayer(rowStart, columnStart))
+                    return;
+
+                this.makeMove(rowStart, columnStart, rowEnd, columnEnd);
+                this.changePlayerOnMove();
+            }
+
+            private void makeMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
+            {
+                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
+                this.clearSquare(rowStart, columnStart);
             }
 
             public void clearSquare(int rowIndex, int columnIndex)
