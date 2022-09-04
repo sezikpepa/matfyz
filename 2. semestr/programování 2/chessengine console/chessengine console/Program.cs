@@ -123,7 +123,6 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
-                
             }
 
             public void newEPValidPosition(int x, int y)
@@ -389,26 +388,32 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             protected void linearExplore(Piece[,] board, int incrementX, int incrementY)
             {
-                int j = this.position.x;
-                int i = this.position.y;
-                while ((0 <= i + incrementX && i + incrementX <= 7) && (0 <= j + incrementY && j + incrementY <= 7))
+                
+                int j = this.position.y;
+                int i = this.position.x;
+
+                i += incrementY;
+                j += incrementX;
+
+                while ((0 <= i && i <= 7) && (0 <= j && j <= 7))
                 {
-                    if (board[i + incrementX, j + incrementY].color == "blank")
+                    if (board[i, j].color == "blank")
                     {
-                        this.validMoves[i + incrementX, j + incrementY] = true;
+                        Console.WriteLine("ano");
+                        this.validMoves[i, j] = true;
                     }
-                    else if (board[i + incrementX, j + incrementY].color == this.color)
+                    else if (board[i, j].color == this.color)
                     {
-                        break;
+                        return;
                     }
-                    else
+                    else if (board[i, j].color != this.color)
                     {
-                        this.validMoves[i + incrementX, j + incrementY] = true;
-                        break;
+                        this.validMoves[i, j] = true;
+                        return;
                     }
 
-                    i += incrementX;
-                    j += incrementY;
+                    i += incrementY;
+                    j += incrementX;
                 }
             }
 
@@ -834,6 +839,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
             ChessBoard chessBoard = new();
             while (true){              
                 chessBoard.consoleDraw();
+                int i = 2;
+                chessBoard.board[7, i].generateValidMoves(chessBoard.board, new Position(-1, -1), 1, 1);
+                chessBoard.board[7, i].drawValidMoves();
 
                 string line = Console.ReadLine();
                 Move nextMove = new(line);
@@ -841,7 +849,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 chessBoard.moveInput(nextMove);
                 Console.WriteLine();
 
-                //Console.Clear();
+                Console.Clear();
             }
             
         }
