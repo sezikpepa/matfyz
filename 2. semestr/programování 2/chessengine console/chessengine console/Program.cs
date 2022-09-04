@@ -3,7 +3,6 @@
  * pawn e.p.
  * king castle
  * king in check
- * king next to the king - not tested
  * moves from commandline - check validity before making the move
  * 
  * TO FIX
@@ -108,6 +107,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
+                this.board[3, 4] = new King("white", new Position(3, 4));
+                this.board[1, 4] = new King("black", new Position(1, 4));
+
             }
 
             public void changePlayerOnMove()
@@ -151,6 +153,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                 this.makeMove(rowStart, columnStart, rowEnd, columnEnd);
                 this.board[rowEnd, columnEnd].updateCurrentPosition(new Position(rowEnd, columnEnd));
+                this.board[rowEnd, columnEnd].withoutMove = false;
                 this.changePlayerOnMove();
             }
 
@@ -647,6 +650,25 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♔';
             }
 
+            private bool checkKingsNextMoveNextToKing(Piece[,] board, int rowIndex, int columnIndex)
+            {
+                for (int i = -1; i <= 1; i++)
+                {
+                    for (int j = -1; j <= 1; j++)
+                    {                     
+                        if (board[rowIndex + i, columnIndex + j].type == "king" && isOppositeColorsBW(board[rowIndex + i, columnIndex + j].color, this.color))
+                        {
+                            Console.WriteLine(board[rowIndex + i, columnIndex + j].type);
+                            Console.WriteLine(board[rowIndex + i, columnIndex + j].color);
+                            Console.WriteLine();
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+         
+
             public override void generateValidMoves(Piece[,] board)
             {
                 for (int i = -1; i <= 1; i++)
@@ -657,7 +679,10 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         {
                             if (board[this.position.x + i, this.position.y + j].color != this.color)
                             {
-                                this.validMoves[this.position.x + i, this.position.y + j] = true;
+                                if (!this.checkKingsNextMoveNextToKing(board, this.position.x + i, this.position.y + j))
+                                {
+                                    this.validMoves[this.position.x + i, this.position.y + j] = true;
+                                }                            
                             }
                         }                          
                     }
@@ -727,14 +752,16 @@ namespace MyApp // Note: actual namespace depends on the project name.
             ChessBoard chessBoard = new();
             while (true){              
                 chessBoard.consoleDraw();
-               
+                chessBoard.board[3, 4].generateValidMoves(chessBoard.board);
+                chessBoard.board[3, 4].drawValidMoves();
+
                 string line = Console.ReadLine();
                 Move nextMove = new(line);
 
                 chessBoard.moveInput(nextMove);
                 Console.WriteLine();
 
-                Console.Clear();
+                //Console.Clear();
 
             }
             
