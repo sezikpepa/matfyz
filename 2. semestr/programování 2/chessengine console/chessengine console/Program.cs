@@ -1,7 +1,7 @@
 ﻿/*
  * TODO
  * 
- * pawn e.p.
+ * pawn e.p. - tested, not 100% for correctness
  * king castle
  * king in check
  * mat
@@ -69,6 +69,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             public bool[,] squaresUnderAttackWhite;
             public bool[,] squaresUnderAttackBlack;
             public string playerOnMove;
+            public Position positionEPValid;
 
             public ChessBoard()
             {
@@ -77,6 +78,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.squaresUnderAttackWhite = new bool[8, 8];
                 this.squaresUnderAttackBlack = new bool[8, 8];
                 this.setStartPosition();
+                this.positionEPValid = new Position(-1, -1);
             }
 
             public void setStartPosition()
@@ -117,9 +119,18 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
-                this.board[3, 4] = new King("white", new Position(3, 4));
-                this.board[1, 4] = new King("black", new Position(1, 4));
+                
+            }
 
+            public void resetHelpGameActionsSigns()
+            {
+                this.positionEPValid = new Position(-1, -1);
+            }
+
+            public void newEPValidPosition(int x, int y)
+            {
+                this.positionEPValid.x = x;
+                this.positionEPValid.y = y;
             }
 
             public void changePlayerOnMove()
@@ -142,10 +153,25 @@ namespace MyApp // Note: actual namespace depends on the project name.
             private bool checkCorrectPieceMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
             {
 
-                this.board[rowStart, columnStart].generateValidMoves(this.board);
+                this.board[rowStart, columnStart].generateValidMoves(this.board, this.positionEPValid);
                 if (this.board[rowStart, columnStart].validMoves[rowEnd, columnEnd] == false)
                     return false;
                 return true;
+            }
+
+            private void checkForMarkingEPValidSquare(int rowStart, int columnStart, int rowEnd, int columnEnd)
+            {
+                if(this.board[rowStart, columnStart].type == "pawn")
+                {
+                    if(Math.Abs(rowStart - rowEnd) == 2)
+                    {
+                        Console.WriteLine("rowepindex");
+                        int rowIndex = (rowStart + rowEnd) / 2;
+                        Console.WriteLine(rowIndex);
+                        Console.WriteLine(columnStart);
+                        this.newEPValidPosition(rowIndex, columnStart);
+                    }
+                }
             }
 
             public void moveInput(Move move)
@@ -160,6 +186,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                 if (!this.checkCorrectPieceMove(rowStart, columnStart, rowEnd, columnEnd))
                     return;
+
+                this.checkForMarkingEPValidSquare(rowStart, columnStart, rowEnd, columnEnd);
 
                 this.makeMove(rowStart, columnStart, rowEnd, columnEnd);
                 this.board[rowEnd, columnEnd].updateCurrentPosition(new Position(rowEnd, columnEnd));
@@ -190,7 +218,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 {
                     for (int j = 0; j < 8; j++)
                     {
-                        this.board[i, j].generateValidMoves(this.board);
+                        this.board[i, j].generateValidMoves(this.board, this.positionEPValid);
                     }
                 }
             }
@@ -225,7 +253,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     {
                         if (this.board[i, j].color == "white")
                         {
-                            this.board[i, j].generateValidMoves(this.board);
+                            this.board[i, j].generateValidMoves(this.board, this.positionEPValid);
                         }
                     }
                 }
@@ -412,7 +440,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.linearExplore(board, 0, -1);
             }
 
-            public virtual void generateValidMoves(Piece[,] board)
+            public virtual void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
 
             }
@@ -425,8 +453,10 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
         public class EmptySpace : Piece
         {
+            public bool EPValid;
             public EmptySpace(string color, Position position) : base(color, position)
             {
+                this.EPValid = false;
                 this.addConsoleRepresentation();
                 this.type = "blank";
             }
@@ -436,7 +466,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.consoleRepresentation = ' ';
             }
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
 
             }
@@ -459,7 +489,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
                 this.resetValidMoves();
 
@@ -483,13 +513,14 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♙';
             }
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
                 this.resetValidMoves();
 
                 this.checkMoveForward(board);
                 this.checkDiscardPieceMove(board);
                 this.checkMoveForwardByTwo(board);
+                this.checkMoveEP(board, EPValidPosition);
                 
             }
 
@@ -510,6 +541,25 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         this.validMoves[this.position.x + (increment * 2), this.position.y] = true;
                     }
                 }              
+            }
+
+            private void checkMoveEP(Piece[,] board, Position EPValidPosition)
+            {
+                Console.WriteLine("ve funkci");
+                int increment;
+                if (this.color == "black")
+                    increment = 1;
+                else
+                    increment = -1;
+
+                if (this.position.x + increment == EPValidPosition.x && this.position.y - 1 == EPValidPosition.y)
+                {
+                    this.validMoves[this.position.x + increment, this.position.y - 1] = true;
+                }
+                if (this.position.x + increment == EPValidPosition.x && this.position.y + 1 == EPValidPosition.y)
+                {
+                    this.validMoves[this.position.x + increment, this.position.y + 1] = true;
+                }
             }
 
 
@@ -573,7 +623,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♘';
             }
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
                 this.resetValidMoves();
                 int x = this.position.x;
@@ -609,7 +659,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♗';
             }
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
                 this.resetValidMoves();
 
@@ -635,7 +685,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♕';
             }
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
                 this.resetValidMoves();
 
@@ -679,7 +729,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
          
 
-            public override void generateValidMoves(Piece[,] board)
+            public override void generateValidMoves(Piece[,] board, Position EPValidPosition)
             {
                 for (int i = -1; i <= 1; i++)
                 {
@@ -762,8 +812,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
             ChessBoard chessBoard = new();
             while (true){              
                 chessBoard.consoleDraw();
-                chessBoard.board[3, 4].generateValidMoves(chessBoard.board);
-                chessBoard.board[3, 4].drawValidMoves();
+                //chessBoard.board[3, 4].generateValidMoves(chessBoard.board);
+                //chessBoard.board[3, 4].drawValidMoves();
 
                 string line = Console.ReadLine();
                 Move nextMove = new(line);
