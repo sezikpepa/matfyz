@@ -16,7 +16,12 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
     internal class Program
     {
-       
+
+        static public int reverseNumber8(int value)
+        {
+            int[] line = { 8, 7, 6, 5, 4, 3, 2, 1 };
+            return line[value] - 1;
+        }
         static public bool isBetweenIncluding(int value, int number1, int number2)
         {
             if (value <= number2 && number1 <= value)
@@ -679,13 +684,13 @@ namespace MyApp // Note: actual namespace depends on the project name.
             public int getRowIndexStartPosition()
             {
                 int result = this.startPosition[1] - '0' - 1;
-                return result;
+                return reverseNumber8(result);
             }
 
             public int getRowIndexEndPosition()
             {
                 int result = this.endPosition[1] - '0' - 1;
-                return result;
+                return reverseNumber8(result);
             }
 
             public string getStringRepresentation()
@@ -706,6 +711,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                 chessBoard.moveInput(nextMove);
                 Console.WriteLine();
+
+                Console.Clear();
 
             }
             
