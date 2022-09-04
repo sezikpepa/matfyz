@@ -4,6 +4,7 @@
  * king castle
  * king in check
  * king next to the king
+ * moves from commandline - check validity before making the move
  */
 
 
@@ -11,12 +12,14 @@
 
 
 using System;
+using System.Text;
 
 namespace MyApp // Note: actual namespace depends on the project name.
 {
 
     internal class Program
     {
+       
         static public bool isBetweenIncluding(int value, int number1, int number2)
         {
             if (value <= number2 && number1 <= value)
@@ -99,10 +102,41 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             }
 
+            public void moveInput(Move move)
+            {
+                this.makeMove(move);
+            }
+
+            private void makeMove(Move move)
+            {
+
+                this.board[move.getRowIndexEndPosition(), move.getColumnIndexEndPosition()] = this.board[move.getRowIndexStartPosition(), move.getColumnIndexStartPosition()];
+
+                this.clearSquare(move.getRowIndexStartPosition(), move.getColumnIndexStartPosition());
+
+                Console.WriteLine("test");
+            }
+
+            public void clearSquare(int rowIndex, int columnIndex)
+            {
+                this.board[rowIndex, columnIndex] = new EmptySpace("blank", new Position(rowIndex, columnIndex));
+            }
+
             public void resetSquaresUnderAttack()
             {
                 this.resetSquaresUnderAttackBlack();
                 this.resetSquaresUnderAttackWhite();
+            }
+
+            public void generateMovesAllPieces()
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        this.board[i, j].generateValidMoves(this.board);
+                    }
+                }
             }
 
             public void resetSquaresUnderAttackWhite()
@@ -129,7 +163,39 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             public void setSquaresUnderAttackWhite()
             {
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        if (this.board[i, j].color == "white")
+                        {
+                            this.board[i, j].generateValidMoves(this.board);
+                        }
+                    }
+                }
+            }
 
+            public void setSquaresUnderAttackWhiteByPiece()
+            {
+                this.generateMovesAllPieces();  
+                this.resetSquaresUnderAttackWhite();
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        for (int k = 0; k < 8; k++)
+                        {
+                            for (int l = 0; l < 8; l++)
+                            {
+                                if (this.board[i, j].validMoves[k, l] == true)
+                                {
+                                    this.squaresUnderAttackWhite[k, l] = true;
+                                }
+                            }
+                        }
+                        
+                    }
+                }
             }
 
             public void setSquaresUnderAttackBlack()
@@ -186,17 +252,17 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 }
             }
 
-            protected void linearExplore(ChessBoard board, int incrementX, int incrementY)
+            protected void linearExplore(Piece[,] board, int incrementX, int incrementY)
             {
                 int j = this.position.x;
                 int i = this.position.y;
                 while ((0 <= i + incrementX && i + incrementX <= 7) && (0 <= j + incrementY && j + incrementY <= 7))
                 {
-                    if (board.board[i + incrementX, j + incrementY].color == "blank")
+                    if (board[i + incrementX, j + incrementY].color == "blank")
                     {
                         this.validMoves[i + incrementX, j + incrementY] = true;
                     }
-                    else if (board.board[i + incrementX, j + incrementY].color == this.color)
+                    else if (board[i + incrementX, j + incrementY].color == this.color)
                     {
                         break;
                     }
@@ -239,7 +305,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     throw new InvalidDataException("ERROR: you have options: black, white");
             }
 
-            protected void exploreDiagonals(ChessBoard board)
+            protected void exploreDiagonals(Piece[,] board)
             {
                 this.linearExplore(board, 1, 1);
                 this.linearExplore(board, -1, -1);
@@ -248,7 +314,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.linearExplore(board, -1, 1);
             }
 
-            protected void exploreNonDiagonals(ChessBoard board)
+            protected void exploreNonDiagonals(Piece[,] board)
             {
                 this.linearExplore(board, 1, 0);
                 this.linearExplore(board, -1, 0);
@@ -257,7 +323,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.linearExplore(board, 0, -1);
             }
 
-            public virtual void generateValidMoves(ChessBoard board)
+            public virtual void generateValidMoves(Piece[,] board)
             {
 
             }
@@ -281,7 +347,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.consoleRepresentation = ' ';
             }
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
 
             }
@@ -304,7 +370,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
                 this.resetValidMoves();
 
@@ -328,7 +394,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♙';
             }
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
                 this.resetValidMoves();
 
@@ -338,7 +404,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 
             }
 
-            private void checkMoveForwardByTwo(ChessBoard board)
+            private void checkMoveForwardByTwo(Piece[,] board)
             {
                 if (this.withoutMove == false)
                     return;
@@ -348,9 +414,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 else
                     increment = -1;
 
-                if (board.board[this.position.x + increment, this.position.y].color == "blank")
+                if (board[this.position.x + increment, this.position.y].color == "blank")
                 {
-                    if (board.board[this.position.x + (increment * 2), this.position.y].color == "blank")
+                    if (board[this.position.x + (increment * 2), this.position.y].color == "blank")
                     {
                         this.validMoves[this.position.x + (increment * 2), this.position.y] = true;
                     }
@@ -358,7 +424,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
 
-            private void checkMoveForward(ChessBoard board)
+            private void checkMoveForward(Piece[,] board)
             {
                 int increment;
                 if (this.color == "black")
@@ -366,11 +432,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 else
                     increment = -1;
 
-                if (board.board[this.position.x + increment, this.position.y].color == "blank")
+                if (board[this.position.x + increment, this.position.y].color == "blank")
                     this.validMoves[this.position.x + increment, this.position.y] = true;
             }
 
-            private void checkDiscardPieceMove(ChessBoard board)
+            private void checkDiscardPieceMove(Piece[,] board)
             {
                 int increment;
                 if (this.color == "black")
@@ -380,7 +446,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                 try
                 {
-                    if (isOppositeColorsBW(board.board[this.position.x + increment, this.position.y + 1].color, this.color))
+                    if (isOppositeColorsBW(board[this.position.x + increment, this.position.y + 1].color, this.color))
                         this.validMoves[this.position.x + increment, this.position.y + 1] = true;
                 }
                 catch
@@ -390,7 +456,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
                 try
                 {
-                    if (isOppositeColorsBW(board.board[this.position.x + increment, this.position.y - 1].color, this.color))
+                    if (isOppositeColorsBW(board[this.position.x + increment, this.position.y - 1].color, this.color))
                         this.validMoves[this.position.x + increment, this.position.y - 1] = true;
                 }
                 catch
@@ -418,7 +484,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♘';
             }
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
                 this.resetValidMoves();
                 int x = this.position.x;
@@ -429,7 +495,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     {
                         if(isBetweenIncluding(x - i, 0, 7) && isBetweenIncluding(y - j, 0, 7) && Math.Abs(i) + Math.Abs(j) == 3 && i != 0 && j != 0)
                         {
-                            if (board.board[x - i, y - j].color != this.color)
+                            if (board[x - i, y - j].color != this.color)
                                 this.validMoves[x - i, y - j] = true;
                         }
                     }
@@ -454,7 +520,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♗';
             }
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
                 this.resetValidMoves();
 
@@ -480,7 +546,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♕';
             }
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
                 this.resetValidMoves();
 
@@ -505,7 +571,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     this.consoleRepresentation = '♔';
             }
 
-            public override void generateValidMoves(ChessBoard board)
+            public override void generateValidMoves(Piece[,] board)
             {
                 for (int i = -1; i <= 1; i++)
                 {
@@ -513,7 +579,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     {
                         if (isBetweenIncluding(this.position.x + i, 0, 7) && isBetweenIncluding(this.position.y + j, 0, 7))
                         {
-                            if (board.board[this.position.x + i, this.position.y + j].color != this.color)
+                            if (board[this.position.x + i, this.position.y + j].color != this.color)
                             {
                                 this.validMoves[this.position.x + i, this.position.y + j] = true;
                             }
@@ -545,6 +611,34 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.endPosition = endPostion;
             }
 
+            private int getColumnIndex(string value)
+            {
+                byte[] asciiBytes = Encoding.ASCII.GetBytes(value);
+                return asciiBytes[0] - 97;
+            }
+
+            public int getColumnIndexStartPosition()
+            {
+                return this.getColumnIndex(this.startPosition);
+            }
+
+            public int getColumnIndexEndPosition()
+            {
+                return this.getColumnIndex(this.endPosition);
+            }
+
+            public int getRowIndexStartPosition()
+            {
+                int result = this.startPosition[1] - '0' - 1;
+                return result;
+            }
+
+            public int getRowIndexEndPosition()
+            {
+                int result = this.endPosition[1] - '0' - 1;
+                return result;
+            }
+
             public string getStringRepresentation()
             {
                 return this.startPosition + " " + this.endPosition;
@@ -553,17 +647,17 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
         static void Main(string[] args)
         {
-            while(true){
-                Console.OutputEncoding = System.Text.Encoding.Unicode;
-                ChessBoard chessBoard = new();
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            ChessBoard chessBoard = new();
+            while (true){              
                 chessBoard.consoleDraw();
-                /*
+               
                 string line = Console.ReadLine();
-                Move nextMove = new Move(line);
-                */
-                chessBoard.board[6,0].generateValidMoves(chessBoard);
-                chessBoard.board[6,0].drawValidMoves();
-                Console.ReadLine();
+                Move nextMove = new(line);
+
+                chessBoard.moveInput(nextMove);
+                Console.WriteLine();
+
             }
             
         }
