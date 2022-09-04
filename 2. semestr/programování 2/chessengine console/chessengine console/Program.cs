@@ -5,6 +5,10 @@
  * king in check
  * king next to the king - not tested
  * moves from commandline - check validity before making the move
+ * 
+ * TO FIX
+ * 
+ * 
  */
 
 
@@ -123,6 +127,15 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 return this.board[rowIndex, columnIndex].color == this.playerOnMove;
             }
 
+            private bool checkCorrectPieceMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
+            {
+
+                this.board[rowStart, columnStart].generateValidMoves(this.board);
+                if (this.board[rowStart, columnStart].validMoves[rowEnd, columnEnd] == false)
+                    return false;
+                return true;
+            }
+
             public void moveInput(Move move)
             {
                 int rowStart = move.getRowIndexStartPosition();
@@ -133,7 +146,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 if (!this.checkMoveFromRightPlayer(rowStart, columnStart))
                     return;
 
+                if (!this.checkCorrectPieceMove(rowStart, columnStart, rowEnd, columnEnd))
+                    return;
+
                 this.makeMove(rowStart, columnStart, rowEnd, columnEnd);
+                this.board[rowEnd, columnEnd].updateCurrentPosition(new Position(rowEnd, columnEnd));
                 this.changePlayerOnMove();
             }
 
@@ -304,6 +321,11 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         this.validMoves[i, j] = false;
                     }
                 }
+            }
+
+            public void updateCurrentPosition(Position position)
+            {
+                this.position = position;
             }
 
             protected void linearExplore(Piece[,] board, int incrementX, int incrementY)
