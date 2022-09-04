@@ -3,7 +3,7 @@
  * pawn e.p.
  * king castle
  * king in check
- * king next to the king
+ * king next to the king - not tested
  * moves from commandline - check validity before making the move
  */
 
@@ -109,12 +109,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             private void makeMove(Move move)
             {
-
                 this.board[move.getRowIndexEndPosition(), move.getColumnIndexEndPosition()] = this.board[move.getRowIndexStartPosition(), move.getColumnIndexStartPosition()];
-
                 this.clearSquare(move.getRowIndexStartPosition(), move.getColumnIndexStartPosition());
-
-                Console.WriteLine("test");
             }
 
             public void clearSquare(int rowIndex, int columnIndex)
@@ -220,6 +216,34 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     Console.WriteLine();
                 }
             }
+
+            public bool kingsNextToEachOther()
+            {
+                for(int k = 0; k < 8; k++)
+                {
+                    for(int l = 0; l < 8; l++)
+                    {
+                        if(this.board[k, l].type == "king")
+                        {
+                            for (int i = -1; i <= 1; i++)
+                            {
+                                for (int j = -1; j <= 1; j++)
+                                {
+                                    if (isBetweenIncluding(k + i, 0, 7) && isBetweenIncluding(l + j, 0, 7))
+                                    {
+                                        if (board[k + i, l + j].type == "king" && (i != 0 && j != 0))
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
         }
 
         public class Piece
