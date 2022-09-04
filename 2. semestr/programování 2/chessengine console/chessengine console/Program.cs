@@ -1,9 +1,19 @@
 ﻿/*
  * TODO
+ * 
  * pawn e.p.
  * king castle
  * king in check
- * moves from commandline - check validity before making the move
+ * mat
+ * 3 move repeat
+ * pat
+ * server play
+ * engine
+ * pgn load, store
+ * notation
+ * graphics 
+ * 
+ * 
  * 
  * TO FIX
  * 
