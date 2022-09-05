@@ -2,7 +2,6 @@
  * TODO
  * 
  * pawn e.p. - tested, not 100% for correctness
- * king castle
  * king in check
  * mat
  * 3 move repeat
@@ -87,6 +86,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
 
             public void setStartPosition()
             {
+                
                 this.board[0, 0] = new Rook("black", new Position(0, 0));
                 this.board[0, 1] = new Knight("black", new Position(0, 1));
                 this.board[0, 2] = new Bishop("black", new Position(0, 2));
@@ -122,6 +122,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.board[7, 5] = new Bishop("white", new Position(7, 5));
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
+
+                this.board[7, 5] = new EmptySpace("blank", new Position(7, 5));
+                this.board[7, 6] = new EmptySpace("blank", new Position(7, 6));
 
             }
 
@@ -175,6 +178,72 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 }
             }
 
+            private void doShortCastle(string color)
+            {
+                this.increaseCurrentMove();
+                
+                if (color == "white")
+                {
+                    this.board[7, 6] = this.board[7, 4];
+                    this.board[7, 5] = this.board[7, 7];
+
+                    this.board[7, 6].updateCurrentPosition(new Position(7, 6));
+                    this.board[7, 6].withoutMove = false;
+                    this.board[7, 5].updateCurrentPosition(new Position(7, 5));
+                    this.board[7, 5].withoutMove = false;
+                    this.changePlayerOnMove();
+
+                    this.clearSquare(7, 4);
+                    this.clearSquare(7, 7);
+
+                    return;
+                }
+
+                this.board[0, 6] = this.board[0, 4];
+                this.board[0, 5] = this.board[0, 7];
+
+                this.board[0, 6].updateCurrentPosition(new Position(0, 6));
+                this.board[0, 6].withoutMove = false;
+                this.board[0, 5].updateCurrentPosition(new Position(0, 5));
+                this.board[0, 5].withoutMove = false;
+                this.changePlayerOnMove();
+
+                this.clearSquare(0, 4);
+                this.clearSquare(0, 7);
+            }
+
+            private void doLongCastle(string color)
+            {
+                this.increaseCurrentMove();
+                if (color == "white")
+                {
+                    this.board[7, 2] = this.board[7, 4];
+                    this.board[7, 4] = this.board[7, 0];
+
+                    this.clearSquare(7, 4);
+                    this.clearSquare(7, 0);
+
+                    this.board[7, 2].updateCurrentPosition(new Position(7, 2));
+                    this.board[7, 2].withoutMove = false;
+                    this.board[7, 4].updateCurrentPosition(new Position(7, 4));
+                    this.board[7, 4].withoutMove = false;
+                    this.changePlayerOnMove();
+
+                    return;
+                }
+                this.board[0, 2] = this.board[0, 4];
+                this.board[0, 4] = this.board[0, 0];
+
+                this.clearSquare(0, 4);
+                this.clearSquare(0, 0);
+
+                this.board[0, 2].updateCurrentPosition(new Position(0, 2));
+                this.board[0, 2].withoutMove = false;
+                this.board[0, 4].updateCurrentPosition(new Position(0, 4));
+                this.board[0, 4].withoutMove = false;
+                this.changePlayerOnMove();
+            }
+
             public void moveInput(Move move)
             {
                 int rowStart = move.getRowIndexStartPosition();
@@ -189,8 +258,24 @@ namespace MyApp // Note: actual namespace depends on the project name.
                     return;
 
                 this.checkForMarkingEPValidSquare(rowStart, columnStart, rowEnd, columnEnd);
-
+                
+                if (this.board[rowStart, columnStart].type == "king")
+                {
+                    Console.WriteLine("king");
+                    if (columnEnd - columnStart == 2)
+                    {
+                        this.doShortCastle(this.board[rowStart, columnStart].color);
+                        return;
+                    }
+                    else if (columnEnd - columnStart == -2)
+                    {
+                        this.doLongCastle(this.board[rowStart, columnStart].color);
+                        return;
+                    }
+                }
+                
                 this.makeMove(rowStart, columnStart, rowEnd, columnEnd);
+                           
                 this.board[rowEnd, columnEnd].updateCurrentPosition(new Position(rowEnd, columnEnd));
                 this.board[rowEnd, columnEnd].withoutMove = false;
                 this.changePlayerOnMove();
@@ -742,14 +827,42 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 for (int i = -1; i <= 1; i++)
                 {
                     for (int j = -1; j <= 1; j++)
-                    {                     
-                        if (board[rowIndex + i, columnIndex + j].type == "king" && isOppositeColorsBW(board[rowIndex + i, columnIndex + j].color, this.color))
+                    {
+                        if (isBetweenIncluding(rowIndex + i, 0, 7) && isBetweenIncluding(columnIndex + j, 0, 7))
                         {
-                            return true;
+                            if (board[rowIndex + i, columnIndex + j].type == "king" && isOppositeColorsBW(board[rowIndex + i, columnIndex + j].color, this.color))
+                            {
+                                return true;
+                            }
                         }
+                        
                     }
                 }
                 return false;
+            }
+
+            private void checkCastlePossibility(Piece[,] board, int rowIndex, int columnIndex)
+            {
+                
+                if (board[rowIndex, columnIndex].withoutMove == false)
+                    return;
+                //short castle
+                if (board[rowIndex, columnIndex + 1].type == "blank" && board[rowIndex, columnIndex + 2].type == "blank")
+                {
+                    if (board[rowIndex, columnIndex + 3].withoutMove == true)
+                    {
+                        this.validMoves[rowIndex, columnIndex + 2] = true;
+                    }
+                }
+                //long castle
+                if (board[rowIndex, columnIndex + 1].type == "blank" && board[rowIndex, columnIndex + 2].type == "blank")
+                {
+                    if (board[rowIndex, columnIndex + 3].withoutMove == true)
+                    {
+                        this.validMoves[rowIndex, columnIndex + 2] = true;
+                    }
+                }
+
             }
          
 
@@ -771,6 +884,8 @@ namespace MyApp // Note: actual namespace depends on the project name.
                         }                          
                     }
                 }
+                this.checkCastlePossibility(board, this.position.x, this.position.y);
+
             }
         }
 
@@ -780,6 +895,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             public string endPosition;
             //flags
             public bool ep;
+            public string castle;
 
             public Move(string move)
             {
@@ -791,6 +907,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 this.startPosition = parts[0];
                 this.endPosition = parts[1];
                 this.ep = false;
+                this.castle = "none";
             }
 
             public Move(string startPosition, string endPostion)
@@ -839,7 +956,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             ChessBoard chessBoard = new();
             while (true){              
                 chessBoard.consoleDraw();
-                int i = 2;
+                int i = 4;
                 chessBoard.board[7, i].generateValidMoves(chessBoard.board, new Position(-1, -1), 1, 1);
                 chessBoard.board[7, i].drawValidMoves();
 
@@ -849,7 +966,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 chessBoard.moveInput(nextMove);
                 Console.WriteLine();
 
-                Console.Clear();
+                //Console.Clear();
             }
             
         }
