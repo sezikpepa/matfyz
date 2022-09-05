@@ -1,0 +1,98 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0-windows7.0": {
+      "chessengine console/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/chessengine console.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/chessengine console.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "chessengine console/1.0.0": {
+      "type": "project",
+      "path": "../chessengine console/chessengine console.csproj",
+      "msbuildProject": "../chessengine console/chessengine console.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0-windows7.0": [
+      "chessengine console >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\sezik\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\ChessWindowApp\\ChessWindowApp.csproj",
+      "projectName": "ChessWindowApp",
+      "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\ChessWindowApp\\ChessWindowApp.csproj",
+      "packagesPath": "C:\\Users\\sezik\\.nuget\\packages\\",
+      "outputPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\ChessWindowApp\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\sezik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0-windows7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0-windows7.0": {
+          "targetAlias": "net6.0-windows",
+          "projectReferences": {
+            "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj": {
+              "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0-windows7.0": {
+        "targetAlias": "net6.0-windows",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WindowsForms": {
+            "privateAssets": "none"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "ChessWindowApp/1.0.0": {
+        "runtime": {
+          "ChessWindowApp.dll": {}
+        }
+      },
+      "chessengine console/1.0.0": {
+        "runtime": {
+          "chessengine console.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ChessWindowApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "chessengine console/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

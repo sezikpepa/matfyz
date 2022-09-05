@@ -1,0 +1,15 @@
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\bin\Debug\net6.0\klienttest.exe
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\bin\Debug\net6.0\klienttest.deps.json
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\bin\Debug\net6.0\klienttest.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\bin\Debug\net6.0\klienttest.dll
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\bin\Debug\net6.0\klienttest.pdb
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.dll
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\refint\klienttest.dll
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.pdb
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\klienttest.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\klienttest\klienttest\obj\Debug\net6.0\ref\klienttest.dll

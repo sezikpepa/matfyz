@@ -1,0 +1,32 @@
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\chessengine console.exe
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\chessengine console.deps.json
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\chessengine console.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\chessengine console.pdb
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\refint\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.pdb
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\ref\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\bin\Debug\net6.0\pgn.net.dll
+C:\matfyz\2. semestr\programování 2\chessengine console\chessengine console\obj\Debug\net6.0\chessengine console.csproj.CopyComplete
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\bin\Debug\net6.0\chessengine console.exe
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\bin\Debug\net6.0\chessengine console.deps.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\bin\Debug\net6.0\chessengine console.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\bin\Debug\net6.0\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\bin\Debug\net6.0\chessengine console.pdb
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\refint\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.pdb
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\chessengine console.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\chessengine console\obj\Debug\net6.0\ref\chessengine console.dll

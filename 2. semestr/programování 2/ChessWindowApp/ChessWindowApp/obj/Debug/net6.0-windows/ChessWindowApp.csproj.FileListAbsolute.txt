@@ -1,0 +1,24 @@
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\chessengine console.deps.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\chessengine console.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\chessengine console.exe
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\ChessWindowApp.exe
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\ChessWindowApp.deps.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\ChessWindowApp.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\ChessWindowApp.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\ChessWindowApp.pdb
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\chessengine console.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\chessengine console.pdb
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.csproj.AssemblyReference.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.Form1.resources
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.csproj.GenerateResource.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.AssemblyInfoInputs.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.AssemblyInfo.cs
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.csproj.CoreCompileInputs.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.csproj.CopyComplete
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\refint\ChessWindowApp.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.pdb
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.genruntimeconfig.cache
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ref\ChessWindowApp.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.Properties.Resources.resources
