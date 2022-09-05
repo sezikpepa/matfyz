@@ -19,7 +19,7 @@
  */
 
 
-using System;
+using System;  
 using System.Text;
 
 namespace MyApp // Note: actual namespace depends on the project name.
@@ -84,8 +84,7 @@ namespace MyApp // Note: actual namespace depends on the project name.
             }
 
             public void setStartPosition()
-            {
-                
+            {        
                 this.board[0, 0] = new Rook("black", new Position(0, 0));
                 this.board[0, 1] = new Knight("black", new Position(0, 1));
                 this.board[0, 2] = new Bishop("black", new Position(0, 2));
@@ -256,6 +255,9 @@ namespace MyApp // Note: actual namespace depends on the project name.
                 if (!this.checkCorrectPieceMove(rowStart, columnStart, rowEnd, columnEnd))
                     return;
 
+                if (this.isKingChecked(this.board, rowEnd, columnEnd))
+                    return;
+
                 this.checkForMarkingEPValidSquare(rowStart, columnStart, rowEnd, columnEnd);
                 
                 if (this.board[rowStart, columnStart].type == "king")
@@ -305,6 +307,19 @@ namespace MyApp // Note: actual namespace depends on the project name.
             public void clearSquare(int rowIndex, int columnIndex)
             {
                 this.board[rowIndex, columnIndex] = new EmptySpace("blank", new Position(rowIndex, columnIndex));
+            }
+
+            public bool isKingChecked(Piece [,] board, int rowIndex, int columnIndex)
+            {
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        board[i, j].generateValidMoves(board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
+                    }
+                }
+
+                return false;
             }
 
             public void resetSquaresUnderAttack()
