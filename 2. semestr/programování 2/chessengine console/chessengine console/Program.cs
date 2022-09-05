@@ -1,7 +1,6 @@
 ﻿/*
  * TODO
  * 
- * pawn e.p. - tested, not 100% for correctness
  * king in check
  * mat
  * 3 move repeat
