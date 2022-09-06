@@ -56,6 +56,7 @@
             this.label20 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.showValidMovesCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -337,11 +338,23 @@
             this.comboBox1.Size = new System.Drawing.Size(227, 28);
             this.comboBox1.TabIndex = 26;
             // 
+            // showValidMovesCheckBox
+            // 
+            this.showValidMovesCheckBox.AutoSize = true;
+            this.showValidMovesCheckBox.Location = new System.Drawing.Point(968, 866);
+            this.showValidMovesCheckBox.Name = "showValidMovesCheckBox";
+            this.showValidMovesCheckBox.Size = new System.Drawing.Size(150, 24);
+            this.showValidMovesCheckBox.TabIndex = 27;
+            this.showValidMovesCheckBox.Text = "Show valid moves";
+            this.showValidMovesCheckBox.UseVisualStyleBackColor = true;
+            this.showValidMovesCheckBox.CheckedChanged += new System.EventHandler(this.showValidMovesCheckBoxChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1230, 902);
+            this.Controls.Add(this.showValidMovesCheckBox);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label19);
@@ -409,5 +422,6 @@
         private Label label20;
         private Button button4;
         private ComboBox comboBox1;
+        private CheckBox showValidMovesCheckBox;
     }
 }

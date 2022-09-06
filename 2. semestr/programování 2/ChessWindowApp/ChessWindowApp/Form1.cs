@@ -16,10 +16,13 @@ namespace ChessWindowApp
         public Position startPosition;
         public Position endPosition;
 
+        public bool showValidMoves;
+
         public Form1()
         {
             InitializeComponent();
             this.Text = "MatfyzBot 1.0";
+            this.showValidMoves = false;
 
             this.ResetPositions();
             this.lastClickedButton = null;
@@ -107,6 +110,12 @@ namespace ChessWindowApp
             {
                 this.startPosition = new Position(location.X, location.Y);
                 clickedButton.BackColor = Color.LightBlue;
+                this.chessBoard.board[location.Y, location.X].generateValidMoves(this.chessBoard.board, this.chessBoard.positionEPValid, this.chessBoard.currentMove, this.chessBoard.lastEPUpdate);
+                //MessageBox.Show(this.chessBoard.board[location.Y, location.X].type);
+                if (this.showValidMoves)
+                {
+                    this.ShowUserValidSquares(this.chessBoard.board[location.Y, location.X].validMoves);
+                }
             }
             else 
             { 
@@ -121,6 +130,20 @@ namespace ChessWindowApp
             this.lastClickedButton = clickedButton;
             this.RedrawChessGrid();
             
+        }
+
+        public void ShowUserValidSquares(bool[,] validMoves)
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    if(validMoves[i, j] == true)
+                    {
+                        this.brnGrid[j, i].BackColor = Color.LightGreen;
+                    }
+                }
+            }
         }
 
         private void GuiMoveInput(Position startPosition, Position endPosition)
@@ -147,6 +170,18 @@ namespace ChessWindowApp
 
         private void label6_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void showValidMovesCheckBoxChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            if (checkBox.Checked)
+            {
+                this.showValidMoves = true;
+                return;
+            }
+            this.showValidMoves = false;
 
         }
 
