@@ -332,7 +332,8 @@
             "Magistr ",
             "Doktor",
             "Martin Pergel",
-            "Náhodný člověk z internetu"});
+            "Náhodný člověk z internetu",
+            "Jen tak si tahat"});
             this.comboBox1.Location = new System.Drawing.Point(947, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(227, 28);

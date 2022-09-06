@@ -96,7 +96,35 @@ namespace ChessWindowApp
                 return;
             }
             button.BackColor = Color.Brown;
+        }
 
+        public void setAllButtonOriginalColor()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    this.SetButtonOriginalColor(brnGrid[i, j]);
+                }
+            }
+        }
+
+        public void hideValidMoves()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (this.startPosition != null)
+                    {
+                        if (this.startPosition.x == i && this.startPosition.y == j)
+                        {
+                            continue;
+                        }
+                    }
+                    this.SetButtonOriginalColor(brnGrid[i, j]);
+                }
+            }
         }
 
         private void GridButtonClick(object sender, EventArgs e)
@@ -111,7 +139,6 @@ namespace ChessWindowApp
                 this.startPosition = new Position(location.X, location.Y);
                 clickedButton.BackColor = Color.LightBlue;
                 this.chessBoard.board[location.Y, location.X].generateValidMoves(this.chessBoard.board, this.chessBoard.positionEPValid, this.chessBoard.currentMove, this.chessBoard.lastEPUpdate);
-                //MessageBox.Show(this.chessBoard.board[location.Y, location.X].type);
                 if (this.showValidMoves)
                 {
                     this.ShowUserValidSquares(this.chessBoard.board[location.Y, location.X].validMoves);
@@ -122,8 +149,7 @@ namespace ChessWindowApp
                 this.endPosition = new Position(location.X, location.Y);
                 this.GuiMoveInput(startPosition, endPosition);
 
-                if (this.lastClickedButton != null)
-                    this.SetButtonOriginalColor(this.lastClickedButton);
+                this.setAllButtonOriginalColor();
                 this.ResetPositions();
             }
 
@@ -179,9 +205,11 @@ namespace ChessWindowApp
             if (checkBox.Checked)
             {
                 this.showValidMoves = true;
+
                 return;
             }
             this.showValidMoves = false;
+            this.hideValidMoves();
 
         }
 
