@@ -8,7 +8,7 @@ namespace ChessWindowApp
     public partial class Form1 : Form
     {
 
-        public ChessBoard chessBoard = new ChessBoard();
+        public ChessBoard chessBoard = new();
         public Button[,] brnGrid = new Button[8, 8];
 
         private Button? lastClickedButton;
@@ -21,19 +21,19 @@ namespace ChessWindowApp
             InitializeComponent();
             this.Text = "MatfyzBot 1.0";
 
-            this.resetPositions();
+            this.ResetPositions();
             this.lastClickedButton = null;
 
-            this.printButtonGrid();
+            this.PrintButtonGrid();
         }
 
-        private void resetPositions()
+        private void ResetPositions()
         {
             this.startPosition = new Position(-1, -1);
             this.endPosition = new Position(-1, -1);
         }
 
-        private void printButtonGrid()
+        private void PrintButtonGrid()
         {
             Debug.WriteLine("constructor fired");
             int buttonSize = 100;
@@ -42,35 +42,37 @@ namespace ChessWindowApp
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    brnGrid[i, j] = new Button();
-                    brnGrid[i, j].Width = buttonSize;
-                    brnGrid[i, j].Height = buttonSize;
+                    brnGrid[i, j] = new Button
+                    {
+                        Width = buttonSize,
+                        Height = buttonSize
+                    };
 
-                    brnGrid[i, j].Click += this.gridButtonClick;
+                    brnGrid[i, j].Click += this.GridButtonClick;
 
                     panel1.Controls.Add(brnGrid[i, j]);
 
                     brnGrid[i, j].Location = new Point(i * buttonSize, j * buttonSize);
 
                     brnGrid[i, j].Text = Char.ToString(chessBoard.board[j, i].consoleRepresentation);
-                    Font chessPieceFont = new Font("Arial", 50);
+                    Font chessPieceFont = new("Arial", 50);
                     brnGrid[i, j].Font = chessPieceFont;
 
                     brnGrid[i, j].Tag = new Point(i, j);
 
-                    this.setButtonOriginalColor(brnGrid[i, j]);
+                    this.SetButtonOriginalColor(brnGrid[i, j]);
                 }
             }
         }
 
-        public void redrawChessGrid()
+        public void RedrawChessGrid()
         {
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     brnGrid[i, j].Text = Char.ToString(chessBoard.board[j, i].consoleRepresentation);
-                    Font chessPieceFont = new Font("Arial", 50);
+                    Font chessPieceFont = new("Arial", 50);
                     brnGrid[i, j].Font = chessPieceFont;
 
                     brnGrid[i, j].Tag = new Point(i, j);
@@ -78,7 +80,7 @@ namespace ChessWindowApp
             }
         }
 
-        private void setButtonOriginalColor(Button button)
+        private void SetButtonOriginalColor(Button button)
         {
             if (button == null)
                 return;
@@ -94,10 +96,10 @@ namespace ChessWindowApp
 
         }
 
-        private void gridButtonClick(object? sender, EventArgs e)
+        private void GridButtonClick(object sender, EventArgs e)
         {
             if(this.lastClickedButton != null)
-                this.setButtonOriginalColor(this.lastClickedButton);
+                this.SetButtonOriginalColor(this.lastClickedButton);
 
             Button clickedButton = (Button) sender;
             Point location = (Point) clickedButton.Tag;
@@ -109,20 +111,21 @@ namespace ChessWindowApp
             else 
             { 
                 this.endPosition = new Position(location.X, location.Y);
-                this.guiMoveInput(startPosition, endPosition);
+                this.GuiMoveInput(startPosition, endPosition);
 
-                this.setButtonOriginalColor(this.lastClickedButton);
-                this.resetPositions();
+                if (this.lastClickedButton != null)
+                    this.SetButtonOriginalColor(this.lastClickedButton);
+                this.ResetPositions();
             }
 
             this.lastClickedButton = clickedButton;
-            this.redrawChessGrid();
+            this.RedrawChessGrid();
             
         }
 
-        private void guiMoveInput(Position startPosition, Position endPosition)
+        private void GuiMoveInput(Position startPosition, Position endPosition)
         {
-            Move move = new Move(startPosition, endPosition);
+            Move move = new(startPosition, endPosition);
 
             chessBoard.moveInput(move);
         }
@@ -150,9 +153,11 @@ namespace ChessWindowApp
         private void resetButtonClicked(object sender, EventArgs e)
         {
             this.chessBoard = new ChessBoard();
-            this.redrawChessGrid();
-            this.resetPositions();
-            this.setButtonOriginalColor(this.lastClickedButton);
+            this.RedrawChessGrid();
+            this.ResetPositions();
+
+            if (this.lastClickedButton != null)
+                this.SetButtonOriginalColor(this.lastClickedButton);
         }
 
         static public int reverseNumber8(int value)
@@ -295,7 +300,7 @@ namespace ChessWindowApp
                 return true;
             }
 
-            private void checkForMarkingEPValidSquare(int rowStart, int columnStart, int rowEnd, int columnEnd)
+            private void CheckForMarkingEPValidSquare(int rowStart, int columnStart, int rowEnd, int columnEnd)
             {
                 if (this.board[rowStart, columnStart].type == "pawn")
                 {
@@ -396,7 +401,7 @@ namespace ChessWindowApp
                 //if (this.isKingChecked(this.board, rowEnd, columnEnd))
                 //return;
 
-                this.checkForMarkingEPValidSquare(rowStart, columnStart, rowEnd, columnEnd);
+                this.CheckForMarkingEPValidSquare(rowStart, columnStart, rowEnd, columnEnd);
 
                 if (this.board[rowStart, columnStart].type == "king")
                 {
@@ -607,6 +612,7 @@ namespace ChessWindowApp
                 this.position = position;
                 this.withoutMove = true;
                 this.type = "";
+                this.color = color;
             }
 
             protected void resetValidMoves()
@@ -1051,7 +1057,7 @@ namespace ChessWindowApp
             public bool ep;
             public string castle;
 
-            private string[] columnIndexesToLetters = {"a", "b", "c", "d", "e", "f", "g", "h"};
+            private readonly string[] columnIndexesToLetters = { "a", "b", "c", "d", "e", "f", "g", "h" };
 
 
             public Move(string move)
