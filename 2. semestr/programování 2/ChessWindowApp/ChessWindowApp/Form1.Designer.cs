@@ -319,7 +319,7 @@
             this.button4.TabIndex = 25;
             this.button4.Text = "RESET";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.resetButtonClicked);
+            this.button4.Click += new System.EventHandler(this.ResetButtonClicked);
             // 
             // chooseOpponentComboBox
             // 
@@ -338,7 +338,7 @@
             this.chooseOpponentComboBox.Size = new System.Drawing.Size(227, 28);
             this.chooseOpponentComboBox.TabIndex = 26;
             this.chooseOpponentComboBox.Text = "Jen tak si tahat";
-            this.chooseOpponentComboBox.SelectedValueChanged += new System.EventHandler(this.chooseOpponentComboBoxValueChanged);
+            this.chooseOpponentComboBox.SelectedValueChanged += new System.EventHandler(this.ChooseOpponentComboBoxValueChanged);
             // 
             // showValidMovesCheckBox
             // 

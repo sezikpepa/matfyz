@@ -100,7 +100,7 @@ namespace ChessWindowApp
             button.BackColor = Color.Brown;
         }
 
-        public void setAllButtonOriginalColor()
+        public void SetAllButtonOriginalColor()
         {
             for (int i = 0; i < 8; i++)
             {
@@ -111,7 +111,7 @@ namespace ChessWindowApp
             }
         }
 
-        public void hideValidMoves()
+        public void HideValidMoves()
         {
             for (int i = 0; i < 8; i++)
             {
@@ -138,7 +138,7 @@ namespace ChessWindowApp
 
                 Button clickedButton = (Button)sender;
                 Point location = (Point)clickedButton.Tag;
-                if (!this.startPosition.isValid())
+                if (!this.startPosition.IsValid())
                 {
                     if(this.chessBoard.board[location.Y, location.X].color == this.chessBoard.playerOnMove)
                     {
@@ -157,7 +157,7 @@ namespace ChessWindowApp
                     this.endPosition = new Position(location.X, location.Y);
                     this.GuiMoveInput(startPosition, endPosition);
 
-                    this.setAllButtonOriginalColor();
+                    this.SetAllButtonOriginalColor();
                     this.ResetPositions();
                 }
 
@@ -193,7 +193,7 @@ namespace ChessWindowApp
         {
             Move move = new(startPosition, endPosition);
 
-            chessBoard.moveInput(move);
+            chessBoard.MoveInput(move);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -211,14 +211,14 @@ namespace ChessWindowApp
 
         }
 
-        private void chooseOpponentComboBoxValueChanged(object sender, EventArgs e)
+        private void ChooseOpponentComboBoxValueChanged(object sender, EventArgs e)
         {
             ComboBox choosePlayerComboBox = (ComboBox)sender;
 
-            this.setOpponentNameLabel(choosePlayerComboBox.Text);
+            this.SetOpponentNameLabel(choosePlayerComboBox.Text);
         }
 
-        private void setOpponentNameLabel(string text)
+        private void SetOpponentNameLabel(string text)
         {
             if(text == "Jen tak si tahat")
             {
@@ -237,20 +237,20 @@ namespace ChessWindowApp
                 return;
             }
             this.showValidMoves = false;
-            this.hideValidMoves();
+            this.HideValidMoves();
 
         }
 
-        private void resetButtonClicked(object sender, EventArgs e)
+        private void ResetButtonClicked(object sender, EventArgs e)
         {
             this.chessBoard = new ChessBoard();
             this.RedrawChessGrid();
             this.ResetPositions();
 
-            this.setAllButtonOriginalColor();
+            this.SetAllButtonOriginalColor();
         }
 
-        static public int reverseNumber8(int value)
+        static public int ReverseNumber8(int value)
         {
             if (value < 0 || value > 7)
             {
@@ -259,14 +259,14 @@ namespace ChessWindowApp
             int[] line = { 8, 7, 6, 5, 4, 3, 2, 1};
             return line[value] - 1;
         }
-        static public bool isBetweenIncluding(int value, int number1, int number2)
+        static public bool IsBetweenIncluding(int value, int number1, int number2)
         {
             if (value <= number2 && number1 <= value)
                 return true;
             return false;
         }
 
-        static public bool isOppositeColorsBW(string color1, string color2)
+        static public bool IsOppositeColorsBW(string color1, string color2)
         {
             if (color1 == "black" && color2 == "white")
                 return true;
@@ -285,9 +285,9 @@ namespace ChessWindowApp
                 this.y = y;
             }
 
-            public bool isValid()
+            public bool IsValid()
             {
-                return (isBetweenIncluding(this.x, 0, 7) && isBetweenIncluding(this.y, 0, 7));
+                return (IsBetweenIncluding(this.x, 0, 7) && IsBetweenIncluding(this.y, 0, 7));
             }
         }
 
@@ -309,14 +309,14 @@ namespace ChessWindowApp
                 this.board = new Piece[8, 8];
                 this.squaresUnderAttackWhite = new bool[8, 8];
                 this.squaresUnderAttackBlack = new bool[8, 8];
-                this.setStartPosition();
+                this.SetStartPosition();
                 this.positionEPValid = new Position(-1, -1);
                 this.currentMove = 1;
                 this.lastEPUpdate = 0;
                 this.toResetUserSigns = false;
             }
 
-            public void setStartPosition()
+            public void SetStartPosition()
             {
                 this.board[0, 0] = new Rook("black", new Position(0, 0));
                 this.board[0, 1] = new Knight("black", new Position(0, 1));
@@ -356,19 +356,19 @@ namespace ChessWindowApp
 
             }
 
-            public void newEPValidPosition(int x, int y)
+            public void NewEPValidPosition(int x, int y)
             {
                 this.positionEPValid.x = x;
                 this.positionEPValid.y = y;
                 this.lastEPUpdate = this.currentMove;
             }
 
-            public void increaseCurrentMove()
+            public void IncreaseCurrentMove()
             {
                 this.currentMove += 1;
             }
 
-            public void changePlayerOnMove()
+            public void ChangePlayerOnMove()
             {
                 if (this.playerOnMove == "white")
                 {
@@ -380,12 +380,12 @@ namespace ChessWindowApp
                 }
             }
 
-            private bool checkMoveFromRightPlayer(int rowIndex, int columnIndex)
+            private bool CheckMoveFromRightPlayer(int rowIndex, int columnIndex)
             {
                 return this.board[rowIndex, columnIndex].color == this.playerOnMove;
             }
 
-            private bool checkCorrectPieceMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
+            private bool CheckCorrectPieceMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
             {
 
                 this.board[rowStart, columnStart].generateValidMoves(this.board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
@@ -401,14 +401,14 @@ namespace ChessWindowApp
                     if (Math.Abs(rowStart - rowEnd) == 2)
                     {
                         int rowIndex = (rowStart + rowEnd) / 2;
-                        this.newEPValidPosition(rowIndex, columnStart);
+                        this.NewEPValidPosition(rowIndex, columnStart);
                     }
                 }
             }
 
-            private void doShortCastle(string color)
+            private void DoShortCastle(string color)
             {
-                this.increaseCurrentMove();
+                this.IncreaseCurrentMove();
 
                 if (color == "white")
                 {
@@ -419,10 +419,10 @@ namespace ChessWindowApp
                     this.board[7, 6].withoutMove = false;
                     this.board[7, 5].updateCurrentPosition(new Position(7, 5));
                     this.board[7, 5].withoutMove = false;
-                    this.changePlayerOnMove();
+                    this.ChangePlayerOnMove();
 
-                    this.clearSquare(7, 4);
-                    this.clearSquare(7, 7);
+                    this.ClearSquare(7, 4);
+                    this.ClearSquare(7, 7);
 
                     return;
                 }
@@ -434,45 +434,45 @@ namespace ChessWindowApp
                 this.board[0, 6].withoutMove = false;
                 this.board[0, 5].updateCurrentPosition(new Position(0, 5));
                 this.board[0, 5].withoutMove = false;
-                this.changePlayerOnMove();
+                this.ChangePlayerOnMove();
 
-                this.clearSquare(0, 4);
-                this.clearSquare(0, 7);
+                this.ClearSquare(0, 4);
+                this.ClearSquare(0, 7);
             }
 
-            private void doLongCastle(string color)
+            private void DoLongCastle(string color)
             {
-                this.increaseCurrentMove();
+                this.IncreaseCurrentMove();
                 if (color == "white")
                 {
                     this.board[7, 2] = this.board[7, 4];
                     this.board[7, 3] = this.board[7, 0];
 
-                    this.clearSquare(7, 4);
-                    this.clearSquare(7, 0);
+                    this.ClearSquare(7, 4);
+                    this.ClearSquare(7, 0);
 
                     this.board[7, 2].updateCurrentPosition(new Position(7, 2));
                     this.board[7, 2].withoutMove = false;
                     this.board[7, 3].updateCurrentPosition(new Position(7, 3));
                     this.board[7, 3].withoutMove = false;
-                    this.changePlayerOnMove();
+                    this.ChangePlayerOnMove();
 
                     return;
                 }
                 this.board[0, 2] = this.board[0, 4];
                 this.board[0, 3] = this.board[0, 0];
 
-                this.clearSquare(0, 4);
-                this.clearSquare(0, 0);
+                this.ClearSquare(0, 4);
+                this.ClearSquare(0, 0);
 
                 this.board[0, 2].updateCurrentPosition(new Position(0, 2));
                 this.board[0, 2].withoutMove = false;
                 this.board[0, 3].updateCurrentPosition(new Position(0, 3));
                 this.board[0, 3].withoutMove = false;
-                this.changePlayerOnMove();
+                this.ChangePlayerOnMove();
             }
 
-            public void moveInput(Move move)
+            public void MoveInput(Move move)
             {
                 int rowStart = move.getRowIndexStartPosition();
                 int rowEnd = move.getRowIndexEndPosition();
@@ -486,10 +486,10 @@ namespace ChessWindowApp
                 */
 
 
-                if (!this.checkMoveFromRightPlayer(rowStart, columnStart))
+                if (!this.CheckMoveFromRightPlayer(rowStart, columnStart))
                     return;
 
-                if (!this.checkCorrectPieceMove(rowStart, columnStart, rowEnd, columnEnd))
+                if (!this.CheckCorrectPieceMove(rowStart, columnStart, rowEnd, columnEnd))
                     return;
 
                 //if (this.isKingChecked(this.board, rowEnd, columnEnd))
@@ -502,22 +502,22 @@ namespace ChessWindowApp
                     Console.WriteLine("king");
                     if (columnEnd - columnStart == 2)
                     {
-                        this.doShortCastle(this.board[rowStart, columnStart].color);
+                        this.DoShortCastle(this.board[rowStart, columnStart].color);
 
                         return;
                     }
                     else if (columnEnd - columnStart == -2)
                     {
-                        this.doLongCastle(this.board[rowStart, columnStart].color);
+                        this.DoLongCastle(this.board[rowStart, columnStart].color);
                         return;
                     }
                 }
 
-                this.makeMove(rowStart, columnStart, rowEnd, columnEnd);
+                this.MakeMove(rowStart, columnStart, rowEnd, columnEnd);
 
                 this.board[rowEnd, columnEnd].updateCurrentPosition(new Position(rowEnd, columnEnd));
                 this.board[rowEnd, columnEnd].withoutMove = false;
-                this.changePlayerOnMove();
+                this.ChangePlayerOnMove();
 
                 if (rowEnd == this.positionEPValid.x && columnEnd == this.positionEPValid.y)
                 {
@@ -535,19 +535,19 @@ namespace ChessWindowApp
 
             }
 
-            private void makeMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
+            private void MakeMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
             {
                 this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
-                this.clearSquare(rowStart, columnStart);
-                this.increaseCurrentMove();
+                this.ClearSquare(rowStart, columnStart);
+                this.IncreaseCurrentMove();
             }
 
-            public void clearSquare(int rowIndex, int columnIndex)
+            public void ClearSquare(int rowIndex, int columnIndex)
             {
                 this.board[rowIndex, columnIndex] = new EmptySpace("blank", new Position(rowIndex, columnIndex));
             }
 
-            public bool isKingChecked(Piece[,] board, int rowStart, int columnStart, int rowEnd, int columnEnd)
+            public bool IsKingChecked(Piece[,] board, int rowStart, int columnStart, int rowEnd, int columnEnd)
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -561,13 +561,13 @@ namespace ChessWindowApp
                 return false;
             }
 
-            public void resetSquaresUnderAttack()
+            public void ResetSquaresUnderAttack()
             {
-                this.resetSquaresUnderAttackBlack();
-                this.resetSquaresUnderAttackWhite();
+                this.ResetSquaresUnderAttackBlack();
+                this.ResetSquaresUnderAttackWhite();
             }
 
-            public void generateMovesAllPieces()
+            public void GenerateMovesAllPieces()
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -578,7 +578,7 @@ namespace ChessWindowApp
                 }
             }
 
-            public void resetSquaresUnderAttackWhite()
+            public void ResetSquaresUnderAttackWhite()
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -589,7 +589,7 @@ namespace ChessWindowApp
                 }
             }
 
-            public void resetSquaresUnderAttackBlack()
+            public void ResetSquaresUnderAttackBlack()
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -600,7 +600,7 @@ namespace ChessWindowApp
                 }
             }
 
-            public void setSquaresUnderAttackWhite()
+            public void SetSquaresUnderAttackWhite()
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -614,10 +614,10 @@ namespace ChessWindowApp
                 }
             }
 
-            public void setSquaresUnderAttackWhiteByPiece()
+            public void SetSquaresUnderAttackWhiteByPiece()
             {
-                this.generateMovesAllPieces();
-                this.resetSquaresUnderAttackWhite();
+                this.GenerateMovesAllPieces();
+                this.ResetSquaresUnderAttackWhite();
                 for (int i = 0; i < 8; i++)
                 {
                     for (int j = 0; j < 8; j++)
@@ -645,7 +645,7 @@ namespace ChessWindowApp
             public void setSquaresUnderAttack()
             {
                 this.setSquaresUnderAttackBlack();
-                this.setSquaresUnderAttackWhite();
+                this.SetSquaresUnderAttackWhite();
             }
 
             public void consoleDraw()
@@ -672,7 +672,7 @@ namespace ChessWindowApp
                             {
                                 for (int j = -1; j <= 1; j++)
                                 {
-                                    if (isBetweenIncluding(k + i, 0, 7) && isBetweenIncluding(l + j, 0, 7))
+                                    if (IsBetweenIncluding(k + i, 0, 7) && IsBetweenIncluding(l + j, 0, 7))
                                     {
                                         if (board[k + i, l + j].type == "king" && (i != 0 && j != 0))
                                         {
@@ -951,7 +951,7 @@ namespace ChessWindowApp
 
                 try
                 {
-                    if (isOppositeColorsBW(board[this.position.x + increment, this.position.y + 1].color, this.color))
+                    if (IsOppositeColorsBW(board[this.position.x + increment, this.position.y + 1].color, this.color))
                         this.validMoves[this.position.x + increment, this.position.y + 1] = true;
                 }
                 catch
@@ -961,7 +961,7 @@ namespace ChessWindowApp
 
                 try
                 {
-                    if (isOppositeColorsBW(board[this.position.x + increment, this.position.y - 1].color, this.color))
+                    if (IsOppositeColorsBW(board[this.position.x + increment, this.position.y - 1].color, this.color))
                         this.validMoves[this.position.x + increment, this.position.y - 1] = true;
                 }
                 catch
@@ -998,7 +998,7 @@ namespace ChessWindowApp
                 {
                     for (int j = -2; j <= 2; j++)
                     {
-                        if (isBetweenIncluding(x - i, 0, 7) && isBetweenIncluding(y - j, 0, 7) && Math.Abs(i) + Math.Abs(j) == 3 && i != 0 && j != 0)
+                        if (IsBetweenIncluding(x - i, 0, 7) && IsBetweenIncluding(y - j, 0, 7) && Math.Abs(i) + Math.Abs(j) == 3 && i != 0 && j != 0)
                         {
                             if (board[x - i, y - j].color != this.color)
                                 this.validMoves[x - i, y - j] = true;
@@ -1082,9 +1082,9 @@ namespace ChessWindowApp
                 {
                     for (int j = -1; j <= 1; j++)
                     {
-                        if (isBetweenIncluding(rowIndex + i, 0, 7) && isBetweenIncluding(columnIndex + j, 0, 7))
+                        if (IsBetweenIncluding(rowIndex + i, 0, 7) && IsBetweenIncluding(columnIndex + j, 0, 7))
                         {
-                            if (board[rowIndex + i, columnIndex + j].type == "king" && isOppositeColorsBW(board[rowIndex + i, columnIndex + j].color, this.color))
+                            if (board[rowIndex + i, columnIndex + j].type == "king" && IsOppositeColorsBW(board[rowIndex + i, columnIndex + j].color, this.color))
                             {
                                 return true;
                             }
@@ -1126,7 +1126,7 @@ namespace ChessWindowApp
                 {
                     for (int j = -1; j <= 1; j++)
                     {
-                        if (isBetweenIncluding(this.position.x + i, 0, 7) && isBetweenIncluding(this.position.y + j, 0, 7))
+                        if (IsBetweenIncluding(this.position.x + i, 0, 7) && IsBetweenIncluding(this.position.y + j, 0, 7))
                         {
                             if (board[this.position.x + i, this.position.y + j].color != this.color)
                             {
@@ -1171,12 +1171,16 @@ namespace ChessWindowApp
             {
                 this.startPosition = startPosition;
                 this.endPosition = endPostion;
+                this.ep = false;
+                this.castle = "none";
             }
 
             public Move(Position startPosition, Position endPosition)
             {
-                this.startPosition = this.columnIndexesToLetters[startPosition.x] + reverseNumber8((startPosition.y - 1)).ToString();
-                this.endPosition = this.columnIndexesToLetters[endPosition.x] + reverseNumber8((endPosition.y - 1)).ToString();
+                this.startPosition = this.columnIndexesToLetters[startPosition.x] + ReverseNumber8((startPosition.y - 1)).ToString();
+                this.endPosition = this.columnIndexesToLetters[endPosition.x] + ReverseNumber8((endPosition.y - 1)).ToString();
+                this.ep = false;
+                this.castle = "none";
             }
 
             private int getColumnIndex(string value)
@@ -1198,13 +1202,13 @@ namespace ChessWindowApp
             public int getRowIndexStartPosition()
             {
                 int result = this.startPosition[1] - '0' - 1;
-                return reverseNumber8(result);
+                return ReverseNumber8(result);
             }
 
             public int getRowIndexEndPosition()
             {
                 int result = this.endPosition[1] - '0' - 1;
-                return reverseNumber8(result);
+                return ReverseNumber8(result);
             }
 
             public string getStringRepresentation()
