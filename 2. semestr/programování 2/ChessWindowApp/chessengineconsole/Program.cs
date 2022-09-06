@@ -987,10 +987,3 @@ namespace MyApp // Note: actual namespace depends on the project name.
         }
     }
 }
-
-namespace chessengine_console
-{
-    public class ChessBoard
-    {
-    }
-}
