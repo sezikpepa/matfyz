@@ -10,6 +10,9 @@ namespace ChessWindowApp
 
         public ChessBoard chessBoard = new();
         public Button[,] brnGrid = new Button[8, 8];
+        public Label[,] whiteDiscardedPiecesLabels = new Label[5, 2];
+        public Label[,] blackDiscardedPiecesLabels = new Label[5, 2];
+
 
         private Button? lastClickedButton;
 
@@ -28,6 +31,7 @@ namespace ChessWindowApp
             this.lastClickedButton = null;
 
             this.PrintButtonGrid();
+            this.PrintDiscardedPieces();
         }
 
         private void ResetPositions()
@@ -38,7 +42,6 @@ namespace ChessWindowApp
 
         private void PrintButtonGrid()
         {
-            Debug.WriteLine("constructor fired");
             int buttonSize = 100;
 
             for (int i = 0; i < 8; i++)
@@ -65,6 +68,84 @@ namespace ChessWindowApp
 
                     this.SetButtonOriginalColor(brnGrid[i, j]);
                 }
+            }
+        }
+
+        private void PrintDiscardedPieces()
+        {
+            this.PrintDiscardedPiecesWhite();
+            this.PrintDiscardedPiecesBlack();
+        }
+
+        private void PrintDiscardedPiecesWhite()
+        {
+            
+            int iterable = 0;
+            foreach(var element in this.chessBoard.discardedPiecesWhite)
+            {
+                int labelSize = 50;
+                int labelSize2 = 50;
+
+                this.whiteDiscardedPiecesLabels[iterable, 0] = new Label();
+                this.whiteDiscardedPiecesLabels[iterable, 1] = new Label();
+
+                this.whiteDiscardedPiecesLabels[iterable, 0].Text = element.Key.ToString();
+                this.whiteDiscardedPiecesLabels[iterable, 1].Text = element.Value.ToString();
+
+                this.whiteDiscardedPiecesLabels[iterable, 0].Height = labelSize;
+                this.whiteDiscardedPiecesLabels[iterable, 1].Height = labelSize;
+
+                this.whiteDiscardedPiecesLabels[iterable, 0].Width = labelSize2;
+                this.whiteDiscardedPiecesLabels[iterable, 1].Width = labelSize2;
+
+                this.whiteDiscardedPiecesLabels[iterable, 0].Location = new Point(0, 0 + iterable * labelSize);
+                this.whiteDiscardedPiecesLabels[iterable, 1].Location = new Point(80, 13 + iterable * labelSize);
+
+                Font discardedPiecesFont = new("Arial", 30);
+                Font discardedPiecesNumbersFont = new("Arial", 20);
+                this.whiteDiscardedPiecesLabels[iterable, 0].Font = discardedPiecesFont;
+                this.whiteDiscardedPiecesLabels[iterable, 1].Font = discardedPiecesNumbersFont;
+
+                this.whiteDiscardedPiecesPanel.Controls.Add(this.whiteDiscardedPiecesLabels[iterable, 0]);
+                this.whiteDiscardedPiecesPanel.Controls.Add(this.whiteDiscardedPiecesLabels[iterable, 1]);
+
+                iterable += 1;
+            }
+        }
+
+        private void PrintDiscardedPiecesBlack()
+        {
+            int iterable = 0;
+            int labelSize = 50;
+            int labelSize2 = 50;
+
+            foreach (var element in this.chessBoard.discardedPiecesWhite)
+            {
+
+                this.blackDiscardedPiecesLabels[iterable, 0] = new Label();
+                this.blackDiscardedPiecesLabels[iterable, 1] = new Label();
+
+                this.blackDiscardedPiecesLabels[iterable, 0].Text = element.Key.ToString();
+                this.blackDiscardedPiecesLabels[iterable, 1].Text = element.Value.ToString();
+
+                this.blackDiscardedPiecesLabels[iterable, 0].Height = labelSize;
+                this.blackDiscardedPiecesLabels[iterable, 1].Height = labelSize;
+
+                this.blackDiscardedPiecesLabels[iterable, 0].Width = labelSize2;
+                this.blackDiscardedPiecesLabels[iterable, 1].Width = labelSize2;
+
+                this.blackDiscardedPiecesLabels[iterable, 0].Location = new Point(0, 0 + iterable * labelSize);
+                this.blackDiscardedPiecesLabels[iterable, 1].Location = new Point(80, 13 + iterable * labelSize);
+
+                Font discardedPiecesFont = new("Arial", 30);
+                Font discardedPiecesNumbersFont = new("Arial", 20);
+                this.blackDiscardedPiecesLabels[iterable, 0].Font = discardedPiecesFont;
+                this.blackDiscardedPiecesLabels[iterable, 1].Font = discardedPiecesNumbersFont;
+
+                this.blackDiscardedPiecesPanel.Controls.Add(this.blackDiscardedPiecesLabels[iterable, 0]);
+                this.blackDiscardedPiecesPanel.Controls.Add(this.blackDiscardedPiecesLabels[iterable, 1]);
+
+                iterable += 1;
             }
         }
 
@@ -246,6 +327,8 @@ namespace ChessWindowApp
             this.RedrawChessGrid();
             this.ResetPositions();
 
+            this.chessBoard.resetDiscardedPieces();
+
             this.SetAllButtonOriginalColor();
         }
 
@@ -300,6 +383,9 @@ namespace ChessWindowApp
             public int lastEPUpdate;
             public bool toResetUserSigns;
 
+            public Dictionary<string, int> discardedPiecesWhite;
+            public Dictionary<string, int> discardedPiecesBlack;
+
             public ChessBoard()
             {
                 this.playerOnMove = "white";
@@ -311,6 +397,8 @@ namespace ChessWindowApp
                 this.currentMove = 1;
                 this.lastEPUpdate = 0;
                 this.toResetUserSigns = false;
+
+                this.resetDiscardedPieces();
             }
 
             public void SetStartPosition()
@@ -350,6 +438,36 @@ namespace ChessWindowApp
                 this.board[7, 5] = new Bishop("white", new Position(7, 5));
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
+
+            }
+
+            public void resetDiscardedPieces()
+            {
+                this.ResetDiscardedPiecesWhite();
+                this.ResetDiscardedPiecesBlack();
+            }
+
+            private void ResetDiscardedPiecesWhite()
+            {
+                this.discardedPiecesWhite = new Dictionary<string, int>();
+
+                this.discardedPiecesWhite.Add("♙", 0);
+                this.discardedPiecesWhite.Add("♘", 0);
+                this.discardedPiecesWhite.Add("♗", 0);
+                this.discardedPiecesWhite.Add("♖", 0);
+                this.discardedPiecesWhite.Add("♕", 0);
+
+            }
+
+            private void ResetDiscardedPiecesBlack()
+            {
+                this.discardedPiecesBlack = new Dictionary<string, int>();
+
+                this.discardedPiecesBlack.Add("♟", 0);
+                this.discardedPiecesBlack.Add("♞", 0);
+                this.discardedPiecesBlack.Add("♝", 0);
+                this.discardedPiecesBlack.Add("♜", 0);
+                this.discardedPiecesBlack.Add("♛", 0);
 
             }
 
@@ -534,9 +652,28 @@ namespace ChessWindowApp
 
             private void MakeMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
             {
+                if (this.board[rowEnd, columnEnd].type != "blank")
+                {
+                    this.changeDiscardedPiecesCount(this.board[rowEnd, columnEnd]);
+                }
                 this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
                 this.ClearSquare(rowStart, columnStart);
                 this.IncreaseCurrentMove();
+            }
+
+            private void changeDiscardedPiecesCount(Piece piece)
+            {
+                if (piece == null)
+                    return;
+
+                if (piece.color == "white")
+                {
+                    this.discardedPiecesWhite[piece.type] += 1;
+                }
+                else if (piece.color == "black")
+                {
+                    this.discardedPiecesBlack[piece.type] += 1;
+                }
             }
 
             public void ClearSquare(int rowIndex, int columnIndex)

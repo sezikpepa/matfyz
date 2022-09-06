@@ -57,6 +57,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.chooseOpponentComboBox = new System.Windows.Forms.ComboBox();
             this.showValidMovesCheckBox = new System.Windows.Forms.CheckBox();
+            this.blackDiscardedPiecesPanel = new System.Windows.Forms.Panel();
+            this.whiteDiscardedPiecesPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -351,11 +353,27 @@
             this.showValidMovesCheckBox.UseVisualStyleBackColor = true;
             this.showValidMovesCheckBox.CheckedChanged += new System.EventHandler(this.showValidMovesCheckBoxChanged);
             // 
+            // blackDiscardedPiecesPanel
+            // 
+            this.blackDiscardedPiecesPanel.Location = new System.Drawing.Point(1182, 75);
+            this.blackDiscardedPiecesPanel.Name = "blackDiscardedPiecesPanel";
+            this.blackDiscardedPiecesPanel.Size = new System.Drawing.Size(261, 314);
+            this.blackDiscardedPiecesPanel.TabIndex = 28;
+            // 
+            // whiteDiscardedPiecesPanel
+            // 
+            this.whiteDiscardedPiecesPanel.Location = new System.Drawing.Point(1182, 540);
+            this.whiteDiscardedPiecesPanel.Name = "whiteDiscardedPiecesPanel";
+            this.whiteDiscardedPiecesPanel.Size = new System.Drawing.Size(355, 321);
+            this.whiteDiscardedPiecesPanel.TabIndex = 29;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1230, 910);
+            this.ClientSize = new System.Drawing.Size(1626, 1023);
+            this.Controls.Add(this.whiteDiscardedPiecesPanel);
+            this.Controls.Add(this.blackDiscardedPiecesPanel);
             this.Controls.Add(this.showValidMovesCheckBox);
             this.Controls.Add(this.chooseOpponentComboBox);
             this.Controls.Add(this.button4);
@@ -425,5 +443,7 @@
         private Button button4;
         private ComboBox chooseOpponentComboBox;
         private CheckBox showValidMovesCheckBox;
+        private Panel blackDiscardedPiecesPanel;
+        private Panel whiteDiscardedPiecesPanel;
     }
 }
