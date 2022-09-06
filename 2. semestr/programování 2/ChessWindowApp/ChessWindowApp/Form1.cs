@@ -446,29 +446,29 @@ namespace ChessWindowApp
                 if (color == "white")
                 {
                     this.board[7, 2] = this.board[7, 4];
-                    this.board[7, 4] = this.board[7, 0];
+                    this.board[7, 3] = this.board[7, 0];
 
                     this.clearSquare(7, 4);
                     this.clearSquare(7, 0);
 
                     this.board[7, 2].updateCurrentPosition(new Position(7, 2));
                     this.board[7, 2].withoutMove = false;
-                    this.board[7, 4].updateCurrentPosition(new Position(7, 4));
-                    this.board[7, 4].withoutMove = false;
+                    this.board[7, 3].updateCurrentPosition(new Position(7, 3));
+                    this.board[7, 3].withoutMove = false;
                     this.changePlayerOnMove();
 
                     return;
                 }
                 this.board[0, 2] = this.board[0, 4];
-                this.board[0, 4] = this.board[0, 0];
+                this.board[0, 3] = this.board[0, 0];
 
                 this.clearSquare(0, 4);
                 this.clearSquare(0, 0);
 
                 this.board[0, 2].updateCurrentPosition(new Position(0, 2));
                 this.board[0, 2].withoutMove = false;
-                this.board[0, 4].updateCurrentPosition(new Position(0, 4));
-                this.board[0, 4].withoutMove = false;
+                this.board[0, 3].updateCurrentPosition(new Position(0, 3));
+                this.board[0, 3].withoutMove = false;
                 this.changePlayerOnMove();
             }
 
@@ -1109,11 +1109,11 @@ namespace ChessWindowApp
                     }
                 }
                 //long castle
-                if (board[rowIndex, columnIndex + 1].type == "blank" && board[rowIndex, columnIndex + 2].type == "blank")
+                if (board[rowIndex, columnIndex - 1].type == "blank" && board[rowIndex, columnIndex - 2].type == "blank" && board[rowIndex, columnIndex - 3].type == "blank")
                 {
-                    if (board[rowIndex, columnIndex + 3].withoutMove == true)
+                    if (board[rowIndex, columnIndex - 4].withoutMove == true)
                     {
-                        this.validMoves[rowIndex, columnIndex + 2] = true;
+                        this.validMoves[rowIndex, columnIndex - 2] = true;
                     }
                 }
 
@@ -1212,7 +1212,5 @@ namespace ChessWindowApp
                 return this.startPosition + " " + this.endPosition;
             }
         }
-
-       
     }
 }
