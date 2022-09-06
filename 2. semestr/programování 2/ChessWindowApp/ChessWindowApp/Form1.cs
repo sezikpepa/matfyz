@@ -233,7 +233,6 @@ namespace ChessWindowApp
             if (checkBox.Checked)
             {
                 this.showValidMoves = true;
-
                 return;
             }
             this.showValidMoves = false;
@@ -261,9 +260,7 @@ namespace ChessWindowApp
         }
         static public bool IsBetweenIncluding(int value, int number1, int number2)
         {
-            if (value <= number2 && number1 <= value)
-                return true;
-            return false;
+            return value <= number2 && number1 <= value;
         }
 
         static public bool IsOppositeColorsBW(string color1, string color2)
