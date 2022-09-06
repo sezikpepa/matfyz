@@ -225,7 +225,11 @@ namespace ChessWindowApp
 
         static public int reverseNumber8(int value)
         {
-            int[] line = { 8, 7, 6, 5, 4, 3, 2, 1 };
+            if (value < 0 || value > 7)
+            {
+                return 0;
+            }
+            int[] line = { 8, 7, 6, 5, 4, 3, 2, 1};
             return line[value] - 1;
         }
         static public bool isBetweenIncluding(int value, int number1, int number2)
