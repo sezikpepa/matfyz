@@ -83,6 +83,8 @@ namespace ChessWindowApp
             }
         }
 
+        
+
         private void SetButtonOriginalColor(Button button)
         {
             if (button == null)
@@ -129,32 +131,40 @@ namespace ChessWindowApp
 
         private void GridButtonClick(object sender, EventArgs e)
         {
-            if(this.lastClickedButton != null)
-                this.SetButtonOriginalColor(this.lastClickedButton);
-
-            Button clickedButton = (Button) sender;
-            Point location = (Point) clickedButton.Tag;
-            if (!this.startPosition.isValid())
+            if (sender != null)
             {
-                this.startPosition = new Position(location.X, location.Y);
-                clickedButton.BackColor = Color.LightBlue;
-                this.chessBoard.board[location.Y, location.X].generateValidMoves(this.chessBoard.board, this.chessBoard.positionEPValid, this.chessBoard.currentMove, this.chessBoard.lastEPUpdate);
-                if (this.showValidMoves)
+                if (this.lastClickedButton != null)
+                    this.SetButtonOriginalColor(this.lastClickedButton);
+
+                Button clickedButton = (Button)sender;
+                Point location = (Point)clickedButton.Tag;
+                if (!this.startPosition.isValid())
                 {
-                    this.ShowUserValidSquares(this.chessBoard.board[location.Y, location.X].validMoves);
+                    if(this.chessBoard.board[location.Y, location.X].color == this.chessBoard.playerOnMove)
+                    {
+                        this.startPosition = new Position(location.X, location.Y);
+                        clickedButton.BackColor = Color.LightBlue;
+                        this.chessBoard.board[location.Y, location.X].generateValidMoves(this.chessBoard.board, this.chessBoard.positionEPValid, this.chessBoard.currentMove, this.chessBoard.lastEPUpdate);
+                        if (this.showValidMoves)
+                        {
+                            this.ShowUserValidSquares(this.chessBoard.board[location.Y, location.X].validMoves);
+                        }
+                    }
+                    
                 }
-            }
-            else 
-            { 
-                this.endPosition = new Position(location.X, location.Y);
-                this.GuiMoveInput(startPosition, endPosition);
+                else
+                {
+                    this.endPosition = new Position(location.X, location.Y);
+                    this.GuiMoveInput(startPosition, endPosition);
 
-                this.setAllButtonOriginalColor();
-                this.ResetPositions();
-            }
+                    this.setAllButtonOriginalColor();
+                    this.ResetPositions();
+                }
 
-            this.lastClickedButton = clickedButton;
-            this.RedrawChessGrid();
+                this.lastClickedButton = clickedButton;
+                this.RedrawChessGrid();
+            }
+            
             
         }
 
@@ -166,7 +176,14 @@ namespace ChessWindowApp
                 {
                     if(validMoves[i, j] == true)
                     {
-                        this.brnGrid[j, i].BackColor = Color.LightGreen;
+                        if (this.chessBoard.board[i, j].type == "blank")
+                        {
+                            this.brnGrid[j, i].BackColor = Color.LightGreen;
+                        }
+                        else
+                        {
+                            this.brnGrid[j, i].BackColor = Color.Red;
+                        }
                     }
                 }
             }
@@ -184,11 +201,6 @@ namespace ChessWindowApp
             
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
 
@@ -197,6 +209,22 @@ namespace ChessWindowApp
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chooseOpponentComboBoxValueChanged(object sender, EventArgs e)
+        {
+            ComboBox choosePlayerComboBox = (ComboBox)sender;
+
+            this.setOpponentNameLabel(choosePlayerComboBox.Text);
+        }
+
+        private void setOpponentNameLabel(string text)
+        {
+            if(text == "Jen tak si tahat")
+            {
+                this.opponentNameLabel.Text = "You";
+            }
+            this.opponentNameLabel.Text = text;
         }
 
         private void showValidMovesCheckBoxChanged(object sender, EventArgs e)
@@ -219,8 +247,7 @@ namespace ChessWindowApp
             this.RedrawChessGrid();
             this.ResetPositions();
 
-            if (this.lastClickedButton != null)
-                this.SetButtonOriginalColor(this.lastClickedButton);
+            this.setAllButtonOriginalColor();
         }
 
         static public int reverseNumber8(int value)
@@ -1186,6 +1213,6 @@ namespace ChessWindowApp
             }
         }
 
-        
+       
     }
 }

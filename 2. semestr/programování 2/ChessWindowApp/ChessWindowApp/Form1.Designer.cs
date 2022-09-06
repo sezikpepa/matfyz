@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.label1 = new System.Windows.Forms.Label();
+            this.opponentNameLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -55,23 +55,22 @@
             this.label19 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.chooseOpponentComboBox = new System.Windows.Forms.ComboBox();
             this.showValidMovesCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // opponentNameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.DarkGray;
-            this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(956, 289);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 49);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "MatfyzBot";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.opponentNameLabel.AutoSize = true;
+            this.opponentNameLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.opponentNameLabel.Font = new System.Drawing.Font("Monotype Corsiva", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.opponentNameLabel.Location = new System.Drawing.Point(956, 289);
+            this.opponentNameLabel.Name = "opponentNameLabel";
+            this.opponentNameLabel.Size = new System.Drawing.Size(81, 49);
+            this.opponentNameLabel.TabIndex = 0;
+            this.opponentNameLabel.Text = "You";
             // 
             // panel1
             // 
@@ -322,10 +321,10 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.resetButtonClicked);
             // 
-            // comboBox1
+            // chooseOpponentComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.chooseOpponentComboBox.FormattingEnabled = true;
+            this.chooseOpponentComboBox.Items.AddRange(new object[] {
             "Prvák matematik",
             "Prvák informatik",
             "Bakalář",
@@ -334,10 +333,12 @@
             "Martin Pergel",
             "Náhodný člověk z internetu",
             "Jen tak si tahat"});
-            this.comboBox1.Location = new System.Drawing.Point(947, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(227, 28);
-            this.comboBox1.TabIndex = 26;
+            this.chooseOpponentComboBox.Location = new System.Drawing.Point(947, 12);
+            this.chooseOpponentComboBox.Name = "chooseOpponentComboBox";
+            this.chooseOpponentComboBox.Size = new System.Drawing.Size(227, 28);
+            this.chooseOpponentComboBox.TabIndex = 26;
+            this.chooseOpponentComboBox.Text = "Jen tak si tahat";
+            this.chooseOpponentComboBox.SelectedValueChanged += new System.EventHandler(this.chooseOpponentComboBoxValueChanged);
             // 
             // showValidMovesCheckBox
             // 
@@ -354,9 +355,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1230, 902);
+            this.ClientSize = new System.Drawing.Size(1230, 910);
             this.Controls.Add(this.showValidMovesCheckBox);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.chooseOpponentComboBox);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.label20);
@@ -382,7 +383,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.opponentNameLabel);
             this.Location = new System.Drawing.Point(200, 200);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -396,7 +397,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label opponentNameLabel;
         private Panel panel1;
         private Label label2;
         private PictureBox pictureBox1;
@@ -422,7 +423,7 @@
         private Label label19;
         private Label label20;
         private Button button4;
-        private ComboBox comboBox1;
+        private ComboBox chooseOpponentComboBox;
         private CheckBox showValidMovesCheckBox;
     }
 }
