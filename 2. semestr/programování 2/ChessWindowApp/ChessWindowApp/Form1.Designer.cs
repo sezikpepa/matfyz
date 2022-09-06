@@ -94,7 +94,7 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button00 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -111,6 +111,15 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.resetGameButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -193,7 +202,7 @@
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
             this.panel1.Controls.Add(this.button4);
-            this.panel1.Controls.Add(this.button5);
+            this.panel1.Controls.Add(this.button00);
             this.panel1.Location = new System.Drawing.Point(12, 55);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(800, 800);
@@ -1018,19 +1027,19 @@
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // button00
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.button5.FlatAppearance.BorderSize = 0;
-            this.button5.Location = new System.Drawing.Point(0, 0);
-            this.button5.Margin = new System.Windows.Forms.Padding(0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 100);
-            this.button5.TabIndex = 5;
-            this.button5.TabStop = false;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button00.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.button00.FlatAppearance.BorderSize = 0;
+            this.button00.Location = new System.Drawing.Point(0, 0);
+            this.button00.Margin = new System.Windows.Forms.Padding(0);
+            this.button00.Name = "button00";
+            this.button00.Size = new System.Drawing.Size(100, 100);
+            this.button00.TabIndex = 5;
+            this.button00.TabStop = false;
+            this.button00.Text = "button5";
+            this.button00.UseVisualStyleBackColor = false;
+            this.button00.Click += new System.EventHandler(this.button5_Click);
             // 
             // label2
             // 
@@ -1193,11 +1202,110 @@
             this.label12.TabIndex = 13;
             this.label12.Text = "e";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(815, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 50);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "8";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(818, 183);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 50);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "7";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(821, 380);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(43, 50);
+            this.label15.TabIndex = 20;
+            this.label15.Text = "5";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(818, 286);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 50);
+            this.label16.TabIndex = 19;
+            this.label16.Text = "6";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(824, 588);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 50);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "3";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label18.Location = new System.Drawing.Point(821, 480);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(43, 50);
+            this.label18.TabIndex = 21;
+            this.label18.Text = "4";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label19.Location = new System.Drawing.Point(827, 788);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(43, 50);
+            this.label19.TabIndex = 24;
+            this.label19.Text = "1";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Segoe UI", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label20.Location = new System.Drawing.Point(824, 680);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(43, 50);
+            this.label20.TabIndex = 23;
+            this.label20.Text = "2";
+            // 
+            // resetGameButton
+            // 
+            this.resetGameButton.Location = new System.Drawing.Point(1135, 872);
+            this.resetGameButton.Name = "resetGameButton";
+            this.resetGameButton.Size = new System.Drawing.Size(94, 29);
+            this.resetGameButton.TabIndex = 25;
+            this.resetGameButton.Text = "RESET";
+            this.resetGameButton.UseVisualStyleBackColor = true;
+            this.resetGameButton.Click += new System.EventHandler(this.resetGameButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1230, 902);
+            this.Controls.Add(this.resetGameButton);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label11);
@@ -1240,7 +1348,7 @@
         private Button button1;
         private Button button2;
         private Button button3;
-        private Button button5;
+        private Button button00;
         private Button button12;
         private Button button13;
         private Button button14;
@@ -1312,5 +1420,14 @@
         private Label label10;
         private Label label11;
         private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private Label label17;
+        private Label label18;
+        private Label label19;
+        private Label label20;
+        private Button resetGameButton;
     }
 }

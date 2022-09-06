@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj": {}
+    "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\chessengine console.csproj": {}
   },
   "projects": {
-    "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj": {
+    "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\chessengine console.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj",
+        "projectUniqueName": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\chessengine console.csproj",
         "projectName": "chessengine console",
-        "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj",
+        "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\chessengine console.csproj",
         "packagesPath": "C:\\Users\\sezik\\.nuget\\packages\\",
-        "outputPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\obj\\",
+        "outputPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

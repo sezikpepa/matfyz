@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\chessengine console\chessengine console.csproj" />
+    <ProjectReference Include="..\chessengineconsole\chessengine console.csproj" />
   </ItemGroup>
 
   <ItemGroup>

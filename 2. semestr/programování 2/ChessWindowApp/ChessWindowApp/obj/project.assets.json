@@ -17,8 +17,8 @@
   "libraries": {
     "chessengine console/1.0.0": {
       "type": "project",
-      "path": "../chessengine console/chessengine console.csproj",
-      "msbuildProject": "../chessengine console/chessengine console.csproj"
+      "path": "../chessengineconsole/chessengine console.csproj",
+      "msbuildProject": "../chessengineconsole/chessengine console.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -58,8 +58,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj": {
-              "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengine console\\chessengine console.csproj"
+            "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\chessengine console.csproj": {
+              "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\chessengineconsole\\chessengine console.csproj"
             }
           }
         }
