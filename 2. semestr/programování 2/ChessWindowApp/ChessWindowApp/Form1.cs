@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Sockets;
+using System.Collections.Generic;
+using System.Net;
 using System.Text;
 
 namespace ChessWindowApp
@@ -14,6 +16,10 @@ namespace ChessWindowApp
         public Label[,] whiteDiscardedPiecesLabels = new Label[5, 2];
         public Label[,] blackDiscardedPiecesLabels = new Label[5, 2];
 
+        public bool playAsWhite;
+
+        public Communicator onlineCommunicator;
+
 
         private Button? lastClickedButton;
 
@@ -24,6 +30,10 @@ namespace ChessWindowApp
 
         public Form1()
         {
+            this.onlineCommunicator = new();
+
+            this.playAsWhite = true;
+
             InitializeComponent();
             this.Text = "MatfyzBot 1.0";
             this.showValidMoves = false;
@@ -33,6 +43,8 @@ namespace ChessWindowApp
 
             this.PrintButtonGrid();
             this.PrintDiscardedPieces();
+
+            //this.redrawBoardWhiteTop();
         }
 
         private void ResetPositions()
@@ -61,7 +73,11 @@ namespace ChessWindowApp
 
                     brnGrid[i, j].Location = new Point(i * buttonSize, j * buttonSize);
 
-                    brnGrid[i, j].Text = Char.ToString(chessBoard.board[j, i].consoleRepresentation);
+                    if(this.playAsWhite == true)
+                        brnGrid[i, j].Text = Char.ToString(chessBoard.board[j, i].consoleRepresentation);
+                    else
+                        brnGrid[i, j].Text = Char.ToString(chessBoard.board[7 - j, i].consoleRepresentation);
+
                     Font chessPieceFont = new("Arial", 50);
                     brnGrid[i, j].Font = chessPieceFont;
 
@@ -161,6 +177,17 @@ namespace ChessWindowApp
                     brnGrid[i, j].Font = chessPieceFont;
 
                     brnGrid[i, j].Tag = new Point(i, j);
+                }
+            }
+        }
+
+        public void redrawBoardWhiteTop()
+        {
+            for(int i = 0; i < 8; i++)
+            {
+                for(int j = 0; j < 8; j++)
+                {
+                    this.brnGrid[i, j].Text = Char.ToString(chessBoard.board[7 - j, i].consoleRepresentation);
                 }
             }
         }
@@ -292,6 +319,9 @@ namespace ChessWindowApp
             Move move = new(startPosition, endPosition);
 
             chessBoard.MoveInput(move);
+
+            this.onlineCommunicator.SendString(move.getStringRepresentation());
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -305,6 +335,11 @@ namespace ChessWindowApp
         }
 
         private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChoosePlayerColorCheckBoxChanged(object sender, EventArgs e)
         {
 
         }
@@ -347,6 +382,7 @@ namespace ChessWindowApp
             this.chessBoard.resetDiscardedPieces();
 
             this.SetAllButtonOriginalColor();
+            this.setValuesDiscardePiecesLabels();
         }
 
         static public int ReverseNumber8(int value)
@@ -1366,6 +1402,8 @@ namespace ChessWindowApp
             private TcpClient client;
             public bool newMessage;
             public string receivedMessage;
+
+            private string id;
             
 
             public OnlineCommunicator(string serverIpAddress, int serverPort)
@@ -1373,6 +1411,7 @@ namespace ChessWindowApp
                 this.client = new TcpClient(serverIpAddress, serverPort);
                 this.newMessage = false;
                 this.receivedMessage = "";
+                this.id = "test";
             }
 
             public void sendMove(Move move)
@@ -1401,8 +1440,108 @@ namespace ChessWindowApp
                     }
                 }
                 stream.Close();
+                MessageBox.Show("yes");
             }        
         }
+
+        public class Communicator
+        {
+            private static readonly Socket ClientSocket = new Socket
+            (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            private const int PORT = 100;
+            public string messageToSend = "test";
+            public Communicator()
+            {
+                ConnectToServer();
+                Thread thread = new Thread(this.RequestLoop);
+                thread.Start();
+            }
+
+            private void ConnectToServer()
+            {
+                int attempts = 0;
+
+                while (!ClientSocket.Connected)
+                {
+                    try
+                    {
+                        attempts++;
+                        //Console.WriteLine("Connection attempt " + attempts);
+                        // Change IPAddress.Loopback to a remote IP to connect to a remote host.
+                        ClientSocket.Connect(IPAddress.Loopback, PORT);
+                    }
+                    catch (SocketException)
+                    {
+                        //Console.Clear();
+                    }
+                }
+
+                //Console.Clear();
+                //Console.WriteLine("Connected");
+            }
+
+            private void RequestLoop()
+            {
+                //Console.WriteLine(@"<Type ""exit"" to properly disconnect client>");
+                
+                while (true)
+                {
+                    SendRequest();
+                    ReceiveResponse();
+                }
+            }
+
+            /// <summary>
+            /// Close socket and exit program.
+            /// </summary>
+            private void Exit()
+            {
+                SendString("exit"); // Tell the server we are exiting
+                ClientSocket.Shutdown(SocketShutdown.Both);
+                ClientSocket.Close();
+                Environment.Exit(0);
+            }
+
+            public void SendRequest()
+            {
+                //Console.Write("Send a request: ");
+                if(this.messageToSend != "")
+                {
+                    SendString(this.messageToSend);
+
+                    if (this.messageToSend.ToLower() == "exit")
+                    {
+                        Exit();
+                    }
+                }
+                
+            }
+
+            /// <summary>
+            /// Sends a string to the server with ASCII encoding.
+            /// </summary>
+            public void SendString(string text)
+            {
+                byte[] buffer = Encoding.ASCII.GetBytes(text);
+                ClientSocket.Send(buffer, 0, buffer.Length, SocketFlags.None);
+
+                this.messageToSend = "";
+            }
+
+            private void ReceiveResponse()
+            {
+                var buffer = new byte[2048];
+                int received = ClientSocket.Receive(buffer, SocketFlags.None);
+                if (received == 0) return;
+                var data = new byte[received];
+                Array.Copy(buffer, data, received);
+                string text = Encoding.ASCII.GetString(data);
+                MessageBox.Show(text);
+                //Console.WriteLine(text);
+            }
+        }
+
 
     }
 }

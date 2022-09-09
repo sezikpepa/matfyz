@@ -16,3 +16,9 @@ C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\ne
 C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.genruntimeconfig.cache
 C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ref\ChessWindowApp.dll
 C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.Properties.Resources.resources
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\multiklient.deps.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\multiklient.runtimeconfig.json
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\multiklient.exe
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\multiklient.dll
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\bin\Debug\net6.0-windows\multiklient.pdb
+C:\matfyz\2. semestr\programování 2\ChessWindowApp\ChessWindowApp\obj\Debug\net6.0-windows\ChessWindowApp.csproj.CopyComplete

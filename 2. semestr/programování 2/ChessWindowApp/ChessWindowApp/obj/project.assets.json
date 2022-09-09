@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "multiklient/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/multiklient.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/multiklient.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "multiklient/1.0.0": {
+      "type": "project",
+      "path": "../multiklient/multiklient.csproj",
+      "msbuildProject": "../multiklient/multiklient.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "multiklient >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\sezik\\.nuget\\packages\\": {},
@@ -38,7 +57,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\multiklient\\multiklient.csproj": {
+              "projectPath": "C:\\matfyz\\2. semestr\\programování 2\\ChessWindowApp\\multiklient\\multiklient.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

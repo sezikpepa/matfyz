@@ -59,6 +59,7 @@
             this.showValidMovesCheckBox = new System.Windows.Forms.CheckBox();
             this.blackDiscardedPiecesPanel = new System.Windows.Forms.Panel();
             this.whiteDiscardedPiecesPanel = new System.Windows.Forms.Panel();
+            this.ChoosePlayerColorCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -367,11 +368,23 @@
             this.whiteDiscardedPiecesPanel.Size = new System.Drawing.Size(355, 321);
             this.whiteDiscardedPiecesPanel.TabIndex = 29;
             // 
+            // ChoosePlayerColorCheckBox
+            // 
+            this.ChoosePlayerColorCheckBox.AutoSize = true;
+            this.ChoosePlayerColorCheckBox.Location = new System.Drawing.Point(969, 892);
+            this.ChoosePlayerColorCheckBox.Name = "ChoosePlayerColorCheckBox";
+            this.ChoosePlayerColorCheckBox.Size = new System.Drawing.Size(115, 24);
+            this.ChoosePlayerColorCheckBox.TabIndex = 30;
+            this.ChoosePlayerColorCheckBox.Text = "Play as black";
+            this.ChoosePlayerColorCheckBox.UseVisualStyleBackColor = true;
+            this.ChoosePlayerColorCheckBox.CheckedChanged += new System.EventHandler(this.ChoosePlayerColorCheckBoxChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1626, 1023);
+            this.Controls.Add(this.ChoosePlayerColorCheckBox);
             this.Controls.Add(this.whiteDiscardedPiecesPanel);
             this.Controls.Add(this.blackDiscardedPiecesPanel);
             this.Controls.Add(this.showValidMovesCheckBox);
@@ -445,5 +458,6 @@
         private CheckBox showValidMovesCheckBox;
         private Panel blackDiscardedPiecesPanel;
         private Panel whiteDiscardedPiecesPanel;
+        private CheckBox ChoosePlayerColorCheckBox;
     }
 }

@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v6.0": {
       "ChessWindowApp/1.0.0": {
+        "dependencies": {
+          "multiklient": "1.0.0"
+        },
         "runtime": {
           "ChessWindowApp.dll": {}
+        }
+      },
+      "multiklient/1.0.0": {
+        "runtime": {
+          "multiklient.dll": {}
         }
       }
     }
   },
   "libraries": {
     "ChessWindowApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "multiklient/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
