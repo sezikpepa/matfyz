@@ -60,6 +60,7 @@
             this.blackDiscardedPiecesPanel = new System.Windows.Forms.Panel();
             this.whiteDiscardedPiecesPanel = new System.Windows.Forms.Panel();
             this.ChoosePlayerColorCheckBox = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -379,11 +380,22 @@
             this.ChoosePlayerColorCheckBox.UseVisualStyleBackColor = true;
             this.ChoosePlayerColorCheckBox.CheckedChanged += new System.EventHandler(this.ChoosePlayerColorCheckBoxChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(841, 923);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1626, 1023);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.ChoosePlayerColorCheckBox);
             this.Controls.Add(this.whiteDiscardedPiecesPanel);
             this.Controls.Add(this.blackDiscardedPiecesPanel);
@@ -459,5 +471,6 @@
         private Panel blackDiscardedPiecesPanel;
         private Panel whiteDiscardedPiecesPanel;
         private CheckBox ChoosePlayerColorCheckBox;
+        private Button button1;
     }
 }

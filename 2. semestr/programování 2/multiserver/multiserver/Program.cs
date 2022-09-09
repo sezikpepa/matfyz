@@ -14,9 +14,14 @@ namespace MultiServer
         private const int PORT = 100;
         private static readonly byte[] buffer = new byte[BUFFER_SIZE];
 
+        private static Socket[] playingPair = new Socket[2];
+       
+
         static void Main()
         {
             Console.Title = "Server";
+            playingPair[0] = null;
+            playingPair[1] = null;
             SetupServer();
             Console.ReadLine(); // When we press enter close everything
             CloseAllSockets();
@@ -60,6 +65,14 @@ namespace MultiServer
             }
 
             clientSockets.Add(socket);
+            if (playingPair[0] == null)
+            {
+                playingPair[0] = socket;
+            }
+            else if (playingPair[1] == null && socket != playingPair[0])
+            {
+                playingPair[1] = socket;
+            }
             socket.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, socket);
             Console.WriteLine("Client connected, waiting for request...");
             serverSocket.BeginAccept(AcceptCallback, null);
@@ -88,29 +101,25 @@ namespace MultiServer
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
 
-            if (text.ToLower() == "get time") // Client requested time
+            if (playingPair[1] != null)
             {
-                Console.WriteLine("Text is a get time request");
-                byte[] data = Encoding.ASCII.GetBytes(DateTime.Now.ToLongTimeString());
-                current.Send(data);
-                Console.WriteLine("Time sent to client");
+                if (current == playingPair[0])
+                {
+                    byte[] data = Encoding.ASCII.GetBytes(text);
+                    playingPair[1].Send(data);
+                    Console.WriteLine("Message sent to client");
+                }
+                else
+                {
+                    byte[] data = Encoding.ASCII.GetBytes(text);
+                    playingPair[0].Send(data);
+                    Console.WriteLine("Message sent to client");
+                }
+
+                
             }
-            else if (text.ToLower() == "exit") // Client wants to exit gracefully
-            {
-                // Always Shutdown before closing
-                current.Shutdown(SocketShutdown.Both);
-                current.Close();
-                clientSockets.Remove(current);
-                Console.WriteLine("Client disconnected");
-                return;
-            }
-            else
-            {
-                Console.WriteLine("Text is an invalid request");
-                byte[] data = Encoding.ASCII.GetBytes("Invalid request");
-                current.Send(data);
-                Console.WriteLine("Warning Sent");
-            }
+            
+
 
             current.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, current);
         }

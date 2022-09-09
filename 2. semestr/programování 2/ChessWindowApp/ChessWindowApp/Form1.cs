@@ -10,8 +10,8 @@ namespace ChessWindowApp
 
     public partial class Form1 : Form
     {
-
-        public ChessBoard chessBoard = new();
+        public static string testik = "";
+        ChessBoard chessBoard = new();
         public Button[,] brnGrid = new Button[8, 8];
         public Label[,] whiteDiscardedPiecesLabels = new Label[5, 2];
         public Label[,] blackDiscardedPiecesLabels = new Label[5, 2];
@@ -1323,6 +1323,8 @@ namespace ChessWindowApp
             }
         }
 
+
+
         public class Move
         {
             public string startPosition;
@@ -1450,7 +1452,7 @@ namespace ChessWindowApp
             (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             private const int PORT = 100;
-            public string messageToSend = "test";
+            public string receivedMessage = "";
             public Communicator()
             {
                 ConnectToServer();
@@ -1467,69 +1469,29 @@ namespace ChessWindowApp
                     try
                     {
                         attempts++;
-                        //Console.WriteLine("Connection attempt " + attempts);
-                        // Change IPAddress.Loopback to a remote IP to connect to a remote host.
                         ClientSocket.Connect(IPAddress.Loopback, PORT);
                     }
                     catch (SocketException)
                     {
-                        //Console.Clear();
                     }
                 }
-
-                //Console.Clear();
-                //Console.WriteLine("Connected");
             }
-
             private void RequestLoop()
-            {
-                //Console.WriteLine(@"<Type ""exit"" to properly disconnect client>");
-                
+            {                
                 while (true)
                 {
-                    SendRequest();
+                    //SendRequest();
                     ReceiveResponse();
                 }
             }
 
-            /// <summary>
-            /// Close socket and exit program.
-            /// </summary>
-            private void Exit()
-            {
-                SendString("exit"); // Tell the server we are exiting
-                ClientSocket.Shutdown(SocketShutdown.Both);
-                ClientSocket.Close();
-                Environment.Exit(0);
-            }
-
-            public void SendRequest()
-            {
-                //Console.Write("Send a request: ");
-                if(this.messageToSend != "")
-                {
-                    SendString(this.messageToSend);
-
-                    if (this.messageToSend.ToLower() == "exit")
-                    {
-                        Exit();
-                    }
-                }
-                
-            }
-
-            /// <summary>
-            /// Sends a string to the server with ASCII encoding.
-            /// </summary>
             public void SendString(string text)
             {
                 byte[] buffer = Encoding.ASCII.GetBytes(text);
                 ClientSocket.Send(buffer, 0, buffer.Length, SocketFlags.None);
-
-                this.messageToSend = "";
             }
 
-            private void ReceiveResponse()
+            static public void ReceiveResponse()
             {
                 var buffer = new byte[2048];
                 int received = ClientSocket.Receive(buffer, SocketFlags.None);
@@ -1537,11 +1499,15 @@ namespace ChessWindowApp
                 var data = new byte[received];
                 Array.Copy(buffer, data, received);
                 string text = Encoding.ASCII.GetString(data);
-                MessageBox.Show(text);
-                //Console.WriteLine(text);
+
+                testik = text;
             }
         }
 
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.chessBoard.MoveInput(new Move(testik));
+            this.RedrawChessGrid();
+        }
     }
 }
