@@ -329,21 +329,6 @@ namespace ChessWindowApp
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ChoosePlayerColorCheckBoxChanged(object sender, EventArgs e)
         {
 
@@ -1481,7 +1466,6 @@ namespace ChessWindowApp
                     }
                 }
                 stream.Close();
-                MessageBox.Show("yes");
             }        
         }
 
@@ -1542,13 +1526,12 @@ namespace ChessWindowApp
                 if (text == "white" || text == "black")
                 {
                     playerColor = text;
-                    MessageBox.Show("You play as" + text);
+                    MessageBox.Show("You play as " + text.ToUpper());
                     playerColor = text;
                     return;
                 }
 
                 infoForMoveInput = text;
-                MessageBox.Show(infoForMoveInput);
                 
             }
         }
@@ -1572,8 +1555,6 @@ namespace ChessWindowApp
                 this.RedrawChessGrid();
                 infoForMoveInput = "";
 
-                MessageBox.Show(playerColor + "  " + this.chessBoard.playerOnMove);
-
                 this.disableChessGrid();             
             }
             if (playerColor != this.chessBoard.playerOnMove)
@@ -1584,11 +1565,6 @@ namespace ChessWindowApp
             {
                 this.enableChessGrid();
             }
-
-        }
-
-        private void chooseOpponentComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
 
         }
     }

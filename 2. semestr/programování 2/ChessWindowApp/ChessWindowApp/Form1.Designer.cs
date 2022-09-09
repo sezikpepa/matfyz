@@ -175,7 +175,6 @@
             this.label6.Size = new System.Drawing.Size(45, 50);
             this.label6.TabIndex = 10;
             this.label6.Text = "b";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -344,7 +343,6 @@
             this.chooseOpponentComboBox.Size = new System.Drawing.Size(227, 28);
             this.chooseOpponentComboBox.TabIndex = 26;
             this.chooseOpponentComboBox.Text = "Jen tak si tahat";
-            this.chooseOpponentComboBox.SelectedIndexChanged += new System.EventHandler(this.chooseOpponentComboBox_SelectedIndexChanged_1);
             this.chooseOpponentComboBox.SelectedValueChanged += new System.EventHandler(this.ChooseOpponentComboBoxValueChanged);
             // 
             // showValidMovesCheckBox
@@ -437,7 +435,6 @@
             this.Location = new System.Drawing.Point(200, 200);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
