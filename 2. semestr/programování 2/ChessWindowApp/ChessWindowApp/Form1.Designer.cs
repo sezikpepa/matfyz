@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.opponentNameLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -61,6 +62,7 @@
             this.whiteDiscardedPiecesPanel = new System.Windows.Forms.Panel();
             this.ChoosePlayerColorCheckBox = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.actualizationMoveFromServerTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -342,6 +344,7 @@
             this.chooseOpponentComboBox.Size = new System.Drawing.Size(227, 28);
             this.chooseOpponentComboBox.TabIndex = 26;
             this.chooseOpponentComboBox.Text = "Jen tak si tahat";
+            this.chooseOpponentComboBox.SelectedIndexChanged += new System.EventHandler(this.chooseOpponentComboBox_SelectedIndexChanged_1);
             this.chooseOpponentComboBox.SelectedValueChanged += new System.EventHandler(this.ChooseOpponentComboBoxValueChanged);
             // 
             // showValidMovesCheckBox
@@ -389,6 +392,10 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // actualizationMoveFromServerTimer
+            // 
+            this.actualizationMoveFromServerTimer.Tick += new System.EventHandler(this.checkMoveFromInternet);
             // 
             // Form1
             // 
@@ -472,5 +479,6 @@
         private Panel whiteDiscardedPiecesPanel;
         private CheckBox ChoosePlayerColorCheckBox;
         private Button button1;
+        private System.Windows.Forms.Timer actualizationMoveFromServerTimer;
     }
 }

@@ -68,10 +68,14 @@ namespace MultiServer
             if (playingPair[0] == null)
             {
                 playingPair[0] = socket;
+                byte[] data = Encoding.ASCII.GetBytes("white");
+                playingPair[0].Send(data);
             }
             else if (playingPair[1] == null && socket != playingPair[0])
             {
                 playingPair[1] = socket;
+                byte[] data = Encoding.ASCII.GetBytes("black");
+                playingPair[1].Send(data);
             }
             socket.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, socket);
             Console.WriteLine("Client connected, waiting for request...");

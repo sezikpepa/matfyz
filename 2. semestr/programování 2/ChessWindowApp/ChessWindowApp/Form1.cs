@@ -10,7 +10,9 @@ namespace ChessWindowApp
 
     public partial class Form1 : Form
     {
-        public static string testik = "";
+        public int mode = 0; //0: jen tak si tahat, 1: internet 2, engine
+        static public string playerColor;
+        public static string infoForMoveInput = "";
         ChessBoard chessBoard = new();
         public Button[,] brnGrid = new Button[8, 8];
         public Label[,] whiteDiscardedPiecesLabels = new Label[5, 2];
@@ -30,8 +32,6 @@ namespace ChessWindowApp
 
         public Form1()
         {
-            this.onlineCommunicator = new();
-
             this.playAsWhite = true;
 
             InitializeComponent();
@@ -320,7 +320,8 @@ namespace ChessWindowApp
 
             chessBoard.MoveInput(move);
 
-            this.onlineCommunicator.SendString(move.getStringRepresentation());
+            if (this.mode == 1)
+                this.onlineCommunicator.SendString(move.getStringRepresentation());
 
         }
 
@@ -344,11 +345,45 @@ namespace ChessWindowApp
 
         }
 
+        private void disableChessGrid()
+        {
+            this.changeChessGridDisable(false);
+        }
+
+        private void enableChessGrid()
+        {
+            this.changeChessGridDisable(true);
+        }
+
+        private void changeChessGridDisable(bool enable)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    this.brnGrid[i, j].Enabled = enable;
+                }
+            }
+        }
+
         private void ChooseOpponentComboBoxValueChanged(object sender, EventArgs e)
         {
             ComboBox choosePlayerComboBox = (ComboBox)sender;
 
             this.SetOpponentNameLabel(choosePlayerComboBox.Text);
+
+            if (choosePlayerComboBox.Text == "Náhodný člověk z internetu")
+            {
+                this.onlineCommunicator = new();
+                this.mode = 1;
+                this.actualizationMoveFromServerTimer.Start();            
+            }
+            if (choosePlayerComboBox.Text == "Jen tak si tahat")
+            {
+                this.mode = 0;
+                this.actualizationMoveFromServerTimer.Stop();
+            }
+
         }
 
         private void SetOpponentNameLabel(string text)
@@ -1500,14 +1535,43 @@ namespace ChessWindowApp
                 Array.Copy(buffer, data, received);
                 string text = Encoding.ASCII.GetString(data);
 
-                testik = text;
+                if (text == "white" || text == "black")
+                {
+                    playerColor = text;
+                    MessageBox.Show("You play as" + text);
+                    return;
+                }
+
+                infoForMoveInput = text;
+                MessageBox.Show(infoForMoveInput);
+                
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.chessBoard.MoveInput(new Move(testik));
+            this.chessBoard.MoveInput(new Move(infoForMoveInput));
             this.RedrawChessGrid();
+        }
+
+        private void chooseOpponentComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkMoveFromInternet(object sender, EventArgs e)
+        {
+            if (infoForMoveInput != "")
+            {
+                this.chessBoard.MoveInput(new Move(infoForMoveInput));
+                this.RedrawChessGrid();
+                infoForMoveInput = "";
+            }
+        }
+
+        private void chooseOpponentComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
