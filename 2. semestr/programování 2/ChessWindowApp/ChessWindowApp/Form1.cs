@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net.Sockets;
 using System.Text;
 
 namespace ChessWindowApp
@@ -245,8 +246,24 @@ namespace ChessWindowApp
                 this.lastClickedButton = clickedButton;
                 this.RedrawChessGrid();
             }
+
+            this.setValuesDiscardePiecesLabels();
             
             
+        }
+
+        private void setValuesDiscardePiecesLabels()
+        {
+            string[] list = { "♕", "♖", "♗", "♘", "♙" };
+            string[] list2 = { "♛", "♜", "♝", "♞", "♟" };
+            for (int i = 0; i < 5; i++)
+            {
+                this.whiteDiscardedPiecesLabels[4 - i, 1].Text = this.chessBoard.discardedPiecesWhite[list[i]].ToString();
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                this.blackDiscardedPiecesLabels[4 - i, 1].Text = this.chessBoard.discardedPiecesBlack[list2[i]].ToString();
+            }
         }
 
         public void ShowUserValidSquares(bool[,] validMoves)
@@ -593,13 +610,6 @@ namespace ChessWindowApp
                 int rowEnd = move.getRowIndexEndPosition();
                 int columnStart = move.getColumnIndexStartPosition();
                 int columnEnd = move.getColumnIndexEndPosition();
-                /*
-                MessageBox.Show(move.getRowIndexStartPosition().ToString());
-                MessageBox.Show(move.getRowIndexEndPosition().ToString());
-                MessageBox.Show(move.getColumnIndexStartPosition().ToString());
-                MessageBox.Show(move.getColumnIndexEndPosition().ToString());
-                */
-
 
                 if (!this.CheckMoveFromRightPlayer(rowStart, columnStart))
                     return;
@@ -668,11 +678,11 @@ namespace ChessWindowApp
 
                 if (piece.color == "white")
                 {
-                    this.discardedPiecesWhite[piece.type] += 1;
+                    this.discardedPiecesWhite[piece.consoleRepresentation.ToString()] += 1;
                 }
                 else if (piece.color == "black")
                 {
-                    this.discardedPiecesBlack[piece.type] += 1;
+                    this.discardedPiecesBlack[piece.consoleRepresentation.ToString()] += 1;
                 }
             }
 
@@ -1350,5 +1360,49 @@ namespace ChessWindowApp
                 return this.startPosition + " " + this.endPosition;
             }
         }
+
+        public class OnlineCommunicator
+        {
+            private TcpClient client;
+            public bool newMessage;
+            public string receivedMessage;
+            
+
+            public OnlineCommunicator(string serverIpAddress, int serverPort)
+            {
+                this.client = new TcpClient(serverIpAddress, serverPort);
+                this.newMessage = false;
+                this.receivedMessage = "";
+            }
+
+            public void sendMove(Move move)
+            {
+                string message = move.getStringRepresentation();
+
+                int byteCount = Encoding.ASCII.GetByteCount(message + 1);
+                byte[] sendData = Encoding.ASCII.GetBytes(message);
+
+
+                NetworkStream stream = this.client.GetStream();
+                stream.Write(sendData, 0, sendData.Length);
+            } 
+
+            public void listenMessage()
+            {
+                NetworkStream stream = this.client.GetStream();
+                StreamReader sr = new StreamReader(stream);
+                while (true)
+                {
+                    string message = sr.ReadLine();
+                    if (message != "")
+                    {
+                        this.newMessage = true;
+                        break;
+                    }
+                }
+                stream.Close();
+            }        
+        }
+
     }
 }
