@@ -34,6 +34,8 @@ namespace ChessWindowApp
         {
             this.playAsWhite = true;
 
+            
+
             InitializeComponent();
             this.Text = "MatfyzBot 1.0";
             this.showValidMoves = false;
@@ -322,6 +324,8 @@ namespace ChessWindowApp
 
             if (this.mode == 1)
                 this.onlineCommunicator.SendString(move.getStringRepresentation());
+
+            this.RedrawChessGrid();
 
         }
 
@@ -1539,6 +1543,7 @@ namespace ChessWindowApp
                 {
                     playerColor = text;
                     MessageBox.Show("You play as" + text);
+                    playerColor = text;
                     return;
                 }
 
@@ -1566,7 +1571,20 @@ namespace ChessWindowApp
                 this.chessBoard.MoveInput(new Move(infoForMoveInput));
                 this.RedrawChessGrid();
                 infoForMoveInput = "";
+
+                MessageBox.Show(playerColor + "  " + this.chessBoard.playerOnMove);
+
+                this.disableChessGrid();             
             }
+            if (playerColor != this.chessBoard.playerOnMove)
+            {
+                this.disableChessGrid();
+            }
+            else
+            {
+                this.enableChessGrid();
+            }
+
         }
 
         private void chooseOpponentComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
