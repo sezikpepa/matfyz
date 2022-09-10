@@ -23,7 +23,7 @@ namespace ChessWindowApp
 
         public Communicator onlineCommunicator;
 
-
+        private bool keepDisabled = false;
         private Button? lastClickedButton;
 
         public Position startPosition;
@@ -54,7 +54,11 @@ namespace ChessWindowApp
         {
             System.Windows.Forms.Timer timer = (System.Windows.Forms.Timer)sender;
 
-
+            if (this.keepDisabled == true)
+            {
+                this.DisableChessGrid();
+                return;
+            }
 
             if (infoForMoveInput != "")
             {
@@ -542,6 +546,8 @@ namespace ChessWindowApp
             this.SetValuesDiscardePiecesLabels();
 
             this.EnableChessGrid();
+
+            this.keepDisabled = false;
         }
 
         static public int ReverseNumber8(int value)
