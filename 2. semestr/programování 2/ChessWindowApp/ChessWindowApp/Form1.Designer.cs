@@ -38,7 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.offerDrawButton = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.resignButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -146,17 +146,17 @@
             this.offerDrawButton.UseVisualStyleBackColor = false;
             this.offerDrawButton.Click += new System.EventHandler(this.offerDrawButtonClicked);
             // 
-            // button3
+            // resignButton
             // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button3.Location = new System.Drawing.Point(1111, 407);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 67);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "0:2";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.ResignButtonClicked);
+            this.resignButton.BackColor = System.Drawing.Color.Red;
+            this.resignButton.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.resignButton.Location = new System.Drawing.Point(1111, 407);
+            this.resignButton.Name = "resignButton";
+            this.resignButton.Size = new System.Drawing.Size(118, 67);
+            this.resignButton.TabIndex = 8;
+            this.resignButton.Text = "0:2";
+            this.resignButton.UseVisualStyleBackColor = false;
+            this.resignButton.Click += new System.EventHandler(this.ResignButtonClicked);
             // 
             // label5
             // 
@@ -377,9 +377,9 @@
             this.ChoosePlayerColorCheckBox.AutoSize = true;
             this.ChoosePlayerColorCheckBox.Location = new System.Drawing.Point(969, 892);
             this.ChoosePlayerColorCheckBox.Name = "ChoosePlayerColorCheckBox";
-            this.ChoosePlayerColorCheckBox.Size = new System.Drawing.Size(115, 24);
+            this.ChoosePlayerColorCheckBox.Size = new System.Drawing.Size(247, 24);
             this.ChoosePlayerColorCheckBox.TabIndex = 30;
-            this.ChoosePlayerColorCheckBox.Text = "Play as black";
+            this.ChoosePlayerColorCheckBox.Text = "Draw black pieces at the bottom";
             this.ChoosePlayerColorCheckBox.UseVisualStyleBackColor = true;
             this.ChoosePlayerColorCheckBox.CheckedChanged += new System.EventHandler(this.ChoosePlayerColorCheckBoxChanged);
             // 
@@ -427,7 +427,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.resignButton);
             this.Controls.Add(this.offerDrawButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -456,7 +456,7 @@
         private Label label3;
         private Label label4;
         private Button offerDrawButton;
-        private Button button3;
+        private Button resignButton;
         private Label label5;
         private Label label6;
         private Label label7;

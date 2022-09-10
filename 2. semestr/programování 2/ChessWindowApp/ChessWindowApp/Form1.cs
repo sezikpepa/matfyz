@@ -46,9 +46,10 @@ namespace ChessWindowApp
 
             this.PrintButtonGrid();
             this.PrintDiscardedPieces();
+            if(this.playAsWhite == false)
+                this.RedrawBoardWhiteTop();
 
-            this.playAsWhite = false;
-            this.RedrawBoardWhiteTop();
+            this.setDrawResignButtonDisability();
         }
 
         private void CheckMoveFromInternet(object sender, EventArgs e)
@@ -169,6 +170,19 @@ namespace ChessWindowApp
             {
                 this.EnableChessGrid();
             }
+
+        }
+
+        private void setDrawResignButtonDisability()
+        {
+            if (this.mode == 0)
+            {
+                this.resignButton.Enabled = false;
+                this.offerDrawButton.Enabled = false;
+                return;
+            }
+            this.resignButton.Enabled = true;
+            this.offerDrawButton.Enabled = true;
 
         }
 
@@ -380,6 +394,8 @@ namespace ChessWindowApp
 
         private void GridButtonClick(object sender, EventArgs e)
         {
+            this.chooseOpponentComboBox.Enabled = false;
+
             if (sender != null)
             {
                 if (this.lastClickedButton != null)
@@ -494,6 +510,22 @@ namespace ChessWindowApp
 
         private void ChoosePlayerColorCheckBoxChanged(object sender, EventArgs e)
         {
+            CheckBox checkBox = (CheckBox)sender;
+
+            this.SetAllButtonOriginalColor();
+
+            if (checkBox.Checked)
+            {
+                this.playAsWhite = false;
+                this.RedrawBoardWhiteTop();
+            }
+            else
+            {
+                this.playAsWhite = true;
+                this.RedrawChessGrid();
+            }
+
+            
 
         }
 
@@ -535,6 +567,8 @@ namespace ChessWindowApp
                 this.mode = 0;
                 this.actualizationMoveFromServerTimer.Stop();
             }
+
+            this.setDrawResignButtonDisability();
 
         }
 
@@ -578,6 +612,7 @@ namespace ChessWindowApp
             this.EnableChessGrid();
 
             this.keepDisabled = false;
+            this.chooseOpponentComboBox.Enabled = true;
 
         }
 
@@ -744,11 +779,10 @@ namespace ChessWindowApp
                 if (this.playerOnMove == "white")
                 {
                     this.playerOnMove = "black";
+                    return;
                 }
-                else
-                {
-                    this.playerOnMove = "white";
-                }
+                this.playerOnMove = "white";
+                
             }
 
             private bool CheckMoveFromRightPlayer(int rowIndex, int columnIndex)
