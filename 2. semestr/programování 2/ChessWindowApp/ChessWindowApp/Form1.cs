@@ -71,16 +71,81 @@ namespace ChessWindowApp
                     timer.Tag = "stop";
                     
                     if (this.gameInfoLabel.Text == "Opponent resign") return;
-                    MessageBox.Show("Opponent resign");
                     this.gameInfoLabel.Text = "Opponent resign";
+                    MessageBox.Show("Opponent resign");             
                     this.gameInfoLabel.Visible = true;
 
                     return;
                 }
 
+                else if (infoForMoveInput == "01")
+                {
+                    this.DisableChessGrid();
+
+                    infoForMoveInput = "";
+                    this.actualizationMoveFromServerTimer.Enabled = false;
+                    this.actualizationMoveFromServerTimer.Stop();
+                    this.actualizationMoveFromServerTimer = null;
+                    stop = true;
+                    timer.Tag = "stop";
+
+                    if (this.gameInfoLabel.Text == "Opponent offered a draw") return;
+                    this.gameInfoLabel.Text = "Opponent offered a draw";
+                    this.gameInfoLabel.Visible = true;
+
+                    DialogResult dialogResult = MessageBox.Show("Do you accept your opponent draw?", "Draw accept form", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        this.gameInfoLabel.Text = "DRAW";
+                        this.gameInfoLabel.Visible = true;
+                        this.DisableChessGrid();
+                        this.onlineCommunicator.SendDrawAccepted();
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                        this.gameInfoLabel.Visible = true;
+                        this.gameInfoLabel.Text = "You denied draw offer";
+                        this.onlineCommunicator.SendDrawDenied();
+                        if (playerColor != this.chessBoard.playerOnMove)
+                        {
+                            this.DisableChessGrid();
+                        }
+                        else
+                        {
+                            this.EnableChessGrid();
+                        }
+                    }
+                    return;
+                }
+
+                else if (infoForMoveInput == "02")
+                {
+                    this.DisableChessGrid();
+
+                    this.gameInfoLabel.Text = "DRAW accepted";
+                    this.gameInfoLabel.Visible = true;
+                    return;
+                }
+
+                else if (infoForMoveInput == "03")
+                {
+                    this.gameInfoLabel.Text = "DRAW offer denied, continue playing";
+                    this.gameInfoLabel.Visible = true;
+
+                    if (playerColor != this.chessBoard.playerOnMove)
+                    {
+                        this.DisableChessGrid();
+                    }
+                    else
+                    {
+                        this.EnableChessGrid();
+                    }
+                }
+
                 else
                 {
                     this.chessBoard.MoveInput(new Move(infoForMoveInput));
+                    this.gameInfoLabel.Visible = false;
                     this.RedrawChessGrid();
                     infoForMoveInput = "";
 
@@ -88,7 +153,7 @@ namespace ChessWindowApp
                     return;
                 }
             }
-            if (this.gameInfoLabel.Visible == true) return;
+            //if (this.gameInfoLabel.Visible == true) return;
 
             if (playerColor != this.chessBoard.playerOnMove)
             {
@@ -108,6 +173,13 @@ namespace ChessWindowApp
             this.gameInfoLabel.Text = "You resign";
             this.gameInfoLabel.Visible = true;
             this.DisableChessGrid();
+        }
+
+        private void offerDrawButtonClicked(object sender, EventArgs e)
+        {
+            this.onlineCommunicator.SendDrawOffer();
+            this.gameInfoLabel.Text = "You offered a draw, waiting for opponent reaction";
+            this.gameInfoLabel.Visible = true;
         }
 
         private void ResetPositions()
@@ -1534,6 +1606,16 @@ namespace ChessWindowApp
             public void SendDrawOffer()
             {
                 this.SendString("01");
+            }
+
+            public void SendDrawAccepted()
+            {
+                this.SendString("02");
+            }
+
+            public void SendDrawDenied()
+            {
+                this.SendString("03");
             }
 
 

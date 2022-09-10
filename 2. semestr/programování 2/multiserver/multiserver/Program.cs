@@ -6,6 +6,49 @@ using System.Text;
 
 namespace MultiServer
 {
+
+
+    public class PlayingPair
+    {
+        private Socket? player1;
+        private Socket? player2;
+
+        public PlayingPair()
+        {
+            player1 = null;
+            player2 = null;
+        }
+
+        public bool IsFull()
+        {
+            return player1 != null && player2 != null;
+        }
+
+        public void PlayerInput(Socket player)
+        {
+            if (this.player1 == null)
+            {
+                this.player1 = player;
+                return;
+            }
+            if (this.player2 == null)
+            {
+                this.player2 = player;
+            }
+        }
+
+        public void checkPlayersConnected()
+        {
+
+        }
+
+        private bool checkPlayer1Connected()
+        {
+            return true;
+        }
+    }
+
+
     class Program
     {
         private static readonly Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -71,6 +114,7 @@ namespace MultiServer
                 byte[] data = Encoding.ASCII.GetBytes("white");
                 playingPair[0].Send(data);
             }
+
             else if (playingPair[1] == null && socket != playingPair[0])
             {
                 playingPair[1] = socket;
@@ -130,7 +174,9 @@ namespace MultiServer
                     Console.WriteLine("Message sent to client");
                 }           
             }
-           
+
+            
+
             current.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, current);
         }
     }

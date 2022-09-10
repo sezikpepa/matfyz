@@ -37,7 +37,7 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.offerDrawButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -134,16 +134,17 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "00:00";
             // 
-            // button2
+            // offerDrawButton
             // 
-            this.button2.BackColor = System.Drawing.Color.Orange;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(873, 407);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(118, 67);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "1:1";
-            this.button2.UseVisualStyleBackColor = false;
+            this.offerDrawButton.BackColor = System.Drawing.Color.Orange;
+            this.offerDrawButton.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.offerDrawButton.Location = new System.Drawing.Point(873, 407);
+            this.offerDrawButton.Name = "offerDrawButton";
+            this.offerDrawButton.Size = new System.Drawing.Size(118, 67);
+            this.offerDrawButton.TabIndex = 0;
+            this.offerDrawButton.Text = "1:1";
+            this.offerDrawButton.UseVisualStyleBackColor = false;
+            this.offerDrawButton.Click += new System.EventHandler(this.offerDrawButtonClicked);
             // 
             // button3
             // 
@@ -427,7 +428,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.offerDrawButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox2);
@@ -454,7 +455,7 @@
         private PictureBox pictureBox2;
         private Label label3;
         private Label label4;
-        private Button button2;
+        private Button offerDrawButton;
         private Button button3;
         private Label label5;
         private Label label6;
