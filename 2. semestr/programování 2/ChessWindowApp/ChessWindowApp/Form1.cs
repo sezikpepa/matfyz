@@ -47,7 +47,8 @@ namespace ChessWindowApp
             this.PrintButtonGrid();
             this.PrintDiscardedPieces();
 
-            //this.redrawBoardWhiteTop();
+            this.playAsWhite = false;
+            this.RedrawBoardWhiteTop();
         }
 
         private void CheckMoveFromInternet(object sender, EventArgs e)
@@ -386,6 +387,11 @@ namespace ChessWindowApp
 
                 Button clickedButton = (Button)sender;
                 Point location = (Point)clickedButton.Tag;
+                if(this.playAsWhite == false)
+                {
+                    location.Y = ReverseNumber8(location.Y);
+                }
+
                 if (!this.startPosition.IsValid())
                 {
                     if(this.chessBoard.board[location.Y, location.X].color == this.chessBoard.playerOnMove)
@@ -403,6 +409,7 @@ namespace ChessWindowApp
                 else
                 {
                     this.endPosition = new Position(location.X, location.Y);
+
                     this.GuiMoveInput(startPosition, endPosition);
 
                     this.SetAllButtonOriginalColor();
@@ -411,6 +418,8 @@ namespace ChessWindowApp
 
                 this.lastClickedButton = clickedButton;
                 this.RedrawChessGrid();
+                if(this.playAsWhite == false)
+                    this.RedrawBoardWhiteTop(); //pozorddddddddddddddddddddddddddddddddddddddddddddddddddddd
             }
 
             this.SetValuesDiscardePiecesLabels();
@@ -440,14 +449,30 @@ namespace ChessWindowApp
                 {
                     if(validMoves[i, j] == true)
                     {
-                        if (this.chessBoard.board[i, j].type == "blank")
+                        if(this.playAsWhite == false)
                         {
-                            this.brnGrid[j, i].BackColor = Color.LightGreen;
+                            int y = ReverseNumber8(i);
+                            if (this.chessBoard.board[i, j].type == "blank")
+                            {
+                                this.brnGrid[j, y].BackColor = Color.LightGreen;
+                            }
+                            else
+                            {
+                                this.brnGrid[j, y].BackColor = Color.Red;
+                            }
                         }
                         else
                         {
-                            this.brnGrid[j, i].BackColor = Color.Red;
+                            if (this.chessBoard.board[i, j].type == "blank")
+                            {
+                                this.brnGrid[j, i].BackColor = Color.LightGreen;
+                            }
+                            else
+                            {
+                                this.brnGrid[j, i].BackColor = Color.Red;
+                            }
                         }
+                        
                     }
                 }
             }
@@ -463,6 +488,7 @@ namespace ChessWindowApp
                 this.onlineCommunicator.SendString(move.GetStringRepresentation());
 
             this.RedrawChessGrid();
+
 
         }
 
@@ -538,6 +564,10 @@ namespace ChessWindowApp
         {
             this.chessBoard = new ChessBoard();
             this.RedrawChessGrid();
+            if (this.playAsWhite == false)
+            {
+                this.RedrawBoardWhiteTop();
+            }
             this.ResetPositions();
 
             this.chessBoard.ResetDiscardedPieces();
@@ -548,6 +578,7 @@ namespace ChessWindowApp
             this.EnableChessGrid();
 
             this.keepDisabled = false;
+
         }
 
         static public int ReverseNumber8(int value)
@@ -586,6 +617,11 @@ namespace ChessWindowApp
             public bool IsValid()
             {
                 return (IsBetweenIncluding(this.x, 0, 7) && IsBetweenIncluding(this.y, 0, 7));
+            }
+
+            public void normalizeWhiteTop()
+            {
+                this.y = ReverseNumber8(this.y);
             }
         }
 
