@@ -62,6 +62,7 @@
             this.whiteDiscardedPiecesPanel = new System.Windows.Forms.Panel();
             this.ChoosePlayerColorCheckBox = new System.Windows.Forms.CheckBox();
             this.actualizationMoveFromServerTimer = new System.Windows.Forms.Timer(this.components);
+            this.gameInfoLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -154,6 +155,7 @@
             this.button3.TabIndex = 8;
             this.button3.Text = "0:2";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.ResignButtonClicked);
             // 
             // label5
             // 
@@ -382,13 +384,25 @@
             // 
             // actualizationMoveFromServerTimer
             // 
+            this.actualizationMoveFromServerTimer.Interval = 400;
+            this.actualizationMoveFromServerTimer.Tag = "internetTimer";
             this.actualizationMoveFromServerTimer.Tick += new System.EventHandler(this.CheckMoveFromInternet);
+            // 
+            // gameInfoLabel
+            // 
+            this.gameInfoLabel.AutoSize = true;
+            this.gameInfoLabel.Location = new System.Drawing.Point(123, 16);
+            this.gameInfoLabel.Name = "gameInfoLabel";
+            this.gameInfoLabel.Size = new System.Drawing.Size(50, 20);
+            this.gameInfoLabel.TabIndex = 31;
+            this.gameInfoLabel.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1626, 1023);
+            this.Controls.Add(this.gameInfoLabel);
             this.Controls.Add(this.ChoosePlayerColorCheckBox);
             this.Controls.Add(this.whiteDiscardedPiecesPanel);
             this.Controls.Add(this.blackDiscardedPiecesPanel);
@@ -463,6 +477,7 @@
         private Panel blackDiscardedPiecesPanel;
         private Panel whiteDiscardedPiecesPanel;
         private CheckBox ChoosePlayerColorCheckBox;
-        private System.Windows.Forms.Timer actualizationMoveFromServerTimer;
+        public System.Windows.Forms.Timer actualizationMoveFromServerTimer;
+        private Label gameInfoLabel;
     }
 }

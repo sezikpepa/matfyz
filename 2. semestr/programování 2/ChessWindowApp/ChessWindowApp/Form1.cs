@@ -13,6 +13,7 @@ namespace ChessWindowApp
         public int mode = 0; //0: jen tak si tahat, 1: internet 2, engine
         static public string? playerColor;
         public static string infoForMoveInput = "";
+        static public bool stop = false;
         ChessBoard chessBoard = new();
         public Button[,] brnGrid = new Button[8, 8];
         public Label[,] whiteDiscardedPiecesLabels = new Label[5, 2];
@@ -47,6 +48,59 @@ namespace ChessWindowApp
             this.PrintDiscardedPieces();
 
             //this.redrawBoardWhiteTop();
+        }
+
+        private void CheckMoveFromInternet(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Timer timer = (System.Windows.Forms.Timer)sender;
+            if (timer.Tag.ToString() != "internetTimer") return;
+
+            if (infoForMoveInput != "")
+            {
+                if (infoForMoveInput == "00")
+                {
+                    this.DisableChessGrid();
+                    
+                    infoForMoveInput = "";
+                    this.actualizationMoveFromServerTimer.Enabled = false;
+                    this.actualizationMoveFromServerTimer.Stop();
+                    this.actualizationMoveFromServerTimer = null;
+                    this.onlineCommunicator = null;
+                    stop = true;
+                    timer.Tag = "stop";
+                    if (this.gameInfoLabel.Text == "Opponent resign") return;
+                    MessageBox.Show("Opponent resign");
+                    this.gameInfoLabel.Text = "Opponent resign";
+
+                    return;
+                }
+                else
+                {
+                    this.chessBoard.MoveInput(new Move(infoForMoveInput));
+                    this.RedrawChessGrid();
+                    infoForMoveInput = "";
+
+                    this.DisableChessGrid();
+                    return;
+                }
+            }
+
+            if (playerColor != this.chessBoard.playerOnMove)
+            {
+                this.DisableChessGrid();
+                return;
+            }
+            else
+            {
+                this.EnableChessGrid();
+            }
+
+        }
+
+        private void ResignButtonClicked(object sender, EventArgs e)
+        {
+            this.onlineCommunicator.SendResign();
+            this.DisableChessGrid();
         }
 
         private void ResetPositions()
@@ -365,7 +419,8 @@ namespace ChessWindowApp
             {
                 this.onlineCommunicator = new();
                 this.mode = 1;
-                this.actualizationMoveFromServerTimer.Start();            
+                this.actualizationMoveFromServerTimer.Start();
+                MessageBox.Show("žeby tady byl problém?");
             }
             if (choosePlayerComboBox.Text == "Jen tak si tahat")
             {
@@ -407,6 +462,8 @@ namespace ChessWindowApp
 
             this.SetAllButtonOriginalColor();
             this.SetValuesDiscardePiecesLabels();
+
+            this.EnableChessGrid();
         }
 
         static public int ReverseNumber8(int value)
@@ -1459,10 +1516,21 @@ namespace ChessWindowApp
             {                
                 while (true)
                 {
-                    //SendRequest();
                     ReceiveResponse();
                 }
             }
+
+            public void SendResign()
+            {
+                this.SendString("00");
+            }
+
+            public void SendDrawOffer()
+            {
+                this.SendString("01");
+            }
+
+
 
             public void SendString(string text)
             {
@@ -1486,31 +1554,12 @@ namespace ChessWindowApp
                     playerColor = text;
                     return;
                 }
-
+                
                 infoForMoveInput = text;
                 
             }
         }
 
-        private void CheckMoveFromInternet(object sender, EventArgs e)
-        {
-            if (infoForMoveInput != "")
-            {
-                this.chessBoard.MoveInput(new Move(infoForMoveInput));
-                this.RedrawChessGrid();
-                infoForMoveInput = "";
-
-                this.DisableChessGrid();             
-            }
-            if (playerColor != this.chessBoard.playerOnMove)
-            {
-                this.DisableChessGrid();
-            }
-            else
-            {
-                this.EnableChessGrid();
-            }
-
-        }
+        
     }
 }

@@ -82,6 +82,11 @@ namespace MultiServer
             serverSocket.BeginAccept(AcceptCallback, null);
         }
 
+        private static bool checkForSpecialMessages(string message)
+        {
+            return false;
+        }
+
         private static void ReceiveCallback(IAsyncResult AR)
         {
             Socket current = (Socket)AR.AsyncState;
@@ -105,7 +110,12 @@ namespace MultiServer
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
 
-            if (playingPair[1] != null)
+            if (checkForSpecialMessages(text))
+            {
+
+            }
+        
+            else if (playingPair[1] != null)
             {
                 if (current == playingPair[0])
                 {
@@ -118,13 +128,9 @@ namespace MultiServer
                     byte[] data = Encoding.ASCII.GetBytes(text);
                     playingPair[0].Send(data);
                     Console.WriteLine("Message sent to client");
-                }
-
-                
+                }           
             }
-            
-
-
+           
             current.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, current);
         }
     }
