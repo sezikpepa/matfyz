@@ -53,7 +53,8 @@ namespace ChessWindowApp
         private void CheckMoveFromInternet(object sender, EventArgs e)
         {
             System.Windows.Forms.Timer timer = (System.Windows.Forms.Timer)sender;
-            if (timer.Tag.ToString() != "internetTimer") return;
+
+
 
             if (infoForMoveInput != "")
             {
@@ -68,12 +69,15 @@ namespace ChessWindowApp
                     this.onlineCommunicator = null;
                     stop = true;
                     timer.Tag = "stop";
+                    
                     if (this.gameInfoLabel.Text == "Opponent resign") return;
                     MessageBox.Show("Opponent resign");
                     this.gameInfoLabel.Text = "Opponent resign";
+                    this.gameInfoLabel.Visible = true;
 
                     return;
                 }
+
                 else
                 {
                     this.chessBoard.MoveInput(new Move(infoForMoveInput));
@@ -84,6 +88,7 @@ namespace ChessWindowApp
                     return;
                 }
             }
+            if (this.gameInfoLabel.Visible == true) return;
 
             if (playerColor != this.chessBoard.playerOnMove)
             {
@@ -100,6 +105,8 @@ namespace ChessWindowApp
         private void ResignButtonClicked(object sender, EventArgs e)
         {
             this.onlineCommunicator.SendResign();
+            this.gameInfoLabel.Text = "You resign";
+            this.gameInfoLabel.Visible = true;
             this.DisableChessGrid();
         }
 
@@ -420,7 +427,6 @@ namespace ChessWindowApp
                 this.onlineCommunicator = new();
                 this.mode = 1;
                 this.actualizationMoveFromServerTimer.Start();
-                MessageBox.Show("žeby tady byl problém?");
             }
             if (choosePlayerComboBox.Text == "Jen tak si tahat")
             {

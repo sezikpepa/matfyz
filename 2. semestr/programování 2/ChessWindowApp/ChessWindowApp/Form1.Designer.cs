@@ -384,7 +384,7 @@
             // 
             // actualizationMoveFromServerTimer
             // 
-            this.actualizationMoveFromServerTimer.Interval = 400;
+            this.actualizationMoveFromServerTimer.Interval = 200;
             this.actualizationMoveFromServerTimer.Tag = "internetTimer";
             this.actualizationMoveFromServerTimer.Tick += new System.EventHandler(this.CheckMoveFromInternet);
             // 
@@ -396,6 +396,7 @@
             this.gameInfoLabel.Size = new System.Drawing.Size(50, 20);
             this.gameInfoLabel.TabIndex = 31;
             this.gameInfoLabel.Text = "label1";
+            this.gameInfoLabel.Visible = false;
             // 
             // Form1
             // 
