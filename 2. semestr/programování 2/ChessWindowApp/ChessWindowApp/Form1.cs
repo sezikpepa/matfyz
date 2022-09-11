@@ -26,8 +26,8 @@ namespace ChessWindowApp
         private bool keepDisabled = false;
         private Button? lastClickedButton;
 
-        public Position startPosition;
-        public Position endPosition;
+        public Position? startPosition;
+        public Position? endPosition;
 
         public bool showValidMoves;
 
@@ -49,7 +49,7 @@ namespace ChessWindowApp
             if(this.playAsWhite == false)
                 this.RedrawBoardWhiteTop();
 
-            this.setDrawResignButtonDisability();
+            this.SetDrawResignButtonDisability();
         }
 
         private void CheckMoveFromInternet(object sender, EventArgs e)
@@ -153,6 +153,8 @@ namespace ChessWindowApp
                     this.chessBoard.MoveInput(new Move(infoForMoveInput));
                     this.gameInfoLabel.Visible = false;
                     this.RedrawChessGrid();
+                    if(this.playAsWhite == false)
+                        this.RedrawBoardWhiteTop();
                     infoForMoveInput = "";
 
                     this.DisableChessGrid();
@@ -173,7 +175,7 @@ namespace ChessWindowApp
 
         }
 
-        private void setDrawResignButtonDisability()
+        private void SetDrawResignButtonDisability()
         {
             if (this.mode == 0)
             {
@@ -523,10 +525,7 @@ namespace ChessWindowApp
             {
                 this.playAsWhite = true;
                 this.RedrawChessGrid();
-            }
-
-            
-
+            }         
         }
 
         private void DisableChessGrid()
@@ -568,7 +567,7 @@ namespace ChessWindowApp
                 this.actualizationMoveFromServerTimer.Stop();
             }
 
-            this.setDrawResignButtonDisability();
+            this.SetDrawResignButtonDisability();
 
         }
 
@@ -614,14 +613,16 @@ namespace ChessWindowApp
             this.keepDisabled = false;
             this.chooseOpponentComboBox.Enabled = true;
 
+            this.gameInfoLabel.Visible = false;
+            this.gameInfoLabel.Text = "";
+
         }
 
         static public int ReverseNumber8(int value)
         {
             if (value < 0 || value > 7)
-            {
                 return 0;
-            }
+
             int[] line = { 8, 7, 6, 5, 4, 3, 2, 1};
             return line[value] - 1;
         }
@@ -654,7 +655,7 @@ namespace ChessWindowApp
                 return (IsBetweenIncluding(this.x, 0, 7) && IsBetweenIncluding(this.y, 0, 7));
             }
 
-            public void normalizeWhiteTop()
+            public void NormalizeWhiteTop()
             {
                 this.y = ReverseNumber8(this.y);
             }
@@ -1569,6 +1570,7 @@ namespace ChessWindowApp
             //flags
             public bool ep;
             public string castle;
+            public string pieceToPromote;
 
             private readonly string[] columnIndexesToLetters = { "a", "b", "c", "d", "e", "f", "g", "h" };
 
@@ -1577,29 +1579,35 @@ namespace ChessWindowApp
             {
                 string[] parts = move.Split(' ');
 
-                if (parts.Length != 2)
-                    throw new ArgumentException("ERROR: move has to contain two parts");
+                if (parts.Length != 2 || parts.Length != 3)
+                    throw new ArgumentException("ERROR: move has to contain two or three parts");
 
-                this.startPosition = parts[0];
+                this.startPosition = parts[0];        
                 this.endPosition = parts[1];
                 this.ep = false;
                 this.castle = "none";
+                this.pieceToPromote = "";
+                if (parts.Length == 3)
+                    this.pieceToPromote = parts[2];
+
             }
 
-            public Move(string startPosition, string endPostion)
+            public Move(string startPosition, string endPostion, string pieceToPromote="")
             {
                 this.startPosition = startPosition;
                 this.endPosition = endPostion;
                 this.ep = false;
                 this.castle = "none";
+                this.pieceToPromote = pieceToPromote;
             }
 
-            public Move(Position startPosition, Position endPosition)
+            public Move(Position startPosition, Position endPosition, string pieceToPromote="")
             {
                 this.startPosition = this.columnIndexesToLetters[startPosition.x] + ReverseNumber8((startPosition.y - 1)).ToString();
                 this.endPosition = this.columnIndexesToLetters[endPosition.x] + ReverseNumber8((endPosition.y - 1)).ToString();
                 this.ep = false;
                 this.castle = "none";
+                this.pieceToPromote = pieceToPromote;
             }
 
             private static int GetColumnIndex(string value)
@@ -1638,8 +1646,7 @@ namespace ChessWindowApp
 
         public class Communicator
         {
-            private static readonly Socket ClientSocket = new Socket
-            (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            private static readonly Socket ClientSocket = new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             private const int PORT = 100;
             public string receivedMessage = "";
@@ -1723,7 +1730,5 @@ namespace ChessWindowApp
                 
             }
         }
-
-        
     }
 }
