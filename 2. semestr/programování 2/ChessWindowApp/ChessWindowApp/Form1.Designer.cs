@@ -63,6 +63,7 @@
             this.ChoosePlayerColorCheckBox = new System.Windows.Forms.CheckBox();
             this.actualizationMoveFromServerTimer = new System.Windows.Forms.Timer(this.components);
             this.gameInfoLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -399,11 +400,22 @@
             this.gameInfoLabel.Text = "label1";
             this.gameInfoLabel.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(868, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 32;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1626, 1023);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gameInfoLabel);
             this.Controls.Add(this.ChoosePlayerColorCheckBox);
             this.Controls.Add(this.whiteDiscardedPiecesPanel);
@@ -481,5 +493,6 @@
         private CheckBox ChoosePlayerColorCheckBox;
         public System.Windows.Forms.Timer actualizationMoveFromServerTimer;
         private Label gameInfoLabel;
+        private Button button1;
     }
 }

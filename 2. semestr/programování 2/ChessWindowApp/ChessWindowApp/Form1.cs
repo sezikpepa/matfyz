@@ -31,6 +31,8 @@ namespace ChessWindowApp
 
         public bool showValidMoves;
 
+        public ChessEngine chessEngine = new();
+
         public Form1()
         {
             this.playAsWhite = true;
@@ -676,6 +678,9 @@ namespace ChessWindowApp
             public Dictionary<string, int> discardedPiecesWhite;
             public Dictionary<string, int> discardedPiecesBlack;
 
+            public string id;
+            public float potencionalValueByEngine;
+
             public ChessBoard()
             {
                 this.playerOnMove = "white";
@@ -688,9 +693,11 @@ namespace ChessWindowApp
                 this.lastEPUpdate = 0;
                 this.toResetUserSigns = false;
 
+                this.id = "";
+
                 this.ResetDiscardedPieces();
             }
-
+            /*
             public void SetStartPosition()
             {
                 this.board[0, 0] = new Rook("black", new Position(0, 0));
@@ -729,6 +736,21 @@ namespace ChessWindowApp
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
+            }*/
+            
+            public void SetStartPosition()
+            {
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        this.board[j, i] = new EmptySpace("blank", new Position(j, i));
+                    }
+                }
+
+                this.board[7, 7] = new Pawn("white", new Position(7, 7));
+                //this.board[6, 6] = new Pawn("white", new Position(6, 6));
+                this.board[0, 1] = new Pawn("black", new Position(0, 1));
             }
 
             public void ResetDiscardedPieces()
@@ -1103,6 +1125,21 @@ namespace ChessWindowApp
                     }
                 }
                 return false;
+            }
+
+            public ChessBoard Copy()
+            {
+                ChessBoard returnChessboard = new ChessBoard();
+                returnChessboard.board = this.board;
+                returnChessboard.positionEPValid = this.positionEPValid;
+                returnChessboard.playerOnMove = this.playerOnMove;
+                returnChessboard.currentMove = this.currentMove;
+                returnChessboard.lastEPUpdate = this.lastEPUpdate;
+                returnChessboard.potencionalValueByEngine = this.potencionalValueByEngine;
+                
+
+
+                return returnChessboard;
             }
 
         }
@@ -1729,6 +1766,137 @@ namespace ChessWindowApp
                 infoForMoveInput = text;
                 
             }
+        }
+
+        public class ChessEngine
+        {
+            private ChessBoard currentChessBoard;
+            private int[] chessPiecesValues = { 1, 3, 3, 5, 8, 0 };
+            private Dictionary<string, int> chessPiecesToIndex;
+
+            private Queue<ChessBoard> chessBoardsToEvaluate;
+            private List<ChessBoard> evaluatedChessBoards;
+            public ChessEngine()
+            {
+                this.currentChessBoard = new ChessBoard();
+                this.chessPiecesToIndex = new Dictionary<string, int>
+                {
+                    { "pawn", 0 },
+                    { "knight", 1 },
+                    { "bishop", 2 },
+                    { "rook", 3 },
+                    { "queen", 4 },
+                    { "king", 5 }
+                };
+
+                this.chessBoardsToEvaluate = new Queue<ChessBoard>();
+                this.evaluatedChessBoards = new List<ChessBoard>();
+
+            }
+
+            public void startExploring()
+            {
+                this.GenerateBestMoves(this.currentChessBoard);
+            }
+
+            public void GenerateBestMoves(ChessBoard chessBoard)
+                
+            {
+                this.GenerateBoards(chessBoard);
+            }
+
+            private void GenerateBoards(ChessBoard chessBoard)
+            {
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        for(int k = 0; k < 8; k++)
+                        {
+                            for(int l = 0; l < 8; l++)
+                            {
+                                
+                                ChessBoard newChessBoard = chessBoard.Copy();
+                                newChessBoard.MoveInput(new Move(new Position(k, l), new Position(i, j)));
+                                this.chessBoardsToEvaluate.Enqueue(newChessBoard);
+                                MessageBox.Show(newChessBoard.id.ToString());
+                                newChessBoard.id = i.ToString() + j.ToString() + k.ToString() + l.ToString();
+                            }
+                        }
+                    }
+                }
+            }
+
+            public void getBestValue()
+            {
+                float maximum = -1;
+                foreach (var element in this.evaluatedChessBoards)
+                {
+                    if (element.potencionalValueByEngine > maximum)
+                        maximum = element.potencionalValueByEngine;
+                }
+                //MessageBox.Show(maximum.ToString());
+
+            }
+
+            public void EvaluateBoards()
+            {
+                while (this.chessBoardsToEvaluate.Count > 0)
+                {
+                    ChessBoard chessBoard = this.chessBoardsToEvaluate.Dequeue();
+                    float value = this.EvaluatePosition(chessBoard.board);
+                    chessBoard.potencionalValueByEngine = value;
+                    this.evaluatedChessBoards.Add(chessBoard);
+                }
+            }
+
+            private float EvaluatePosition(Piece[,] board)
+            {
+                float result = 0;
+
+                result += this.EvaluatePositionPieceValue(board);
+
+
+                return result;
+                
+            }
+
+            public float EvaluatePositionPieceValue(Piece[,] board)
+            {
+                int whiteScore = 0;
+                int blackScore = 0;
+
+                for(int i = 0; i < 8; i++)
+                {
+                    for(var j = 0; j < 8; j++)
+                    {
+                        if(board[i, j].color == "white")
+                        {
+                            whiteScore += this.chessPiecesValues[this.chessPiecesToIndex[board[i, j].type]];
+                        }
+                        else if (board[i, j].color == "black")
+                        {
+                            blackScore += this.chessPiecesValues[this.chessPiecesToIndex[board[i, j].type]];
+                        }
+                    }
+                }
+                MessageBox.Show(whiteScore.ToString() + " " + blackScore.ToString());
+                return whiteScore - blackScore;
+            }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            Button button = (Button) sender;
+
+            this.chessEngine.startExploring();
+            this.chessEngine.EvaluateBoards();
+            this.chessEngine.getBestValue();
+            
+
+            //MessageBox.Show(this.chessEngine.EvaluatePositionPieceValue(this.chessBoard.board).ToString());
         }
     }
 }
