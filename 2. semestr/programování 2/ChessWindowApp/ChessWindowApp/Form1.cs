@@ -681,6 +681,8 @@ namespace ChessWindowApp
             public string id;
             public float potencionalValueByEngine;
 
+            public bool lastMoveCorrect = true;
+
             public ChessBoard()
             {
                 this.playerOnMove = "white";
@@ -736,8 +738,8 @@ namespace ChessWindowApp
                 this.board[7, 6] = new Knight("white", new Position(7, 6));
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
-            }*/
-            
+            }
+            */
             public void SetStartPosition()
             {
                 for(int i = 0; i < 8; i++)
@@ -748,11 +750,13 @@ namespace ChessWindowApp
                     }
                 }
 
-                this.board[7, 7] = new Pawn("white", new Position(7, 7));
-                //this.board[6, 6] = new Pawn("white", new Position(6, 6));
-                this.board[0, 1] = new Pawn("black", new Position(0, 1));
-            }
+                this.board[7, 6] = new Queen("white", new Position(7, 6));
+                this.board[7, 7] = new Queen("white", new Position(7, 7));
+                this.board[7, 1] = new Pawn("white", new Position(7, 1));
+                this.board[7, 0] = new Knight("black", new Position(7, 0));
 
+            }
+            
             public void ResetDiscardedPieces()
             {
                 this.ResetDiscardedPiecesWhite();
@@ -908,10 +912,16 @@ namespace ChessWindowApp
                 int columnEnd = move.GetColumnIndexEndPosition();
 
                 if (!this.CheckMoveFromRightPlayer(rowStart, columnStart))
+                {
+                    this.lastMoveCorrect = false;
                     return;
+                }
 
                 if (!this.CheckCorrectPieceMove(rowStart, columnStart, rowEnd, columnEnd))
+                {
+                    this.lastMoveCorrect = false;
                     return;
+                }
 
                 //if (this.isKingChecked(this.board, rowEnd, columnEnd))
                 //return;
@@ -924,17 +934,20 @@ namespace ChessWindowApp
                     if (columnEnd - columnStart == 2)
                     {
                         this.DoShortCastle(this.board[rowStart, columnStart].color);
-
+                        this.lastMoveCorrect=true;
                         return;
                     }
                     else if (columnEnd - columnStart == -2)
                     {
                         this.DoLongCastle(this.board[rowStart, columnStart].color);
+                        this.lastMoveCorrect = true;
                         return;
                     }
                 }
 
                 this.MakeMove(rowStart, columnStart, rowEnd, columnEnd);
+                
+                this.lastMoveCorrect = true;
 
                 this.board[rowEnd, columnEnd].UpdateCurrentPosition(new Position(rowEnd, columnEnd));
                 this.board[rowEnd, columnEnd].withoutMove = false;
@@ -1130,7 +1143,44 @@ namespace ChessWindowApp
             public ChessBoard Copy()
             {
                 ChessBoard returnChessboard = new ChessBoard();
-                returnChessboard.board = this.board;
+                
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        if(this.board[i, j].type == "rook")
+                        {
+                            returnChessboard.board[i, j] = new Rook(this.board[i, j].color, new Position(i, j));
+                        }
+                        else if (this.board[i, j].type == "knight")
+                        {
+                            returnChessboard.board[i, j] = new Knight(this.board[i, j].color, new Position(i, j));
+                        }
+                        else if (this.board[i, j].type == "bishop")
+                        {
+                            returnChessboard.board[i, j] = new Bishop(this.board[i, j].color, new Position(i, j));
+                        }
+                        else if (this.board[i, j].type == "king")
+                        {
+                            returnChessboard.board[i, j] = new King(this.board[i, j].color, new Position(i, j));
+                        }
+                        else if (this.board[i, j].type == "queen")
+                        {
+                            returnChessboard.board[i, j] = new Queen(this.board[i, j].color, new Position(i, j));
+                        }
+                        else if (this.board[i, j].type == "pawn")
+                        {
+                            returnChessboard.board[i, j] = new Pawn(this.board[i, j].color, new Position(i, j));
+                        }
+                        else
+                        {
+                            returnChessboard.board[i, j] = new EmptySpace(this.board[i, j].color, new Position(i, j));
+                        }
+                    }
+                }
+
+
+
                 returnChessboard.positionEPValid = this.positionEPValid;
                 returnChessboard.playerOnMove = this.playerOnMove;
                 returnChessboard.currentMove = this.currentMove;
@@ -1266,6 +1316,12 @@ namespace ChessWindowApp
             {
 
             }
+
+            public virtual Piece Copy()
+            {
+                Piece piece = new Piece(this.color, this.position);
+                return piece;
+            }
         }
 
         public class EmptySpace : Piece
@@ -1276,6 +1332,16 @@ namespace ChessWindowApp
                 this.EPValid = false;
                 this.AddConsoleRepresentation();
                 this.type = "blank";
+            }
+
+            public override EmptySpace Copy()
+            {
+                EmptySpace piece = new EmptySpace(this.color, this.position);
+                piece.withoutMove = false;
+                piece.type = "blank";
+                piece.color = this.color;
+                return piece;
+
             }
 
             public override void AddConsoleRepresentation()
@@ -1295,6 +1361,16 @@ namespace ChessWindowApp
             {
                 this.AddConsoleRepresentation();
                 this.type = "rook";
+            }
+
+            public override Rook Copy()
+            {
+                Rook piece = new Rook(this.color, new Position(this.position.x, this.position.y));
+                piece.type = "rook";
+                piece.color = this.color;
+                piece.withoutMove = false;
+                return piece;
+
             }
 
             public override void AddConsoleRepresentation()
@@ -1338,6 +1414,16 @@ namespace ChessWindowApp
                 this.CheckDiscardPieceMove(board);
                 this.CheckMoveForwardByTwo(board);
                 this.CheckMoveEP(EPValidPosition, currentMove, lastEPUpdate);
+
+            }
+
+            public override Pawn Copy()
+            {
+                Pawn piece = new Pawn(this.color, new Position(this.position.x, this.position.y));
+                piece.withoutMove = false;
+                piece.type = "pawn";
+                piece.color = this.color;
+                return piece;
 
             }
 
@@ -1444,6 +1530,16 @@ namespace ChessWindowApp
                     this.consoleRepresentation = '♘';
             }
 
+            public override Knight Copy()
+            {
+                Knight piece = new Knight(this.color, new Position(this.position.x, this.position.y));
+                piece.withoutMove = false;
+                piece.type = "knight";
+                piece.color = this.color;
+                return piece;
+
+            }
+
             public override void GenerateValidMoves(Piece[,] board, Position EPValidPosition, int currentMove, int lastEPUpdate)
             {
                 this.ResetValidMoves();
@@ -1488,6 +1584,16 @@ namespace ChessWindowApp
 
 
             }
+
+            public override Bishop Copy()
+            {
+                Bishop piece = new Bishop(this.color, new Position(this.position.x, this.position.y));
+                piece.withoutMove = false;
+                piece.type = "bishop";
+                piece.color = this.color;
+                return piece;
+
+            }
         }
 
         public class Queen : Piece
@@ -1512,6 +1618,16 @@ namespace ChessWindowApp
 
                 this.ExploreDiagonals(board);
                 this.ExploreNonDiagonals(board);
+            }
+
+            public override Queen Copy()
+            {
+                Queen piece = new Queen(this.color, new Position(this.position.x, this.position.y));
+                piece.withoutMove = false;
+                piece.type = "queen";
+                piece.color = this.color;
+                return piece;
+
             }
         }
 
@@ -1571,6 +1687,16 @@ namespace ChessWindowApp
                         this.validMoves[rowIndex, columnIndex - 2] = true;
                     }
                 }
+
+            }
+
+            public override King Copy()
+            {
+                King piece = new King(this.color, new Position(this.position.x, this.position.y));
+                piece.withoutMove = false;
+                piece.type = "king";
+                piece.color = this.color;
+                return piece;
 
             }
 
@@ -1786,7 +1912,8 @@ namespace ChessWindowApp
                     { "bishop", 2 },
                     { "rook", 3 },
                     { "queen", 4 },
-                    { "king", 5 }
+                    { "king", 5 },
+                    { "blank", 5 }
                 };
 
                 this.chessBoardsToEvaluate = new Queue<ChessBoard>();
@@ -1796,31 +1923,58 @@ namespace ChessWindowApp
 
             public void startExploring()
             {
-                this.GenerateBestMoves(this.currentChessBoard);
+                this.GenerateBestMoves(this.currentChessBoard.Copy());
             }
 
             public void GenerateBestMoves(ChessBoard chessBoard)
                 
             {
-                this.GenerateBoards(chessBoard);
+                this.GenerateBoards(chessBoard.Copy());
             }
 
             private void GenerateBoards(ChessBoard chessBoard)
             {
-                for(int i = 0; i < 8; i++)
+                chessBoard.GenerateMovesAllPieces();
+                for (int i = 0; i < 8; i++)
                 {
                     for(int j = 0; j < 8; j++)
-                    {
+                    {                     
                         for(int k = 0; k < 8; k++)
                         {
                             for(int l = 0; l < 8; l++)
                             {
                                 
                                 ChessBoard newChessBoard = chessBoard.Copy();
-                                newChessBoard.MoveInput(new Move(new Position(k, l), new Position(i, j)));
-                                this.chessBoardsToEvaluate.Enqueue(newChessBoard);
-                                MessageBox.Show(newChessBoard.id.ToString());
-                                newChessBoard.id = i.ToString() + j.ToString() + k.ToString() + l.ToString();
+                                
+                                if(chessBoard.board[i, j].validMoves[k, l] == true && chessBoard.board[i, j].color == "white")
+                                {
+                                    //MessageBox.Show(newChessBoard.board[i, j].type);
+                                    newChessBoard.board[k, l] = chessBoard.board[i, j].Copy();
+                                    newChessBoard.board[i, j] = new EmptySpace("blank", new Position(i, j));
+                                    //MessageBox.Show(newChessBoard.board[k, l].type);
+                                    //MessageBox.Show(newChessBoard.board[i, j].type);
+                                    newChessBoard.board[k, l].UpdateCurrentPosition(new Position(k, l));
+                                    newChessBoard.board[i, j].UpdateCurrentPosition(new Position(i, j));
+
+                                    //MessageBox.Show(newChessBoard.board[k, l].type);
+                                    //MessageBox.Show(newChessBoard.board[i, j].type);
+
+                                    this.chessBoardsToEvaluate.Enqueue(newChessBoard);
+                                    
+                                }
+
+
+                                /*
+                                if(newChessBoard.lastMoveCorrect == true)
+                                {
+                                    //MessageBox.Show(i.ToString() + j.ToString() + k.ToString() + l.ToString());
+                                    //MessageBox.Show(newChessBoard.board[k, l].type);
+
+                                    this.chessBoardsToEvaluate.Enqueue(newChessBoard);
+                                }
+                                //MessageBox.Show(newChessBoard.playerOnMove);
+                                //MessageBox.Show(newChessBoard.id.ToString());
+                                */
                             }
                         }
                     }
@@ -1833,9 +1987,14 @@ namespace ChessWindowApp
                 foreach (var element in this.evaluatedChessBoards)
                 {
                     if (element.potencionalValueByEngine > maximum)
-                        maximum = element.potencionalValueByEngine;
+                    {
+                        maximum = element.potencionalValueByEngine;             
+                    }
+                        
                 }
-                //MessageBox.Show(maximum.ToString());
+                
+
+                MessageBox.Show(maximum.ToString());
 
             }
 
@@ -1845,6 +2004,7 @@ namespace ChessWindowApp
                 {
                     ChessBoard chessBoard = this.chessBoardsToEvaluate.Dequeue();
                     float value = this.EvaluatePosition(chessBoard.board);
+                    //MessageBox.Show(value.ToString());
                     chessBoard.potencionalValueByEngine = value;
                     this.evaluatedChessBoards.Add(chessBoard);
                 }
@@ -1868,19 +2028,24 @@ namespace ChessWindowApp
 
                 for(int i = 0; i < 8; i++)
                 {
-                    for(var j = 0; j < 8; j++)
+                    for(int j = 0; j < 8; j++)
                     {
                         if(board[i, j].color == "white")
                         {
+                            //MessageBox.Show(i.ToString() + j.ToString() + board[i, j].GetType().ToString());
+                            //MessageBox.Show(board[i, j].type);
+                            //MessageBox.Show(board[i, j].color);
                             whiteScore += this.chessPiecesValues[this.chessPiecesToIndex[board[i, j].type]];
                         }
                         else if (board[i, j].color == "black")
                         {
+                            //MessageBox.Show(i.ToString() + j.ToString() + board[i, j].GetType().ToString() + board[i, j].type);
                             blackScore += this.chessPiecesValues[this.chessPiecesToIndex[board[i, j].type]];
                         }
                     }
                 }
-                MessageBox.Show(whiteScore.ToString() + " " + blackScore.ToString());
+                //MessageBox.Show("Board done");
+                //MessageBox.Show(whiteScore.ToString() + " " + blackScore.ToString());
                 return whiteScore - blackScore;
             }
 
