@@ -699,7 +699,7 @@ namespace ChessWindowApp
 
                 this.ResetDiscardedPieces();
             }
-            /*
+            
             public void SetStartPosition()
             {
                 this.board[0, 0] = new Rook("black", new Position(0, 0));
@@ -739,7 +739,8 @@ namespace ChessWindowApp
                 this.board[7, 7] = new Rook("white", new Position(7, 7));
 
             }
-            */
+            
+            /*
             public void SetStartPosition()
             {
                 for(int i = 0; i < 8; i++)
@@ -752,11 +753,12 @@ namespace ChessWindowApp
 
                 this.board[7, 6] = new Queen("white", new Position(7, 6));
                 this.board[7, 7] = new Queen("white", new Position(7, 7));
-                this.board[7, 1] = new Pawn("white", new Position(7, 1));
+                this.board[0, 7] = new Queen("black", new Position(0, 7));
+                this.board[1, 7] = new Pawn("white", new Position(1, 7));
                 this.board[7, 0] = new Knight("black", new Position(7, 0));
 
             }
-            
+            */
             public void ResetDiscardedPieces()
             {
                 this.ResetDiscardedPiecesWhite();
@@ -1202,6 +1204,7 @@ namespace ChessWindowApp
             public Position position;
             public string type;
             public bool withoutMove;
+            public int[,] strongPositions;
 
             public Piece(string color, Position position)
             {
@@ -1212,6 +1215,36 @@ namespace ChessWindowApp
                 this.withoutMove = true;
                 this.type = "";
                 this.color = color;
+                /*
+                this.strongPositions = new int[8,8] { 
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    { 0,0,0,0,0,0,0,0 },
+                                                    };*/
+            }
+
+            public int GetPositionStrongValue()
+            {
+                if (this.color == "white")
+                {
+                    //MessageBox.Show(this.strongPositions[this.position.x, this.position.y].ToString() + this.position.x.ToString() + this.position.y.ToString());
+                    //MessageBox.Show(this.strongPositions[this.position.x, this.position.y].ToString());
+                    return this.strongPositions[this.position.x, this.position.y];
+                }
+                    
+                else if (this.color == "black")
+                {                  
+                    return this.strongPositions[ReverseNumber8(this.position.x), this.position.y];
+                }
+                    
+                else
+                    return 125;
+
             }
 
             protected void ResetValidMoves()
@@ -1227,7 +1260,8 @@ namespace ChessWindowApp
 
             public void UpdateCurrentPosition(Position position)
             {
-                this.position = position;
+                this.position.x = position.x;
+                this.position.y = position.y;
             }
 
             protected void LinearExplore(Piece[,] board, int incrementX, int incrementY)
@@ -1361,6 +1395,16 @@ namespace ChessWindowApp
             {
                 this.AddConsoleRepresentation();
                 this.type = "rook";
+                this.strongPositions = new int[8, 8] {
+                                                    {  0,  0,  0,  0,  0,  0,  0,  0 },
+                                                    {  5, 10, 10, 10, 10, 10, 10,  5 },
+                                                    { -5,  0,  0,  0,  0,  0,  0, -5 },
+                                                    { -5,  0,  0,  0,  0,  0,  0, -5 },
+                                                    { -5,  0,  0,  0,  0,  0,  0, -5 },
+                                                    { -5,  0,  0,  0,  0,  0,  0, -5 },
+                                                    { -5,  0,  0,  0,  0,  0,  0, -5 },
+                                                    {  0,  0,  0,  5,  5,  0,  0,  0 }
+                                                    };
             }
 
             public override Rook Copy()
@@ -1396,6 +1440,16 @@ namespace ChessWindowApp
             {
                 this.AddConsoleRepresentation();
                 this.type = "pawn";
+                this.strongPositions = new int[8, 8] {
+                                                    {  0,  0,  0,  0,  0,  0,  0,  0 },
+                                                    { 50, 50, 50, 50, 50, 50, 50, 50 },
+                                                    { 10, 10, 20, 30, 30, 20, 10, 10 },
+                                                    {  5,  5, 10, 25, 25, 10,  5,  5 },
+                                                    {  0,  0,  0, 20, 20,  0,  0,  0 },
+                                                    {  5, -5,-10,  0,  0,-10, -5,  5 },
+                                                    {  5, 10, 10,-20,-20, 10, 10,  5 },
+                                                    {  0,  0,  0,  0,  0,  0,  0,  0 }
+                                                    };
             }
 
             public override void AddConsoleRepresentation()
@@ -1520,6 +1574,16 @@ namespace ChessWindowApp
             {
                 this.AddConsoleRepresentation();
                 this.type = "knight";
+                this.strongPositions = new int[8, 8] {
+                                                     { -50, -40, -30, -30, -30, -30, -40, -50 },
+                                                    { -40, -20,   0,   0,   0,   0, -20, -40 },
+                                                    { -30,   0,  10,  15,  15,  10,   0, -30 },
+                                                    { -30,   5,  15,  20,  20,  15,   5, -30 },
+                                                    { -30,   0,  15,  20,  20,  15,   0, -30 },
+                                                    { -30,   5,  10,  15,  15,  10,   5, -30 },
+                                                    { -40, -20,   0,   5,   5,   0, -20, -40 },
+                                                    { -50, -40, -30, -30, -30, -30, -40, -50 }
+                                                    };
             }
 
             public override void AddConsoleRepresentation()
@@ -1566,6 +1630,16 @@ namespace ChessWindowApp
             {
                 this.AddConsoleRepresentation();
                 this.type = "bishop";
+                this.strongPositions = new int[8, 8] {
+                                                      { -20,-10,-10,-10,-10,-10,-10,-20 },
+                                                        { -10,  0,  0,  0,  0,  0,  0,-10 },
+                                                        { -10,  0,  5, 10, 10,  5,  0,-10 },
+                                                        { -10,  5,  5, 10, 10,  5,  5,-10 },
+                                                        { -10,  0, 10, 10, 10, 10,  0,-10 },
+                                                        { -10, 10, 10, 10, 10, 10, 10,-10 },
+                                                        { -10,  5,  0,  0,  0,  0,  5,-10 },
+                                                        { -20,-10,-10,-10,-10,-10,-10,-20 }
+                                                    };
             }
 
             public override void AddConsoleRepresentation()
@@ -1602,6 +1676,16 @@ namespace ChessWindowApp
             {
                 this.AddConsoleRepresentation();
                 this.type = "queen";
+                this.strongPositions = new int[8, 8] {
+                                                      { -20,-10,-10, -5, -5,-10,-10,-20 },
+                                                        { -10,  0,  0,  0,  0,  0,  0,-10 },
+                                                        { -10,  0,  5,  5,  5,  5,  0,-10 },
+                                                        {  -5,  0,  5,  5,  5,  5,  0, -5 },
+                                                        {   0,  0,  5,  5,  5,  5,  0, -5 },
+                                                        { -10,  5,  5,  5,  5,  5,  0,-10 },
+                                                        { -10,  0,  5,  0,  0,  0,  0,-10 },
+                                                        { -20,-10,-10, -5, -5,-10,-10,-20 } 
+                };
             }
 
             public override void AddConsoleRepresentation()
@@ -1635,8 +1719,18 @@ namespace ChessWindowApp
         {
             public King(string color, Position position) : base(color, position)
             {
-                this.AddConsoleRepresentation();
+                this.AddConsoleRepresentation(); 
                 this.type = "king";
+                this.strongPositions = new int[8, 8] {
+                                                      { -30,-40,-40,-50,-50,-40,-40,-30 },
+                                                        { -30,-40,-40,-50,-50,-40,-40,-30 },
+                                                        { -30,-40,-40,-50,-50,-40,-40,-30 },
+                                                        { -30,-40,-40,-50,-50,-40,-40,-30 },
+                                                        { -20,-30,-30,-40,-40,-30,-30,-20 },
+                                                        { -10,-20,-20,-20,-20,-20,-20,-10 },
+                                                        {  20, 20,  0,  0,  0,  0, 20, 20 },
+                                                        {  20, 30, 10,  0,  0, 10, 30, 20 }
+                                                    };
             }
 
             public override void AddConsoleRepresentation()
@@ -1896,7 +1990,7 @@ namespace ChessWindowApp
 
         public class ChessEngine
         {
-            private ChessBoard currentChessBoard;
+            public ChessBoard currentChessBoard;
             private int[] chessPiecesValues = { 1, 3, 3, 5, 8, 0 };
             private Dictionary<string, int> chessPiecesToIndex;
 
@@ -1946,15 +2040,27 @@ namespace ChessWindowApp
                                 
                                 ChessBoard newChessBoard = chessBoard.Copy();
                                 
-                                if(chessBoard.board[i, j].validMoves[k, l] == true && chessBoard.board[i, j].color == "white")
+                                if(chessBoard.board[i, j].validMoves[k, l] == true && chessBoard.board[i, j].color == chessBoard.playerOnMove)
                                 {
                                     //MessageBox.Show(newChessBoard.board[i, j].type);
+                                    //newChessBoard.MoveInput(new Move(new Position(i, j), new Position(k, l)));
+                                    
                                     newChessBoard.board[k, l] = chessBoard.board[i, j].Copy();
                                     newChessBoard.board[i, j] = new EmptySpace("blank", new Position(i, j));
+                                    newChessBoard.IncreaseCurrentMove();
+                                    newChessBoard.ChangePlayerOnMove();
+
+                                    if(newChessBoard.id == "")
+                                        newChessBoard.id = i.ToString() + j.ToString() + k.ToString() + l.ToString();
+                                    
+
+
                                     //MessageBox.Show(newChessBoard.board[k, l].type);
                                     //MessageBox.Show(newChessBoard.board[i, j].type);
                                     newChessBoard.board[k, l].UpdateCurrentPosition(new Position(k, l));
                                     newChessBoard.board[i, j].UpdateCurrentPosition(new Position(i, j));
+
+
 
                                     //MessageBox.Show(newChessBoard.board[k, l].type);
                                     //MessageBox.Show(newChessBoard.board[i, j].type);
@@ -1962,39 +2068,50 @@ namespace ChessWindowApp
                                     this.chessBoardsToEvaluate.Enqueue(newChessBoard);
                                     
                                 }
-
-
-                                /*
-                                if(newChessBoard.lastMoveCorrect == true)
-                                {
-                                    //MessageBox.Show(i.ToString() + j.ToString() + k.ToString() + l.ToString());
-                                    //MessageBox.Show(newChessBoard.board[k, l].type);
-
-                                    this.chessBoardsToEvaluate.Enqueue(newChessBoard);
-                                }
-                                //MessageBox.Show(newChessBoard.playerOnMove);
-                                //MessageBox.Show(newChessBoard.id.ToString());
-                                */
                             }
                         }
                     }
                 }
             }
 
-            public void getBestValue()
+            public void getBestValue(string playerOnMove)
             {
-                float maximum = -1;
-                foreach (var element in this.evaluatedChessBoards)
+                //float[] maximums = new float[2];
+                float maximum = -1000;
+                string id = "";
+                if(playerOnMove == "white")
                 {
-                    if (element.potencionalValueByEngine > maximum)
+                    maximum = -1000;
+                    foreach (var element in this.evaluatedChessBoards)
                     {
-                        maximum = element.potencionalValueByEngine;             
-                    }
-                        
-                }
-                
+                        //MessageBox.Show(element.id + " " + element.potencionalValueByEngine);
+                        if (element.potencionalValueByEngine > maximum)
+                        {
+                            maximum = element.potencionalValueByEngine;
+                            //MessageBox.Show(maximum.ToString());
+                            id = element.id;
+                        }
 
-                MessageBox.Show(maximum.ToString());
+                    }
+                }
+                if (playerOnMove == "black")
+                {
+                    MessageBox.Show("wrong");
+                    maximum = 1000;
+                    foreach (var element in this.evaluatedChessBoards)
+                    {
+                        if (element.potencionalValueByEngine < maximum)
+                        {
+                            maximum = element.potencionalValueByEngine;
+                            id = element.id;
+                        }
+
+                    }
+                }
+
+
+
+                MessageBox.Show(maximum.ToString() + " " + id);
 
             }
 
@@ -2015,8 +2132,9 @@ namespace ChessWindowApp
                 float result = 0;
 
                 result += this.EvaluatePositionPieceValue(board);
+                result += this.EvaluatePositionPiecePosition(board);
 
-
+                //MessageBox.Show(result.ToString());
                 return result;
                 
             }
@@ -2049,6 +2167,33 @@ namespace ChessWindowApp
                 return whiteScore - blackScore;
             }
 
+            public float EvaluatePositionPiecePosition(Piece[,] board)
+            {
+                int whiteScore = 0;
+                int blackScore = 0;
+
+                for(int i=0; i<8; i++)
+                {
+                    for (int j=0; j<8; j++)
+                    {
+                        if(board[i, j].color == "white")
+                        {
+                            //MessageBox.Show(value.ToString());
+                            //MessageBox.Show((board[i, j].GetPositionStrongValue() / 120).ToString() + board[i, j].type);
+                            whiteScore += board[i, j].GetPositionStrongValue();
+                        }
+                        else if(board[i, j].color == "black")
+                        {
+                            blackScore += board[i, j].GetPositionStrongValue();
+
+                        }
+                    }
+                }
+                //MessageBox.Show(whiteScore.ToString() + " " + blackScore.ToString());
+                return (float)((whiteScore - blackScore) / 160.0);
+            }
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -2058,7 +2203,7 @@ namespace ChessWindowApp
 
             this.chessEngine.startExploring();
             this.chessEngine.EvaluateBoards();
-            this.chessEngine.getBestValue();
+            this.chessEngine.getBestValue(this.chessEngine.currentChessBoard.playerOnMove);
             
 
             //MessageBox.Show(this.chessEngine.EvaluatePositionPieceValue(this.chessBoard.board).ToString());
