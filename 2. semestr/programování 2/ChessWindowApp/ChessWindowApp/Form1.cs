@@ -330,8 +330,8 @@ namespace ChessWindowApp
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    //brnGrid[i, j].Text = Char.ToString(chessBoard.board[j, i].consoleRepresentation);
-                    brnGrid[i, j].Text = Char.ToString(chessEngine.currentChessBoard.board[j, i].consoleRepresentation);
+                    brnGrid[i, j].Text = Char.ToString(chessBoard.board[j, i].consoleRepresentation);
+                    //brnGrid[i, j].Text = Char.ToString(chessEngine.currentChessBoard.board[j, i].consoleRepresentation);
                     Font chessPieceFont = new("Arial", 50);
                     brnGrid[i, j].Font = chessPieceFont;
 
@@ -620,6 +620,8 @@ namespace ChessWindowApp
 
             this.gameInfoLabel.Visible = false;
             this.gameInfoLabel.Text = "";
+
+            this.chessEngine.currentChessBoard = new ChessBoard();
 
         }
 
@@ -961,7 +963,7 @@ namespace ChessWindowApp
                 this.board[rowEnd, columnEnd].withoutMove = false;
                 this.ChangePlayerOnMove();
 
-                if (rowEnd == this.positionEPValid.x && columnEnd == this.positionEPValid.y && this.board[rowStart, columnStart].type == "pawn")
+                if (rowEnd == this.positionEPValid.x && columnEnd == this.positionEPValid.y)
                 {
                     if (this.board[rowEnd, columnEnd].color == "white")
                     {
