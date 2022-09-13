@@ -933,8 +933,12 @@ namespace ChessWindowApp
                     return;
                 }
                 //MessageBox.Show("přes kontrolu");
-                //if (this.isKingChecked(this.board, rowEnd, columnEnd))
-                //return;
+                if (this.kingInCheckAfterMove(rowStart, columnStart, rowEnd, columnEnd, this.playerOnMove))
+                {
+                    MessageBox.Show("check condition");
+                    return;
+                }
+                    
 
                 this.CheckForMarkingEPValidSquare(rowStart, columnStart, rowEnd, columnEnd);
 
@@ -974,9 +978,6 @@ namespace ChessWindowApp
                         this.board[rowEnd - 1, columnEnd] = new EmptySpace("blank", new Position(rowEnd - 1, columnEnd));
                     }
                 }
-
-
-
             }
 
             private void MakeMove(int rowStart, int columnStart, int rowEnd, int columnEnd)
@@ -1002,10 +1003,11 @@ namespace ChessWindowApp
                     }
                     if(this.board[7, i].type == "pawn")
                     {
-                        this.board[0, i] = new Queen("black" , new Position(0, i));
+                        this.board[7, i] = new Queen("black" , new Position(7, i));
                     }
                 }
             }
+
             
 
             private void ChangeDiscardedPiecesCount(Piece piece)
@@ -1028,17 +1030,71 @@ namespace ChessWindowApp
                 this.board[rowIndex, columnIndex] = new EmptySpace("blank", new Position(rowIndex, columnIndex));
             }
 
-            public bool IsKingChecked(Piece[,] board, int rowStart, int columnStart, int rowEnd, int columnEnd)
+            public bool kingInCheckAfterMove(int rowStart, int columnStart, int rowEnd, int columnEnd, string color)
             {
+                Piece start = this.board[rowStart, columnStart];
+                Piece end = this.board[rowEnd, columnEnd];
+
+                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
+                this.board[rowStart, columnStart] = new EmptySpace("blank", new Position(rowStart, columnStart));
+
+                bool result = this.IsKingChecked(this.board, color);
+
+                this.board[rowStart, columnStart] = start;
+                this.board[rowEnd, columnEnd] = end;
+
+                return result;
+            }
+
+            private Position FindKing(Piece[,] board, string color)
+            {
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        if(board[i, j].type == "king")
+                        {
+                            if(board[i, j].color == color)
+                            {
+                                return new Position(i, j);
+                            }
+                        }
+                    }
+                }
+                return new Position(-1, -1);
+            }
+
+            public bool IsKingChecked(Piece[,] board, string color)
+            {
+                Position kingPosition = this.FindKing(board, color); 
                 for (int i = 0; i < 8; i++)
                 {
                     for (int j = 0; j < 8; j++)
                     {
-                        board[i, j].GenerateValidMoves(board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
+                        //if(board[i, j].color != color)
+                            board[i, j].GenerateValidMoves(board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
                     }
                 }
-
-                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
+                /*
+                bool[,] checkedSquare = new bool[,] { { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false },
+                                                    { false, false, false, false, false, false, false, false }};
+                */
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        if(board[i, j].validMoves[kingPosition.x, kingPosition.y] == true)
+                        {
+                            return true;
+                        }
+                    }
+                }
                 return false;
             }
 
