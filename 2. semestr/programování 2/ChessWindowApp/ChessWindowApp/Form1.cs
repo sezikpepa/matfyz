@@ -488,7 +488,9 @@ namespace ChessWindowApp
                         }
                         else
                         {
-
+                            //MessageBox.Show(this.startPosition.x.ToString() + this.startPosition.y.ToString() + i.ToString()+  j.ToString() + this.chessBoard.board[this.startPosition.y, this.startPosition.x].color + this.chessBoard.board[this.startPosition.y, this.startPosition.x].type);
+                            if (this.chessBoard.kingInCheckAfterMove(this.startPosition.y, this.startPosition.x, i, j, this.chessBoard.board[this.startPosition.y, this.startPosition.x].color) == true)
+                                continue;
                             if (this.chessBoard.board[i, j].type == "blank")
                             {
                                 this.brnGrid[j, i].BackColor = Color.LightGreen;
