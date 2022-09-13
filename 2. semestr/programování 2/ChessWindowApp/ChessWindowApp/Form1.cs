@@ -988,8 +988,25 @@ namespace ChessWindowApp
                 }
                 this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
                 this.ClearSquare(rowStart, columnStart);
+                this.PromotePawns();
                 this.IncreaseCurrentMove();
             }
+
+            private void PromotePawns()
+            {
+                for(int i = 0; i < 8; i++)
+                {
+                    if(this.board[0, i].type == "pawn")
+                    {
+                        this.board[0, i] = new Queen("white" , new Position(0, i));
+                    }
+                    if(this.board[7, i].type == "pawn")
+                    {
+                        this.board[0, i] = new Queen("black" , new Position(0, i));
+                    }
+                }
+            }
+            
 
             private void ChangeDiscardedPiecesCount(Piece piece)
             {
@@ -1465,7 +1482,7 @@ namespace ChessWindowApp
                 this.AddConsoleRepresentation();
                 this.type = "pawn";
                 this.strongPositions = new int[8, 8] {
-                                                    {  0,  0,  0,  0,  0,  0,  0,  0 },
+                                                    {  1600,  1600,  1600,  1600,  1600,  1600,  1600,  1600 },
                                                     { 50, 50, 50, 50, 50, 50, 50, 50 },
                                                     { 10, 10, 20, 30, 30, 20, 10, 10 },
                                                     {  5,  5, 10, 25, 25, 10,  5,  5 },
@@ -2040,6 +2057,11 @@ namespace ChessWindowApp
                 this.SendString("03");
             }
 
+            public void SendStillConnectedStatus()
+            {
+                this.SendString("04");
+            }
+
 
 
             public void SendString(string text)
@@ -2294,6 +2316,11 @@ namespace ChessWindowApp
             this.RedrawChessGrid();
 
             //MessageBox.Show(this.chessEngine.EvaluatePositionPieceValue(this.chessBoard.board).ToString());
+        }
+
+        private void stillConnectedTimerTick(object sender, EventArgs e)
+        {
+            this.onlineCommunicator.SendStillConnectedStatus();
         }
     }
 }

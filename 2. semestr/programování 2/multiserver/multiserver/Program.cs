@@ -13,10 +13,16 @@ namespace MultiServer
         private Socket? player1;
         private Socket? player2;
 
+        public TimeSpan player1Status;
+        public TimeSpan player2Status;
+
         public PlayingPair()
         {
             player1 = null;
             player2 = null;
+
+            this.player1Status = DateTime.Now.TimeOfDay;
+            this.player2Status = DateTime.Now.TimeOfDay;
         }
 
         public bool IsFull()
@@ -29,11 +35,15 @@ namespace MultiServer
             if (this.player1 == null)
             {
                 this.player1 = player;
+                byte[] data = Encoding.ASCII.GetBytes("white");
+                this.player1.Send(data);
                 return;
             }
             if (this.player2 == null)
             {
                 this.player2 = player;
+                byte[] data = Encoding.ASCII.GetBytes("black");
+                this.player2.Send(data);
             }
         }
 
@@ -57,15 +67,23 @@ namespace MultiServer
         private const int PORT = 100;
         private static readonly byte[] buffer = new byte[BUFFER_SIZE];
 
-        private static Socket[] playingPair = new Socket[2];
+        private static PlayingPair[] playingPairs = new PlayingPair[5];
        
 
         static void Main()
         {
-            Console.Title = "Server";
-            playingPair[0] = null;
-            playingPair[1] = null;
+            Console.Title = "MatfyzChessServer";
             SetupServer();
+            //TimeSpan timeStart = DateTime.Now.TimeOfDay;
+            /*
+            while (true)
+            {
+                if(DateTime.Now.TimeOfDay.TotalSeconds - timeStart.TotalSeconds > 5)
+                {
+                    
+                }
+            }
+            */
             Console.ReadLine(); // When we press enter close everything
             CloseAllSockets();
         }
@@ -94,6 +112,17 @@ namespace MultiServer
             serverSocket.Close();
         }
 
+        private static void FindFreePair(Socket socket)
+        {
+            foreach(var element in playingPairs)
+            {
+                if (element.IsFull() == false)
+                {
+                    element.PlayerInput(socket);
+                }
+            }
+        }
+
         private static void AcceptCallback(IAsyncResult AR)
         {
             Socket socket;
@@ -108,19 +137,7 @@ namespace MultiServer
             }
 
             clientSockets.Add(socket);
-            if (playingPair[0] == null)
-            {
-                playingPair[0] = socket;
-                byte[] data = Encoding.ASCII.GetBytes("white");
-                playingPair[0].Send(data);
-            }
-
-            else if (playingPair[1] == null && socket != playingPair[0])
-            {
-                playingPair[1] = socket;
-                byte[] data = Encoding.ASCII.GetBytes("black");
-                playingPair[1].Send(data);
-            }
+            
             socket.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, socket);
             Console.WriteLine("Client connected, waiting for request...");
             serverSocket.BeginAccept(AcceptCallback, null);
@@ -157,6 +174,14 @@ namespace MultiServer
             if (checkForSpecialMessages(text))
             {
 
+            }
+
+            foreach(var element in playingPairs)
+            {
+                if(element.IsFull() == true)
+                {
+
+                }
             }
         
             else if (playingPair[1] != null)
