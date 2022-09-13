@@ -477,6 +477,8 @@ namespace ChessWindowApp
                         if (this.playAsWhite == false)
                         {                           
                             int y = ReverseNumber8(i);
+                            if (this.chessBoard.kingInCheckAfterMove(this.startPosition.y, this.startPosition.x, i, j, this.chessBoard.board[this.startPosition.y, this.startPosition.x].color) == true)
+                                continue;
                             if (this.chessBoard.board[i, j].type == "blank")
                             {
                                 this.brnGrid[j, y].BackColor = Color.LightGreen;
@@ -489,6 +491,9 @@ namespace ChessWindowApp
                         else
                         {
                             //MessageBox.Show(this.startPosition.x.ToString() + this.startPosition.y.ToString() + i.ToString()+  j.ToString() + this.chessBoard.board[this.startPosition.y, this.startPosition.x].color + this.chessBoard.board[this.startPosition.y, this.startPosition.x].type);
+                            //if (this.chessBoard.board[this.startPosition.y, this.startPosition.y].color == "blank")
+                            //MessageBox.Show(i.ToString()+ j.ToString());
+                            //MessageBox.Show(this.chessBoard.board[this.startPosition.y, this.startPosition.x].type);
                             if (this.chessBoard.kingInCheckAfterMove(this.startPosition.y, this.startPosition.x, i, j, this.chessBoard.board[this.startPosition.y, this.startPosition.x].color) == true)
                                 continue;
                             if (this.chessBoard.board[i, j].type == "blank")
@@ -1075,7 +1080,7 @@ namespace ChessWindowApp
                 Piece start = this.board[rowStart, columnStart];
                 Piece end = this.board[rowEnd, columnEnd];
 
-                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart];
+                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart].Copy();
                 this.board[rowStart, columnStart] = new EmptySpace("blank", new Position(rowStart, columnStart));
 
                 bool result = this.IsKingChecked(this.board, color);
