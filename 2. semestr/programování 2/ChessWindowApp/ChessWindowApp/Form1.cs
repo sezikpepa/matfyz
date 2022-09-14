@@ -150,8 +150,19 @@ namespace ChessWindowApp
                     }
                 }
 
+                else if (infoForMoveInput == "05")
+                {
+                    this.gameInfoLabel.Text = "Opponent has disconnected, you are winner";
+                    this.gameInfoLabel.Visible = true;
+
+                    this.DisableChessGrid();
+
+                    infoForMoveInput = "";
+                }
+
                 else
                 {
+                    //MessageBox.Show(infoForMoveInput);
                     this.chessBoard.MoveInput(new Move(infoForMoveInput));
                     this.gameInfoLabel.Visible = false;
                     this.RedrawChessGrid();
@@ -198,7 +209,7 @@ namespace ChessWindowApp
             this.DisableChessGrid();
         }
 
-        private void offerDrawButtonClicked(object sender, EventArgs e)
+        private void OfferDrawButtonClicked(object sender, EventArgs e)
         {
             this.onlineCommunicator.SendDrawOffer();
             this.gameInfoLabel.Text = "You offered a draw, waiting for opponent reaction";
@@ -515,8 +526,13 @@ namespace ChessWindowApp
         {
             Move move = new(startPosition, endPosition);
 
-            chessBoard.MoveInput(move);
+            var result = chessBoard.MoveInput(move);
+            this.RedrawChessGrid();
             chessEngine.currentChessBoard.MoveInput(move);
+            if (result == true)
+            {
+                this.button1_Click();
+            }
 
             if (this.mode == 1)
                 this.onlineCommunicator.SendString(move.GetStringRepresentation());
@@ -582,6 +598,34 @@ namespace ChessWindowApp
                 this.mode = 0;
                 this.actualizationMoveFromServerTimer.Stop();
             }
+            if (choosePlayerComboBox.Text == "Prvák informatik")
+            {
+                this.mode = 2;
+                ChessBoard naengine = new ChessBoard();
+                this.chessEngine = new ChessEngine(naengine, 0);
+                this.actualizationMoveFromServerTimer.Stop();
+            }
+            if (choosePlayerComboBox.Text == "Bakalář")
+            {
+                this.mode = 2;
+                ChessBoard naengine = new ChessBoard();
+                this.chessEngine = new ChessEngine(naengine, 1);
+                this.actualizationMoveFromServerTimer.Stop();
+            }
+            if (choosePlayerComboBox.Text == "Magistr")
+            {
+                this.mode = 2;
+                ChessBoard naengine = new ChessBoard();
+                this.chessEngine = new ChessEngine(naengine, 2);
+                this.actualizationMoveFromServerTimer.Stop();
+            }
+            if (choosePlayerComboBox.Text == "Martin Pergel")
+            {
+                this.mode = 2;
+                ChessBoard naengine = new ChessBoard();
+                this.chessEngine = new ChessEngine(naengine, 3);
+                this.actualizationMoveFromServerTimer.Stop();
+            }
 
             this.SetDrawResignButtonDisability();
 
@@ -633,6 +677,13 @@ namespace ChessWindowApp
             this.gameInfoLabel.Text = "";
 
             this.chessEngine.currentChessBoard = new ChessBoard();
+
+            if(this.mode == 1)
+            {
+                this.onlineCommunicator.SendReset();
+                this.onlineCommunicator = new();
+                infoForMoveInput = "";
+            }
 
         }
 
@@ -839,7 +890,6 @@ namespace ChessWindowApp
             {
 
                 this.board[rowStart, columnStart].GenerateValidMoves(this.board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
-                //this.clearFromValidMovesCheckedSquares();
                 if (this.board[rowStart, columnStart].validMoves[rowEnd, columnEnd] == false)
                     return false;
                 return true;
@@ -947,7 +997,7 @@ namespace ChessWindowApp
                 //MessageBox.Show("přes kontrolu");
                 if (this.kingInCheckAfterMove(rowStart, columnStart, rowEnd, columnEnd, this.playerOnMove))
                 {
-                    MessageBox.Show("check condition");
+                    //MessageBox.Show("check condition");
                     return false;
                 }
                     
@@ -1043,44 +1093,12 @@ namespace ChessWindowApp
                 this.board[rowIndex, columnIndex] = new EmptySpace("blank", new Position(rowIndex, columnIndex));
             }
 
-            public void clearFromValidMovesCheckedSquares()
-            {
-                return;
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        this.clearFromValidMovesCheckedSquare(i, j);
-                    }
-                }
-            }
-
-            public void clearFromValidMovesCheckedSquare(int row, int column)
-            {
-                return;
-                for(int k = 0; k < 8; k++)
-                {
-                    for (int l = 0; l < 8; l++)
-                    {
-                        if (this.board[row, column].validMoves[k, l] == true)
-                        {
-                            if (this.kingInCheckAfterMove(row, column, k, l, this.board[row, column].color) == true)
-                            {
-                                this.board[row, column].validMoves[k, l] = false;
-                            }
-                        }
-                    }
-                }
-                
-            }
-
-
             public bool kingInCheckAfterMove(int rowStart, int columnStart, int rowEnd, int columnEnd, string color)
             {
                 Piece start = this.board[rowStart, columnStart];
                 Piece end = this.board[rowEnd, columnEnd];
 
-                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart].Copy();
+                this.board[rowEnd, columnEnd] = this.board[rowStart, columnStart]; //tady bylo copy, kdyby nefungoval správně šach
                 this.board[rowStart, columnStart] = new EmptySpace("blank", new Position(rowStart, columnStart));
 
                 bool result = this.IsKingChecked(this.board, color);
@@ -1116,38 +1134,14 @@ namespace ChessWindowApp
                 {
                     for (int j = 0; j < 8; j++)
                     {
-                        //if(board[i, j].color != color)
                         board[i, j].GenerateValidMoves(board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
-                    }
-                }
-                /*
-                bool[,] checkedSquare = new bool[,] { { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false },
-                                                    { false, false, false, false, false, false, false, false }};
-                */
-                for(int i = 0; i < 8; i++)
-                {
-                    for(int j = 0; j < 8; j++)
-                    {
-                        //MessageBox.Show(kingPosition.x.ToString() + kingPosition.y.ToString());
-                        if(board[i, j].validMoves[kingPosition.x, kingPosition.y] == true)
+                        if (board[i, j].validMoves[kingPosition.x, kingPosition.y] == true)
                         {
                             return true;
                         }
                     }
                 }
                 return false;
-            }
-
-            public void ResetSquaresUnderAttack()
-            {
-                this.ResetSquaresUnderAttackBlack();
-                this.ResetSquaresUnderAttackWhite();
             }
 
             public void GenerateMovesAllPieces()
@@ -1157,80 +1151,8 @@ namespace ChessWindowApp
                     for (int j = 0; j < 8; j++)
                     {
                         this.board[i, j].GenerateValidMoves(this.board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
-                        //this.clearFromValidMovesCheckedSquares();
                     }
                 }
-            }
-
-            public void ResetSquaresUnderAttackWhite()
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        this.squaresUnderAttackWhite[i, j] = false;
-                    }
-                }
-            }
-
-            public void ResetSquaresUnderAttackBlack()
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        this.squaresUnderAttackBlack[i, j] = false;
-                    }
-                }
-            }
-
-            public void SetSquaresUnderAttackWhite()
-            {
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        if (this.board[i, j].color == "white")
-                        {
-                            this.board[i, j].GenerateValidMoves(this.board, this.positionEPValid, this.currentMove, this.lastEPUpdate);
-                            //this.clearFromValidMovesCheckedSquares();
-                        }
-                    }
-                }
-            }
-
-            public void SetSquaresUnderAttackWhiteByPiece()
-            {
-                this.GenerateMovesAllPieces();
-                this.ResetSquaresUnderAttackWhite();
-                for (int i = 0; i < 8; i++)
-                {
-                    for (int j = 0; j < 8; j++)
-                    {
-                        for (int k = 0; k < 8; k++)
-                        {
-                            for (int l = 0; l < 8; l++)
-                            {
-                                if (this.board[i, j].validMoves[k, l] == true)
-                                {
-                                    this.squaresUnderAttackWhite[k, l] = true;
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-
-            public void SetSquaresUnderAttackBlack()
-            {
-
-            }
-
-            public void SetSquaresUnderAttack()
-            {
-                this.SetSquaresUnderAttackBlack();
-                this.SetSquaresUnderAttackWhite();
             }
 
             public void ConsoleDraw()
@@ -1274,7 +1196,7 @@ namespace ChessWindowApp
 
             public ChessBoard Copy()
             {
-                ChessBoard returnChessboard = new ChessBoard();
+                ChessBoard returnChessboard = new();
                 
                 for(int i = 0; i < 8; i++)
                 {
@@ -1491,7 +1413,7 @@ namespace ChessWindowApp
 
             public virtual Piece Copy()
             {
-                Piece piece = new Piece(this.color, this.position);
+                Piece piece = new(this.color, this.position);
                 return piece;
             }
         }
@@ -1691,8 +1613,16 @@ namespace ChessWindowApp
                 else
                     increment = -1;
 
-                if (board[this.position.x + increment, this.position.y].color == "blank")
-                    this.validMoves[this.position.x + increment, this.position.y] = true;
+                try
+                {
+                    if (board[this.position.x + increment, this.position.y].color == "blank")
+                        this.validMoves[this.position.x + increment, this.position.y] = true;
+                }
+                catch
+                {
+
+                }
+                
             }
 
             private void CheckDiscardPieceMove(Piece[,] board)
@@ -2031,6 +1961,7 @@ namespace ChessWindowApp
             public bool ep;
             public string castle;
             public string pieceToPromote;
+            public float value;
 
             private readonly string[] columnIndexesToLetters = { "a", "b", "c", "d", "e", "f", "g", "h" };
 
@@ -2039,16 +1970,14 @@ namespace ChessWindowApp
             {
                 string[] parts = move.Split(' ');
 
-                if (parts.Length != 2 && parts.Length != 3)
-                    throw new ArgumentException("ERROR: move has to contain two or three parts");
+                if (parts.Length != 2)
+                    throw new ArgumentException("ERROR: move has to contain two parts");
 
                 this.startPosition = parts[0];        
                 this.endPosition = parts[1];
                 this.ep = false;
                 this.castle = "none";
                 this.pieceToPromote = "";
-                if (parts.Length == 3)
-                    this.pieceToPromote = parts[2];
 
             }
 
@@ -2166,6 +2095,11 @@ namespace ChessWindowApp
                 this.SendString("04");
             }
 
+            public void SendReset()
+            {
+                this.SendString("05");
+            }
+
 
 
             public void SendString(string text)
@@ -2187,7 +2121,6 @@ namespace ChessWindowApp
                 {
                     playerColor = text;
                     MessageBox.Show("You play as " + text.ToUpper());
-                    playerColor = text;
                     return;
                 }
                 
@@ -2201,12 +2134,18 @@ namespace ChessWindowApp
             public ChessBoard currentChessBoard;
             private int[] chessPiecesValues = { 1, 3, 3, 5, 8, 0 };
             private Dictionary<string, int> chessPiecesToIndex;
+            public int remainingDeep;
 
             private Queue<ChessBoard> chessBoardsToEvaluate;
             private List<ChessBoard> evaluatedChessBoards;
-            public ChessEngine()
+            public ChessEngine(ChessBoard chessBoard=null, int remainingDeep=2)
             {
-                this.currentChessBoard = new ChessBoard();
+                if(chessBoard == null)
+                    this.currentChessBoard = new ChessBoard();
+                else
+                {
+                    this.currentChessBoard = chessBoard.Copy();
+                }
                 this.chessPiecesToIndex = new Dictionary<string, int>
                 {
                     { "pawn", 0 },
@@ -2220,25 +2159,22 @@ namespace ChessWindowApp
 
                 this.chessBoardsToEvaluate = new Queue<ChessBoard>();
                 this.evaluatedChessBoards = new List<ChessBoard>();
+                this.remainingDeep = remainingDeep;
 
             }
 
             public void startExploring()
             {
-                this.GenerateBestMoves(this.currentChessBoard.Copy());
+                //Thread thread = new(this.GenerateBoards);
+                //thread.Start();
+                this.GenerateBoards();
+                this.EvaluateBoards();
             }
 
-            public void GenerateBestMoves(ChessBoard chessBoard)
-                
+            private void GenerateBoards()
             {
-                this.GenerateBoards(chessBoard.Copy());
-            }
-
-            private void GenerateBoards(ChessBoard chessBoard)
-            {
+                ChessBoard chessBoard = this.currentChessBoard;
                 chessBoard.GenerateMovesAllPieces();
-                //ChessBoard newChessBoard = chessBoard.Copy();
-                //newChessBoard.GenerateMovesAllPieces();
                 for (int i = 0; i < 8; i++) 
                 {
                     for(int j = 0; j < 8; j++)
@@ -2246,39 +2182,33 @@ namespace ChessWindowApp
                         for(int k = 0; k < 8; k++)
                         {
                             for(int l = 0; l < 8; l++)
-                            {
-                                
-                                ChessBoard newChessBoard = chessBoard.Copy();
-                                newChessBoard.board[i, j].GenerateValidMoves(chessBoard.board, chessBoard.positionEPValid, chessBoard.currentMove, chessBoard.lastEPUpdate);
-                                
-                                //newChessBoard.clearFromValidMovesCheckedSquares();
-                                if ((chessBoard.board[i, j].validMoves[k, l] == true) && chessBoard.board[i, j].color == chessBoard.playerOnMove)
+                            {              
+                                if(chessBoard.board[i, j].color == chessBoard.playerOnMove)
                                 {
-                                    if (newChessBoard.kingInCheckAfterMove(i, j, k, l, chessBoard.playerOnMove))
+                                    if (chessBoard.board[i, j].validMoves[k, l] == true)
                                     {
-                                        continue;
-                                    }
+                                        ChessBoard newChessBoard = chessBoard.Copy();
+
+                                        if (newChessBoard.kingInCheckAfterMove(i, j, k, l, chessBoard.playerOnMove))
+                                        {
+                                            continue;
+                                        }
                                         
-                                    newChessBoard.board[k, l] = newChessBoard.board[i, j].Copy();
-                                    newChessBoard.board[i, j] = new EmptySpace("blank", new Position(i, j));
+                                        
 
-                                    
+                                        newChessBoard.board[k, l] = newChessBoard.board[i, j];
+                                        newChessBoard.board[i, j] = new EmptySpace("blank", new Position(i, j));
 
-                                    //newChessBoard.IncreaseCurrentMove();
-                                    //newChessBoard.ChangePlayerOnMove();
+                                        newChessBoard.id = i.ToString() + " " + j.ToString() + " " + k.ToString() + " " + l.ToString();
 
-                                    //if(newChessBoard.id == "")
-                                    newChessBoard.id = i.ToString() + " " + j.ToString() + " " + k.ToString() + " " + l.ToString();
-                                    
-                                    newChessBoard.board[k, l].UpdateCurrentPosition(new Position(k, l));
-                                    newChessBoard.board[i, j].UpdateCurrentPosition(new Position(i, j));
+                                        newChessBoard.board[k, l].UpdateCurrentPosition(new Position(k, l));
+                                        //newChessBoard.board[i, j].UpdateCurrentPosition(new Position(i, j));      zbytečnost
 
-                                    this.chessBoardsToEvaluate.Enqueue(newChessBoard);
+                                        this.chessBoardsToEvaluate.Enqueue(newChessBoard);
 
-                                    //newChessBoard = chessBoard.Copy();
-                                    //newChessBoard.GenerateMovesAllPieces();
-                                    
+                                    }
                                 }
+                                
                             }
                         }
                     }
@@ -2287,7 +2217,10 @@ namespace ChessWindowApp
 
             public Move getBestValue(string playerOnMove)
             {
-                //float[] maximums = new float[2];
+                this.startExploring();
+
+
+
                 float maximum = -1000;
                 string id = "";
                 if(playerOnMove == "white")
@@ -2296,20 +2229,32 @@ namespace ChessWindowApp
                     foreach (var element in this.evaluatedChessBoards)
                     {
                         //MessageBox.Show(element.id + " " + element.potencionalValueByEngine);
+                        if(this.remainingDeep > 0)
+                        {
+                            ChessEngine newEngine = new ChessEngine(element, this.remainingDeep - 1);
+                            newEngine.currentChessBoard.playerOnMove = "black";
+                          
+                            element.potencionalValueByEngine = newEngine.getBestValue("black").value;
+                        }
                         if (element.potencionalValueByEngine > maximum)
                         {
-                            maximum = element.potencionalValueByEngine;
-                            //MessageBox.Show(maximum.ToString());
+                            maximum = element.potencionalValueByEngine;                           
                             id = element.id;
                         }
 
                     }
                 }
-                if (playerOnMove == "black")
+                else// if (playerOnMove == "black")
                 {
                     maximum = 1000;
                     foreach (var element in this.evaluatedChessBoards)
                     {
+                        if (this.remainingDeep > 0)
+                        {
+                            ChessEngine newEngine = new ChessEngine(element, this.remainingDeep - 1);
+                            newEngine.currentChessBoard.playerOnMove = "white";                          
+                            element.potencionalValueByEngine = newEngine.getBestValue("white").value;
+                        }
                         if (element.potencionalValueByEngine < maximum)
                         {
                             maximum = element.potencionalValueByEngine;
@@ -2319,20 +2264,36 @@ namespace ChessWindowApp
                     }
                 }
 
-                this.evaluatedChessBoards = new();
-
-
-                //MessageBox.Show(maximum.ToString() + " " + id);
+                this.evaluatedChessBoards.Clear();
 
                 string[] parts = id.Split(' ');
                 try
                 {
-                    return new Move(new Position(Int32.Parse(parts[1]), Int32.Parse(parts[0])), new Position(Int32.Parse(parts[3]), Int32.Parse(parts[2])));
+                    Move returnMove = new Move(new Position(Int32.Parse(parts[1]), Int32.Parse(parts[0])), new Position(Int32.Parse(parts[3]), Int32.Parse(parts[2])));
+                    returnMove.value = maximum;
+                    return returnMove;
                 }
                 catch
                 {
+                    Move returnMove = new Move("e0", "d0");
+                    if (this.currentChessBoard.IsKingChecked(this.currentChessBoard.board, this.currentChessBoard.playerOnMove))
+                    {
+                        if(playerOnMove == "black")
+                        {
+                            returnMove.value = -10000;
+                        }
+                        else
+                        {
+                            returnMove.value = 10000;
+                        }
+                        return returnMove;
+                    }
                     MessageBox.Show("mat");
-                    return new Move("e0", "d0");
+
+                    returnMove.value = 0;
+                    return returnMove;
+
+                    
                 }               
             }
 
@@ -2341,8 +2302,10 @@ namespace ChessWindowApp
                 while (this.chessBoardsToEvaluate.Count > 0)
                 {
                     ChessBoard chessBoard = this.chessBoardsToEvaluate.Dequeue();
-                    float value = this.EvaluatePosition(chessBoard.board);
-                    //MessageBox.Show(value.ToString());
+                    float value = 0;
+                    if(this.remainingDeep == 0)
+                        value = this.EvaluatePosition(chessBoard.board);
+
                     chessBoard.potencionalValueByEngine = value;
                     this.evaluatedChessBoards.Add(chessBoard);
                 }
@@ -2354,8 +2317,8 @@ namespace ChessWindowApp
 
                 result += this.EvaluatePositionPieceValue(board);
                 result += this.EvaluatePositionPiecePosition(board);
+                result += this.DoublePawnPenalty(board);
 
-                //MessageBox.Show(result.ToString());
                 return result;
                 
             }
@@ -2371,20 +2334,14 @@ namespace ChessWindowApp
                     {
                         if(board[i, j].color == "white")
                         {
-                            //MessageBox.Show(i.ToString() + j.ToString() + board[i, j].GetType().ToString());
-                            //MessageBox.Show(board[i, j].type);
-                            //MessageBox.Show(board[i, j].color);
                             whiteScore += this.chessPiecesValues[this.chessPiecesToIndex[board[i, j].type]];
                         }
                         else if (board[i, j].color == "black")
                         {
-                            //MessageBox.Show(i.ToString() + j.ToString() + board[i, j].GetType().ToString() + board[i, j].type);
                             blackScore += this.chessPiecesValues[this.chessPiecesToIndex[board[i, j].type]];
                         }
                     }
                 }
-                //MessageBox.Show("Board done");
-                //MessageBox.Show(whiteScore.ToString() + " " + blackScore.ToString());
                 return whiteScore - blackScore;
             }
 
@@ -2399,8 +2356,6 @@ namespace ChessWindowApp
                     {
                         if(board[i, j].color == "white")
                         {
-                            //MessageBox.Show(value.ToString());
-                            //MessageBox.Show((board[i, j].GetPositionStrongValue() / 120).ToString() + board[i, j].type);
                             whiteScore += board[i, j].GetPositionStrongValue();
                         }
                         else if(board[i, j].color == "black")
@@ -2410,24 +2365,70 @@ namespace ChessWindowApp
                         }
                     }
                 }
-                //MessageBox.Show(whiteScore.ToString() + " " + blackScore.ToString());
                 return (float)((whiteScore - blackScore) / 160.0);
+            }
+
+            public float DoublePawnPenalty(Piece[,] board)
+            {
+                float whiteScore = 0;
+                float blackScore = 0;
+
+                int pawnCounterWhite;
+                int pawnCounterBlack;
+
+                for(int y = 0; y < 8; y++)
+                {
+                    pawnCounterWhite = 0;
+                    pawnCounterBlack = 0;
+                    for(int x = 0; x < 8; x++)
+                    {
+                        if(board[x, y].type == "pawn")
+                        {
+                            if(board[x, y].color == "white")
+                            {
+                                pawnCounterWhite++;
+                            }
+                            else if(board[x, y].color == "black")
+                            {
+                                pawnCounterBlack++;
+                            }
+                        }
+                    }
+                    whiteScore += (float)((pawnCounterWhite - 1) * 0.15);
+                    blackScore += (float)((pawnCounterBlack - 1) * 0.15);
+                }
+
+                return whiteScore - blackScore;
+            }
+
+            public float SinglePawnPenalty(Piece[,] board)
+            {
+                float whiteScore = 0;
+                float blackScore = 0;
+                return 0;
+
             }
 
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click()
         {
-             
-            Button button = (Button) sender;
-
-            this.chessEngine.startExploring();
-            this.chessEngine.EvaluateBoards();
+            //Button button = (Button) sender;
+            if (this.mode != 2)
+                return;
+            var timeStart = DateTime.Now;
             Move engineMove = this.chessEngine.getBestValue(this.chessEngine.currentChessBoard.playerOnMove);
-
+            var timeEnd = DateTime.Now;
+            //MessageBox.Show((timeEnd - timeStart).TotalSeconds.ToString());
+            //MessageBox.Show(engineMove.value.ToString());
+            /*
             if (engineMove.GetStringRepresentation() == "e0 d0")
+            {
                 this.DisableChessGrid();
+                MessageBox.Show("mat");
+            }
+            */   
 
             this.chessBoard.MoveInput(engineMove);
             this.chessEngine.currentChessBoard.MoveInput(engineMove);
@@ -2435,18 +2436,30 @@ namespace ChessWindowApp
             this.chessBoard.GenerateMovesAllPieces();
             this.chessEngine.currentChessBoard.GenerateMovesAllPieces();
 
-            //MessageBox.Show(this.chessEngine.currentChessBoard.board[0, 1].type);
+            if (this.playAsWhite == false)
+                this.RedrawBoardWhiteTop();
+            else
+                this.RedrawChessGrid();
+            this.PrintDiscardedPieces();
 
-            this.RedrawChessGrid();
-
-            //MessageBox.Show(this.chessEngine.EvaluatePositionPieceValue(this.chessBoard.board).ToString());
         }
 
-        private void stillConnectedTimerTick(object sender, EventArgs e)
+        private void EngineMoveButton_Click(object sender, EventArgs e)
         {
-            this.onlineCommunicator.SendStillConnectedStatus();
+            //this.button1_Clicks();
+        }
+
+        private void button1_Clicks(object sender, EventArgs e)
+        {
+            MessageBox.Show("Enginy začínají hrát");
+            this.button1_Click();
+            this.timer1.Enabled = true;
+            this.timer1.Start();
+        }
+
+        private void timerinput(object sender, EventArgs e)
+        {
+            this.button1_Click();
         }
     }
 }
-
-//vymazat krále po rošádě?

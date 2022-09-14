@@ -13,16 +13,10 @@ namespace MultiServer
         private Socket? player1;
         private Socket? player2;
 
-        public TimeSpan player1Status;
-        public TimeSpan player2Status;
-
         public PlayingPair()
         {
             player1 = null;
             player2 = null;
-
-            this.player1Status = DateTime.Now.TimeOfDay;
-            this.player2Status = DateTime.Now.TimeOfDay;
         }
 
         public bool IsFull()
@@ -35,15 +29,11 @@ namespace MultiServer
             if (this.player1 == null)
             {
                 this.player1 = player;
-                byte[] data = Encoding.ASCII.GetBytes("white");
-                this.player1.Send(data);
                 return;
             }
             if (this.player2 == null)
             {
                 this.player2 = player;
-                byte[] data = Encoding.ASCII.GetBytes("black");
-                this.player2.Send(data);
             }
         }
 
@@ -66,28 +56,17 @@ namespace MultiServer
         private const int BUFFER_SIZE = 2048;
         private const int PORT = 100;
         private static readonly byte[] buffer = new byte[BUFFER_SIZE];
-
-        private static PlayingPair[] playingPairs = new PlayingPair[5];
-       
+        private static Socket[] playingPair = new Socket[2];
 
         static void Main()
         {
-            Console.Title = "MatfyzChessServer";
+            Console.Title = "Server";
+            playingPair[0] = null;
+            playingPair[1] = null;
             SetupServer();
-            //TimeSpan timeStart = DateTime.Now.TimeOfDay;
-            /*
-            while (true)
-            {
-                if(DateTime.Now.TimeOfDay.TotalSeconds - timeStart.TotalSeconds > 5)
-                {
-                    
-                }
-            }
-            */
             Console.ReadLine(); // When we press enter close everything
             CloseAllSockets();
         }
-
         private static void SetupServer()
         {
             Console.WriteLine("Setting up server...");
@@ -96,7 +75,6 @@ namespace MultiServer
             serverSocket.BeginAccept(AcceptCallback, null);
             Console.WriteLine("Server setup complete");
         }
-
         /// <summary>
         /// Close all connected client (we do not need to shutdown the server socket as its connections
         /// are already closed with the clients).
@@ -108,25 +86,11 @@ namespace MultiServer
                 socket.Shutdown(SocketShutdown.Both);
                 socket.Close();
             }
-
             serverSocket.Close();
         }
-
-        private static void FindFreePair(Socket socket)
-        {
-            foreach(var element in playingPairs)
-            {
-                if (element.IsFull() == false)
-                {
-                    element.PlayerInput(socket);
-                }
-            }
-        }
-
         private static void AcceptCallback(IAsyncResult AR)
         {
             Socket socket;
-
             try
             {
                 socket = serverSocket.EndAccept(AR);
@@ -135,56 +99,53 @@ namespace MultiServer
             {
                 return;
             }
-
             clientSockets.Add(socket);
-            
+            if (playingPair[0] == null)
+            {
+                playingPair[0] = socket;
+                byte[] data = Encoding.ASCII.GetBytes("white");
+                playingPair[0].Send(data);
+            }
+
+            else if (playingPair[1] == null && socket != playingPair[0])
+            {
+                playingPair[1] = socket;
+                byte[] data = Encoding.ASCII.GetBytes("black");
+                playingPair[1].Send(data);
+            }
             socket.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, socket);
             Console.WriteLine("Client connected, waiting for request...");
             serverSocket.BeginAccept(AcceptCallback, null);
         }
-
         private static bool checkForSpecialMessages(string message)
         {
             return false;
         }
-
         private static void ReceiveCallback(IAsyncResult AR)
         {
             Socket current = (Socket)AR.AsyncState;
-            int received;
-
+            int received = 1;
             try
             {
                 received = current.EndReceive(AR);
             }
-            catch (SocketException)
+            catch //(SocketException)
             {
                 Console.WriteLine("Client forcefully disconnected");
                 // Don't shutdown because the socket may be disposed and its disconnected anyway.
-                current.Close();
-                clientSockets.Remove(current);
-                return;
+                //current.Close();
+                //clientSockets.Remove(current);
+                //return;
+                //CloseAllSockets();
+                playingPair[1] = null;
+                playingPair[0] = null;
             }
-
             byte[] recBuf = new byte[received];
             Array.Copy(buffer, recBuf, received);
             string text = Encoding.ASCII.GetString(recBuf);
             Console.WriteLine("Received Text: " + text);
 
-            if (checkForSpecialMessages(text))
-            {
-
-            }
-
-            foreach(var element in playingPairs)
-            {
-                if(element.IsFull() == true)
-                {
-
-                }
-            }
-        
-            else if (playingPair[1] != null)
+            if (playingPair[1] != null)
             {
                 if (current == playingPair[0])
                 {
@@ -197,12 +158,19 @@ namespace MultiServer
                     byte[] data = Encoding.ASCII.GetBytes(text);
                     playingPair[0].Send(data);
                     Console.WriteLine("Message sent to client");
-                }           
+                }
             }
 
-            
-
             current.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallback, current);
+            
+            if(text == "05")
+            {
+                //CloseAllSockets();
+                playingPair[1] = null;
+                playingPair[0] = null;
+            }
+            
+            
         }
     }
 }
