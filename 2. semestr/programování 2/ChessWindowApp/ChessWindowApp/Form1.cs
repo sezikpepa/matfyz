@@ -31,6 +31,8 @@ namespace ChessWindowApp
 
         public bool showValidMoves;
 
+        public static Dictionary<string, float> evaluatedBoardsValues = new Dictionary<string, float>();
+
         public ChessEngine chessEngine = new();
 
         public Form1()
@@ -858,6 +860,7 @@ namespace ChessWindowApp
 
             }
 
+
             public void NewEPValidPosition(int x, int y)
             {
                 this.positionEPValid.x = x;
@@ -1192,6 +1195,26 @@ namespace ChessWindowApp
                     }
                 }
                 return false;
+            }
+
+            public string GetHashOwn()
+            {
+                string hash = "";
+
+
+                for(int i = 0; i < 8; i++)
+                {
+                    for(int j = 0; j < 8; j++)
+                    {
+                        hash += (this.board[i, j].type.ToString() + this.board[i, j].color);
+                    }
+                }
+
+                hash += playerOnMove;
+
+                //MessageBox.Show(hash);
+                return hash;
+
             }
 
             public ChessBoard Copy()
@@ -2138,6 +2161,7 @@ namespace ChessWindowApp
 
             private Queue<ChessBoard> chessBoardsToEvaluate;
             private List<ChessBoard> evaluatedChessBoards;
+           
             public ChessEngine(ChessBoard chessBoard=null, int remainingDeep=2)
             {
                 if(chessBoard == null)
@@ -2217,9 +2241,7 @@ namespace ChessWindowApp
 
             public Move getBestValue(string playerOnMove)
             {
-                this.startExploring();
-
-
+                this.startExploring();              
 
                 float maximum = -1000;
                 string id = "";
@@ -2233,8 +2255,20 @@ namespace ChessWindowApp
                         {
                             ChessEngine newEngine = new ChessEngine(element, this.remainingDeep - 1);
                             newEngine.currentChessBoard.playerOnMove = "black";
-                          
-                            element.potencionalValueByEngine = newEngine.getBestValue("black").value;
+
+                            if (evaluatedBoardsValues.ContainsKey(element.GetHashOwn()))
+                            {
+                                element.potencionalValueByEngine = evaluatedBoardsValues[element.GetHashOwn()];
+                                MessageBox.Show("hash nalezen white");
+
+                            }
+                            else
+                            {
+                                element.potencionalValueByEngine = newEngine.getBestValue("black").value;
+                                evaluatedBoardsValues.Add(element.GetHashOwn(), element.potencionalValueByEngine);
+
+                                //evaluatedBoardsValues[element.GetHash()] = element.potencionalValueByEngine;
+                            }
                         }
                         if (element.potencionalValueByEngine > maximum)
                         {
@@ -2252,8 +2286,20 @@ namespace ChessWindowApp
                         if (this.remainingDeep > 0)
                         {
                             ChessEngine newEngine = new ChessEngine(element, this.remainingDeep - 1);
-                            newEngine.currentChessBoard.playerOnMove = "white";                          
-                            element.potencionalValueByEngine = newEngine.getBestValue("white").value;
+                            newEngine.currentChessBoard.playerOnMove = "white";
+
+                            if (evaluatedBoardsValues.ContainsKey(element.GetHashOwn()))
+                            {
+                                element.potencionalValueByEngine = evaluatedBoardsValues[element.GetHashOwn()];
+                                MessageBox.Show("hash nalezen black");
+                            }
+                            else
+                            {
+                                element.potencionalValueByEngine = newEngine.getBestValue("white").value;
+                                evaluatedBoardsValues.Add(element.GetHashOwn(), element.potencionalValueByEngine);
+
+                                //evaluatedBoardsValues[element.GetHash()] = element.potencionalValueByEngine;
+                            }
                         }
                         if (element.potencionalValueByEngine < maximum)
                         {
@@ -2398,6 +2444,7 @@ namespace ChessWindowApp
                     blackScore += (float)((pawnCounterBlack - 1) * 0.15);
                 }
 
+
                 return whiteScore - blackScore;
             }
 
@@ -2405,6 +2452,8 @@ namespace ChessWindowApp
             {
                 float whiteScore = 0;
                 float blackScore = 0;
+
+
                 return 0;
 
             }
@@ -2420,7 +2469,7 @@ namespace ChessWindowApp
             var timeStart = DateTime.Now;
             Move engineMove = this.chessEngine.getBestValue(this.chessEngine.currentChessBoard.playerOnMove);
             var timeEnd = DateTime.Now;
-            //MessageBox.Show((timeEnd - timeStart).TotalSeconds.ToString());
+            MessageBox.Show((timeEnd - timeStart).TotalSeconds.ToString());
             //MessageBox.Show(engineMove.value.ToString());
             /*
             if (engineMove.GetStringRepresentation() == "e0 d0")

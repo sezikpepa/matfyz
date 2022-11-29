@@ -1,0 +1,7 @@
+Tento archiv obsahuje zadání prvního domácího úkolu z výrokové a predikátové logiky. Detaily jsou v pdf.
+
+Navíc tento archiv také obsahuje příklad na testování bipartitnosti pomocí SAT řešiče, tak jak byl ukázán během cvičení.
+
+Konečně, soubor glucose_static je staticky zkompilovaná binárka řešiče glucose. Běží jak v Linux Subsytemu na Windows, tak v labu na Malé straně (a měla by běžet víceméně v každé linuxové distribuci).
+
+Použití řešiče je snadné -- stačí spustit "./glucose_static input.cnf" a poslední řádka výstupu říká, jestli je formule splnitelná, nebo ne. Můžete přidat i parametr -model, pokud také chcete získat model formule (pokud je splnitelná). Než soubor zkusíte spustit, je možné že mu budete muset nastavit práva na spuštění - použijte "chmod o+x glucose_static".

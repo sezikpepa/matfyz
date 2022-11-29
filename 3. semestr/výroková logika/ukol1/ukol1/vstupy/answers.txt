@@ -1,0 +1,18 @@
+2)a graf není 3-obarvitelný, ani 5-obarvitelný, ale je 10-obarvitelný
+  b 4.graph     5 < chromatické číslo <= 13 - pro čísla mezi běží SAT solver velmi dlouho
+    5.graph	    8 < chromatické číslo <= 43 - odhad je strašně veliký, ale všude mi to pro ostatní hodnoty běží hrozně dlouho a nikdy se to nedobere k výsledku, tak snad je to takto dostačující
+
+
+
+funkce, která vytváří CNF formuli přidává 3 typy formulí, 1) určují, aby každý vrchol měl nějakou barvu 2) určují, aby každý vrchol měl maximálně 1 barvu 3) vrcholy spojené hranou mají jinou barvu,
+toto je vyznačeno komentáři v kodu a vysvětleno proč. Tyto tři typy jsou dostačující k tomu, abychom popsali daný problém pomocí CNF. --- V případě, kde jsme ověřovali, zda je graf bipartitní, tak jsme pro každý vrchol
+mohli rozhodnout zda bude true/false. Zde máme možností více, ale výroky nemohou obsahovat tolik hodnot, tudíž jedna výroková proměnná bude "vrchol + barva vrcholu", tato formule je platná v případě, že daný vrchol je 
+obarven danou barvou, jinak nikoliv, v programu je to reprezentováno jako "číslo_vrcholu + 0 + barva_vrcholu", je to pouze z důvodu snadného vytváření unikátních proměnných
+
+
+
+Příklad spuštění:
+
+obecně:
+pythonInterpret k-color.py vstupniSoubor pocetDostupnýchBarev
+konkrétní příklad: python k-color.py 4.graph 5

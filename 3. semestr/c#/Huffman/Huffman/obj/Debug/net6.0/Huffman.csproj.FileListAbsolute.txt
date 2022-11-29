@@ -1,0 +1,15 @@
+C:\matfyz\3. semestr\c#\Huffman\Huffman\bin\Debug\net6.0\Huffman.exe
+C:\matfyz\3. semestr\c#\Huffman\Huffman\bin\Debug\net6.0\Huffman.deps.json
+C:\matfyz\3. semestr\c#\Huffman\Huffman\bin\Debug\net6.0\Huffman.runtimeconfig.json
+C:\matfyz\3. semestr\c#\Huffman\Huffman\bin\Debug\net6.0\Huffman.dll
+C:\matfyz\3. semestr\c#\Huffman\Huffman\bin\Debug\net6.0\Huffman.pdb
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.csproj.AssemblyReference.cache
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.AssemblyInfoInputs.cache
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.AssemblyInfo.cs
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.csproj.CoreCompileInputs.cache
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.dll
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\refint\Huffman.dll
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.pdb
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\Huffman.genruntimeconfig.cache
+C:\matfyz\3. semestr\c#\Huffman\Huffman\obj\Debug\net6.0\ref\Huffman.dll

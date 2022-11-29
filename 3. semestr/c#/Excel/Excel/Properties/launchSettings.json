@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Excel": {
+      "commandName": "Project",
+      "commandLineArgs": "testfile.txt testilefileoutput.txt"
+    }
+  }
+}

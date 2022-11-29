@@ -1,0 +1,4 @@
+Tento adresář obsahuje příklad, jak použít SAT řešič k otestování, jestli je graf bipartitní. Soubor bipartite_sat.py implementuje program, který převádí vstupní graf zadaný jako první parametr na CNF formuli, která je splnitelná právě tehdy, když je graf bipartitní. Tato CNF formule může být předána např. glucose řešiči k otestování její splnitelnosti.
+
+1.graph není bipartitní, 2.graph je bipartitní
+1.graph.cnf a 2.graph.cnf jsou výstupy skriptu

@@ -1,0 +1,15 @@
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.csproj.AssemblyReference.cache
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.AssemblyInfoInputs.cache
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.AssemblyInfo.cs
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.csproj.CoreCompileInputs.cache
+C:\matfyz\3. semestr\c#\Excel\Excel\bin\Debug\net6.0\Excel.exe
+C:\matfyz\3. semestr\c#\Excel\Excel\bin\Debug\net6.0\Excel.deps.json
+C:\matfyz\3. semestr\c#\Excel\Excel\bin\Debug\net6.0\Excel.runtimeconfig.json
+C:\matfyz\3. semestr\c#\Excel\Excel\bin\Debug\net6.0\Excel.dll
+C:\matfyz\3. semestr\c#\Excel\Excel\bin\Debug\net6.0\Excel.pdb
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.dll
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\refint\Excel.dll
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.pdb
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\Excel.genruntimeconfig.cache
+C:\matfyz\3. semestr\c#\Excel\Excel\obj\Debug\net6.0\ref\Excel.dll

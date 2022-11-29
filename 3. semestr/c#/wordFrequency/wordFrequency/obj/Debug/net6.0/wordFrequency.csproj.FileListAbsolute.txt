@@ -1,0 +1,15 @@
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\bin\Debug\net6.0\wordFrequency.exe
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\bin\Debug\net6.0\wordFrequency.deps.json
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\bin\Debug\net6.0\wordFrequency.runtimeconfig.json
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\bin\Debug\net6.0\wordFrequency.dll
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\bin\Debug\net6.0\wordFrequency.pdb
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.csproj.AssemblyReference.cache
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.AssemblyInfoInputs.cache
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.AssemblyInfo.cs
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.csproj.CoreCompileInputs.cache
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.dll
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\refint\wordFrequency.dll
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.pdb
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\wordFrequency.genruntimeconfig.cache
+C:\matfyz\3. semestr\c#\wordFrequency\wordFrequency\obj\Debug\net6.0\ref\wordFrequency.dll

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "textJustification": {
+      "commandName": "Project",
+      "commandLineArgs": "--highlight-spaces 1.txt 2.txt result.txt 17"
+    }
+  }
+}

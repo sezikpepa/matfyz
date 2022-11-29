@@ -1,0 +1,15 @@
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\bin\Debug\net6.0\wondCounting.exe
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\bin\Debug\net6.0\wondCounting.deps.json
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\bin\Debug\net6.0\wondCounting.runtimeconfig.json
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\bin\Debug\net6.0\wondCounting.dll
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\bin\Debug\net6.0\wondCounting.pdb
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.csproj.AssemblyReference.cache
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.GeneratedMSBuildEditorConfig.editorconfig
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.AssemblyInfoInputs.cache
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.AssemblyInfo.cs
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.csproj.CoreCompileInputs.cache
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.dll
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\refint\wondCounting.dll
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.pdb
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\wondCounting.genruntimeconfig.cache
+C:\matfyz\3. semestr\c#\wondCounting\wondCounting\obj\Debug\net6.0\ref\wondCounting.dll
